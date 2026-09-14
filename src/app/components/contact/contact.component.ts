@@ -29,9 +29,9 @@ export class ContactComponent implements OnInit {
   private languageService = inject(LanguageService);
   private seoService = inject(SEOService);
 
-  emailPopUpHeader!: string;
-  emailPopUpParagraph!: string;
-  submitted: boolean = false;
+  emailPopUpHeader = signal('');
+  emailPopUpParagraph = signal('');
+  submitted = signal(false);
   isEmailModalOpen = signal(false);
   languageRO: Signal<boolean>;
 
@@ -83,19 +83,19 @@ export class ContactComponent implements OnInit {
   }
 
   get isNameInvalid(): boolean {
-    return !!(this.submitted && this.name?.errors);
+    return !!(this.submitted() && this.name?.errors);
   }
 
   get isEmailInvalid(): boolean {
-    return !!(this.submitted && this.email?.errors);
+    return !!(this.submitted() && this.email?.errors);
   }
 
   get isPhoneInvalid(): boolean {
-    return !!(this.submitted && this.phone?.errors);
+    return !!(this.submitted() && this.phone?.errors);
   }
 
   get isMessageInvalid(): boolean {
-    return !!(this.submitted && this.message?.errors);
+    return !!(this.submitted() && this.message?.errors);
   }
 
   ngOnInit(): void {
@@ -107,7 +107,7 @@ export class ContactComponent implements OnInit {
   }
 
   async onSubmit() {
-    this.submitted = true;
+    this.submitted.set(true);
 
     if (this.contactMeForm.invalid) {
       // Mark all fields as touched to trigger validation display
@@ -119,8 +119,8 @@ export class ContactComponent implements OnInit {
     }
 
     this.isEmailModalOpen.set(true);
-    this.emailPopUpHeader = 'Bună, ' + this.contactMeForm.value.name;
-    this.emailPopUpParagraph = 'Se trimite...';
+    this.emailPopUpHeader.set('Bună, ' + this.contactMeForm.value.name);
+    this.emailPopUpParagraph.set('Se trimite...');
 
     try {
       const responseCode = await this.sendEmailService.sendEmailJS(
@@ -140,15 +140,17 @@ export class ContactComponent implements OnInit {
   }
 
   private handleSuccessfulSubmission(): void {
-    this.emailPopUpParagraph = 'Mesajul tău a fost trimis cu succes! ';
+    this.emailPopUpParagraph.set('Mesajul tău a fost trimis cu succes! ');
   }
 
   private handleFailedSubmission(responseCode: number): void {
-    this.emailPopUpParagraph = `(${responseCode}) Serverele noastre sunt pline, te rog să trimiți un E-mail către imaloeducation@gmail.com. `;
+    this.emailPopUpParagraph.set(
+      `(${responseCode}) Serverele noastre sunt pline, te rog să trimiți un E-mail către imaloeducation@gmail.com. `,
+    );
   }
 
   private resetForm(): void {
-    this.submitted = false;
+    this.submitted.set(false);
     this.contactMeForm.reset();
     Object.keys(this.contactMeForm.controls).forEach((key) => {
       const control = this.contactMeForm.get(key);

@@ -7,6 +7,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { LanguageService } from '../../services/language.service';
@@ -15,7 +16,12 @@ import { HamburgerButtonComponent } from '../hamburger-button/hamburger-button.c
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule, ReactiveFormsModule, HamburgerButtonComponent],
+  imports: [
+    RouterModule,
+    ReactiveFormsModule,
+    HamburgerButtonComponent,
+    NgOptimizedImage,
+  ],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

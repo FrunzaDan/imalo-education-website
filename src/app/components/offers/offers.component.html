@@ -17,13 +17,20 @@
     >
       <div
         class="card w-100 justify-content-center align-items-center card-main-gradient-color h-100 text-center mb-2 py-4 cursor-pointer"
+        role="button"
+        tabindex="0"
         (click)="scrollToSection('offers-summerschool')"
+        (keydown.enter)="scrollToSection('offers-summerschool')"
+        (keydown.space)="
+          $event.preventDefault(); scrollToSection('offers-summerschool')
+        "
       >
         <img
           class="card-upper-icon"
-          src="/assets/images/sun.svg"
+          ngSrc="/assets/images/sun.svg"
+          width="24"
+          height="24"
           alt="Imalo Afterschool Sibiu Summerschool"
-          loading="lazy"
         />
         <div class="card-lower-text">
           @if (languageRO()) {
@@ -39,13 +46,20 @@
     >
       <div
         class="card w-100 justify-content-center align-items-center card-main-gradient-color h-100 text-center mb-2 py-4 cursor-pointer"
+        role="button"
+        tabindex="0"
         (click)="scrollToSection('during-schoolyear')"
+        (keydown.enter)="scrollToSection('during-schoolyear')"
+        (keydown.space)="
+          $event.preventDefault(); scrollToSection('during-schoolyear')
+        "
       >
         <img
           class="card-upper-icon"
-          src="/assets/images/books.svg"
+          ngSrc="/assets/images/books.svg"
+          width="30"
+          height="31"
           alt="Imalo Afterschool Sibiu School"
-          loading="lazy"
         />
         <div class="card-lower-text">
           @if (languageRO()) {
@@ -65,13 +79,20 @@
     >
       <div
         class="card w-100 justify-content-center align-items-center card-main-gradient-color h-100 text-center mb-2 py-4 cursor-pointer"
+        role="button"
+        tabindex="0"
         (click)="scrollToSection('extra-activities')"
+        (keydown.enter)="scrollToSection('extra-activities')"
+        (keydown.space)="
+          $event.preventDefault(); scrollToSection('extra-activities')
+        "
       >
         <img
           class="card-upper-icon"
-          src="/assets/images/brush.svg"
+          ngSrc="/assets/images/brush.svg"
+          width="32"
+          height="28"
           alt="Imalo Afterschool Sibiu Freetime"
-          loading="lazy"
         />
         <div class="card-lower-text">
           @if (languageRO()) {

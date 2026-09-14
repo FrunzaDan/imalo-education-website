@@ -1,4 +1,4 @@
-import { ViewportScroller } from '@angular/common';
+import { NgOptimizedImage, ViewportScroller } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -13,7 +13,7 @@ import { SEOService } from '../../services/seo.service';
 
 @Component({
   selector: 'app-offers',
-  imports: [],
+  imports: [NgOptimizedImage],
   templateUrl: './offers.component.html',
   styleUrl: './offers.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

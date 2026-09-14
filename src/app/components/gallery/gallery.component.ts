@@ -8,6 +8,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
 import { GalleryImage } from '../../interfaces/gallery-image';
 import { LanguageService } from '../../services/language.service';
 import { LoadGalleryService } from '../../services/load-gallery.service';
@@ -15,7 +16,7 @@ import { SEOService } from '../../services/seo.service';
 
 @Component({
   selector: 'app-gallery',
-  imports: [],
+  imports: [NgOptimizedImage],
   templateUrl: './gallery.component.html',
   styleUrl: './gallery.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

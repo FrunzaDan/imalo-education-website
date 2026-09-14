@@ -16,7 +16,11 @@
       class="full-card-img"
       alt="Imalo Afterschool Germana Sibiu #{{ i + 1 }}"
       title="Imalo Afterschool Germana Sibiu #{{ i + 1 }}"
+      role="button"
+      tabindex="0"
       (click)="openFullView(i)"
+      (keydown.enter)="openFullView(i)"
+      (keydown.space)="$event.preventDefault(); openFullView(i)"
       loading="lazy"
     />
     }
@@ -41,7 +45,12 @@
   <span
     animate.enter="anim-fade-in"
     animate.leave="anim-fade-out"
+    role="button"
+    tabindex="0"
+    aria-label="Închide galeria"
     (click)="closeFullView()"
+    (keydown.enter)="closeFullView()"
+    (keydown.space)="$event.preventDefault(); closeFullView()"
     id="close-view-button"
     ><span class="grow-to-bottom-right">&times;</span></span
   >
@@ -97,7 +106,9 @@
         >
           <img
             class="card-upper-icon double-drop-shadow"
-            src="/assets/images/social media/Facebook_svg.svg"
+            ngSrc="/assets/images/social media/Facebook_svg.svg"
+            width="500"
+            height="500"
             alt="Imalo Afterschool Sibiu Facebook"
           />
           <div class="card-lower-text">
@@ -129,7 +140,9 @@
         >
           <img
             class="card-upper-icon double-drop-shadow"
-            src="/assets/images/social media/Instagram_svg.svg"
+            ngSrc="/assets/images/social media/Instagram_svg.svg"
+            width="750"
+            height="749"
             alt="Imalo Afterschool Sibiu Instagram"
           />
           <div class="card-lower-text">
@@ -161,7 +174,9 @@
         >
           <img
             class="card-upper-icon double-drop-shadow"
-            src="/assets/images/social media/LinkedIn_svg.svg"
+            ngSrc="/assets/images/social media/LinkedIn_svg.svg"
+            width="36"
+            height="36"
             alt="Imalo Afterschool Sibiu LinkedIn"
           />
           <div class="card-lower-text">

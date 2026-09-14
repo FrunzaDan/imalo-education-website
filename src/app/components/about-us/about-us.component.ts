@@ -6,13 +6,14 @@ import {
   Signal,
   inject,
 } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
 import { LanguageService } from '../../services/language.service';
 import { SEOService } from '../../services/seo.service';
 
 @Component({
   selector: 'app-about-us',
   standalone: true,
-  imports: [],
+  imports: [NgOptimizedImage],
   templateUrl: './about-us.component.html',
   styleUrl: './about-us.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
