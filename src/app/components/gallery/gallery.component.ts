@@ -1,6 +1,13 @@
 
-import { Component, HostListener, OnInit, Signal, inject } from '@angular/core';
-import { fadeIn, fadeOut, transformIn, transformOut } from '../../animations';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostListener,
+  OnInit,
+  Signal,
+  inject,
+  signal,
+} from '@angular/core';
 import { GalleryImage } from '../../interfaces/gallery-image';
 import { LanguageService } from '../../services/language.service';
 import { LoadGalleryService } from '../../services/load-gallery.service';
@@ -11,17 +18,17 @@ import { SEOService } from '../../services/seo.service';
   imports: [],
   templateUrl: './gallery.component.html',
   styleUrl: './gallery.component.css',
-  animations: [transformIn, transformOut, fadeIn, fadeOut],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GalleryComponent implements OnInit {
   private loadGalleryService = inject(LoadGalleryService);
   private languageService = inject(LanguageService);
   private seoService = inject(SEOService);
 
-  galleryImageList: GalleryImage[] = [];
+  galleryImageList = signal<GalleryImage[]>([]);
   languageRO: Signal<boolean>;
-  currentIndex = -1;
-  isFullViewOpen = false;
+  currentIndex = signal(-1);
+  isFullViewOpen = signal(false);
 
   private touchStartX = 0;
   private touchEndX = 0;
@@ -32,36 +39,36 @@ export class GalleryComponent implements OnInit {
 
   ngOnInit(): void {
     this.seoService.createLinkForCanonicalURL();
-    this.seoService.updateMetaDescription(
-      'Galeria Imalo Education, afterschool pe limba germana din Sibiu.',
-    );
+    const description =
+      'Galeria Imalo Education, afterschool pe limba germana din Sibiu.';
+    this.seoService.updateMetaDescription(description);
+    this.seoService.updateOpenGraphTags(description);
 
-    this.galleryImageList = this.loadGalleryService.loadGallery(); // Load images directly
+    this.galleryImageList.set(this.loadGalleryService.loadGallery());
   }
 
   openFullView(index: number): void {
-    this.currentIndex = index;
-    this.isFullViewOpen = true;
+    this.currentIndex.set(index);
+    this.isFullViewOpen.set(true);
   }
 
   closeFullView(): void {
-    this.isFullViewOpen = false;
+    this.isFullViewOpen.set(false);
   }
 
   navigateLeft(): void {
-    this.currentIndex = Math.max(0, this.currentIndex - 1);
+    this.currentIndex.set(Math.max(0, this.currentIndex() - 1));
   }
 
   navigateRight(): void {
-    this.currentIndex = Math.min(
-      this.galleryImageList.length - 1,
-      this.currentIndex + 1,
+    this.currentIndex.set(
+      Math.min(this.galleryImageList().length - 1, this.currentIndex() + 1),
     );
   }
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent): void {
-    if (this.isFullViewOpen) {
+    if (this.isFullViewOpen()) {
       switch (event.key) {
         case 'ArrowLeft':
           this.navigateLeft();

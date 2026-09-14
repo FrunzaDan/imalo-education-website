@@ -1,5 +1,11 @@
 
-import { Component, OnInit, Signal, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  Signal,
+  inject,
+} from '@angular/core';
 import { LanguageService } from '../../services/language.service';
 import { SEOService } from '../../services/seo.service';
 
@@ -9,6 +15,7 @@ import { SEOService } from '../../services/seo.service';
   imports: [],
   templateUrl: './about-us.component.html',
   styleUrl: './about-us.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AboutUsComponent implements OnInit {
   private languageService = inject(LanguageService);
@@ -22,8 +29,9 @@ export class AboutUsComponent implements OnInit {
 
   ngOnInit(): void {
     this.seoService.createLinkForCanonicalURL();
-    this.seoService.updateMetaDescription(
-      'Imalo Education este un centru educativ în limba germana dedicat elevilor din clasele primare - de la clasa pregătitoare până la clasa a IV-a. Imalo Education oferă copilului tău un mediu sigur și relaxant în care să învețe, să se dezvolte și să se exprime liber. Activitățile se desfășoară exclusiv în limba germană, pentru a-i îmbogăți vocabularul și exprimarea.',
-    );
+    const description =
+      'Imalo Education este un centru educativ în limba germana dedicat elevilor din clasele primare - de la clasa pregătitoare până la clasa a IV-a. Imalo Education oferă copilului tău un mediu sigur și relaxant în care să învețe, să se dezvolte și să se exprime liber. Activitățile se desfășoară exclusiv în limba germană, pentru a-i îmbogăți vocabularul și exprimarea.';
+    this.seoService.updateMetaDescription(description);
+    this.seoService.updateOpenGraphTags(description);
   }
 }

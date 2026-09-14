@@ -9,8 +9,8 @@
     }
   </div>
   <div class="container-fluid d-flex flex-wrap justify-content-around">
-    @for (galleryImage of galleryImageList; track galleryImage; let i = $index)
-    {
+    @for (galleryImage of galleryImageList(); track galleryImage.imagePath;
+    let i = $index) {
     <img
       src="{{ galleryImage.imagePath }}"
       class="full-card-img"
@@ -22,47 +22,46 @@
     }
   </div>
 
-  @if (isFullViewOpen) {
+  @if (isFullViewOpen()) {
   <div
     class="full-view-background"
-    @fadeIn
-    @fadeOut
+    animate.enter="anim-fade-in"
+    animate.leave="anim-fade-out"
     (click)="closeFullView()"
   ></div>
-  } @if (isFullViewOpen && currentIndex >= 0) {
+  } @if (isFullViewOpen() && currentIndex() >= 0) {
   <img
-    @transformIn
-    @transformOut
-    [src]="galleryImageList[currentIndex].imagePath"
+    animate.enter="anim-scale-in"
+    animate.leave="anim-scale-out"
+    [src]="galleryImageList()[currentIndex()].imagePath"
     class="full-view-img"
     alt="Imalo Afterschool Germana Sibiu"
   />
-  } @if (isFullViewOpen) {
+  } @if (isFullViewOpen()) {
   <span
-    @fadeIn
-    @fadeOut
+    animate.enter="anim-fade-in"
+    animate.leave="anim-fade-out"
     (click)="closeFullView()"
-    class="grow-to-bottom-right"
     id="close-view-button"
-    >&times;</span
+    ><span class="grow-to-bottom-right">&times;</span></span
   >
-  } @if (isFullViewOpen && currentIndex > 0) {
+  } @if (isFullViewOpen() && currentIndex() > 0) {
   <button
     (click)="navigateLeft()"
     class="galleryNavigationButton"
     id="prev-button"
-    @fadeIn
-    @fadeOut
+    animate.enter="anim-fade-in"
+    animate.leave="anim-fade-out"
   >
     &rarr;
   </button>
-  } @if (isFullViewOpen && currentIndex < galleryImageList.length - 1) {
+  } @if (isFullViewOpen() && currentIndex() < galleryImageList().length - 1) {
   <button
     (click)="navigateRight()"
     class="galleryNavigationButton"
     id="next-button"
-    @fadeIn
-    @fadeOut
+    animate.enter="anim-fade-in"
+    animate.leave="anim-fade-out"
   >
     &rarr;
   </button>

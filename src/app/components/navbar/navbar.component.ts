@@ -1,3 +1,4 @@
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -45,7 +46,8 @@ export class NavbarComponent {
 
     this.toggleLanguageForm
       .get('isGermanLang')
-      ?.valueChanges.subscribe((val) => {
+      ?.valueChanges.pipe(takeUntilDestroyed())
+      .subscribe((val) => {
         if (val !== !this.languageRO()) {
           this.languageService.toggleLanguage();
         }

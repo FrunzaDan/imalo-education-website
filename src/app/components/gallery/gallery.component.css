@@ -21,13 +21,13 @@
   -webkit-text-shadow: 2px 2px var(--cyan-darker-color);
   text-shadow: 2px 2px var(--cyan-darker-color);
   cursor: pointer;
-  animation-duration: 1.6s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
 }
 
 .grow-to-bottom-right {
   animation-name: grow-to-bottom-right;
+  animation-duration: 1.6s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 
 @keyframes grow-to-bottom-right {

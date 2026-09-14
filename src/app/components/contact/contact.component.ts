@@ -1,11 +1,17 @@
-import { Component, OnInit, Signal, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  Signal,
+  inject,
+  signal,
+} from '@angular/core';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { transformIn, transformOut } from '../../animations';
 import { ContactMeForm } from '../../interfaces/contact-me-form';
 import { LanguageService } from '../../services/language.service';
 import { SendEmailService } from '../../services/send-email.service';
@@ -16,7 +22,7 @@ import { SEOService } from '../../services/seo.service';
   imports: [ReactiveFormsModule],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.css',
-  animations: [transformIn, transformOut],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactComponent implements OnInit {
   private sendEmailService = inject(SendEmailService);
@@ -26,7 +32,7 @@ export class ContactComponent implements OnInit {
   emailPopUpHeader!: string;
   emailPopUpParagraph!: string;
   submitted: boolean = false;
-  isEmailModalOpen: boolean = false;
+  isEmailModalOpen = signal(false);
   languageRO: Signal<boolean>;
 
   constructor() {
@@ -94,9 +100,10 @@ export class ContactComponent implements OnInit {
 
   ngOnInit(): void {
     this.seoService.createLinkForCanonicalURL();
-    this.seoService.updateMetaDescription(
-      'Pagina de contact Imalo Education, afterschool pe limba germana din Sibiu.',
-    );
+    const description =
+      'Pagina de contact Imalo Education, afterschool pe limba germana din Sibiu.';
+    this.seoService.updateMetaDescription(description);
+    this.seoService.updateOpenGraphTags(description);
   }
 
   async onSubmit() {
@@ -111,7 +118,7 @@ export class ContactComponent implements OnInit {
       return;
     }
 
-    this.isEmailModalOpen = true;
+    this.isEmailModalOpen.set(true);
     this.emailPopUpHeader = 'Bună, ' + this.contactMeForm.value.name;
     this.emailPopUpParagraph = 'Se trimite...';
 
@@ -153,6 +160,6 @@ export class ContactComponent implements OnInit {
   }
 
   closeEmailModal(): void {
-    this.isEmailModalOpen = false;
+    this.isEmailModalOpen.set(false);
   }
 }

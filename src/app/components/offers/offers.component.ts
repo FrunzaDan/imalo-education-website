@@ -1,6 +1,13 @@
 import { ViewportScroller } from '@angular/common';
-import { Component, OnDestroy, OnInit, Signal, inject } from '@angular/core';
-import { fadeIn, fadeOut, transformIn, transformOut } from '../../animations';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+  Signal,
+  inject,
+  signal,
+} from '@angular/core';
 import { LanguageService } from '../../services/language.service';
 import { SEOService } from '../../services/seo.service';
 
@@ -9,14 +16,14 @@ import { SEOService } from '../../services/seo.service';
   imports: [],
   templateUrl: './offers.component.html',
   styleUrl: './offers.component.css',
-  animations: [transformIn, transformOut, fadeIn, fadeOut],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OffersComponent implements OnInit, OnDestroy {
   private languageService = inject(LanguageService);
   private viewportScroller = inject(ViewportScroller);
   private seoService = inject(SEOService);
 
-  isCourseModalOpen: boolean = false;
+  isCourseModalOpen = signal(false);
   courseTitle?: string;
   languageRO: Signal<boolean>;
 
@@ -26,9 +33,10 @@ export class OffersComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.seoService.createLinkForCanonicalURL();
-    this.seoService.updateMetaDescription(
-      'Pagina cu oferte Imalo Education, afterschool pe limba germana din Sibiu.',
-    );
+    const description =
+      'Pagina cu oferte Imalo Education, afterschool pe limba germana din Sibiu.';
+    this.seoService.updateMetaDescription(description);
+    this.seoService.updateOpenGraphTags(description);
   }
 
   ngOnDestroy(): void {
@@ -36,12 +44,12 @@ export class OffersComponent implements OnInit, OnDestroy {
   }
 
   openCourseModal(selectedCourseTitile?: string): void {
-    this.isCourseModalOpen = true;
+    this.isCourseModalOpen.set(true);
     this.courseTitle = selectedCourseTitile;
   }
 
   closeCourseModal(): void {
-    this.isCourseModalOpen = false;
+    this.isCourseModalOpen.set(false);
     this.courseTitle = undefined;
   }
 

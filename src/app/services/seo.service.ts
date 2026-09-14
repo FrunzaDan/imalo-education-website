@@ -17,12 +17,28 @@ export class SEOService {
     });
   }
 
+  updateOpenGraphTags(description: string): void {
+    const title = this.doc.title;
+    const url = this.getCanonicalURL();
+
+    this.meta.updateTag({ property: 'og:title', content: title });
+    this.meta.updateTag({ property: 'og:description', content: description });
+    this.meta.updateTag({ property: 'og:url', content: url });
+    this.meta.updateTag({ name: 'twitter:title', content: title });
+    this.meta.updateTag({ name: 'twitter:description', content: description });
+    this.meta.updateTag({ name: 'twitter:url', content: url });
+  }
+
   createLinkForCanonicalURL(): void {
     this.removeExistingCanonicalLink();
 
     const link: HTMLLinkElement = this.doc.createElement('link');
     link.setAttribute('rel', 'canonical');
+    link.setAttribute('href', this.getCanonicalURL());
+    this.doc.head.appendChild(link);
+  }
 
+  private getCanonicalURL(): string {
     const firebaselink: string = 'https://imalo-education.web.app';
     let canonicalURL: string = this.getCurrentPath();
 
@@ -31,8 +47,7 @@ export class SEOService {
       canonicalURL = '';
     }
 
-    link.setAttribute('href', firebaselink + canonicalURL);
-    this.doc.head.appendChild(link);
+    return firebaselink + canonicalURL;
   }
 
   private removeExistingCanonicalLink(): void {

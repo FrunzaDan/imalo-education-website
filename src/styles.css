@@ -197,6 +197,46 @@ h1 h2 h3 h4 h5 h6 {
   backdrop-filter: blur(8px);
 }
 
+@keyframes anim-fade-in-keyframes {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes anim-fade-out-keyframes {
+  to {
+    opacity: 0;
+  }
+}
+
+.anim-fade-in {
+  animation: anim-fade-in-keyframes 400ms ease-in;
+}
+
+.anim-fade-out {
+  animation: anim-fade-out-keyframes 400ms ease-out;
+}
+
+@keyframes anim-scale-in-keyframes {
+  from {
+    transform: translate(-50%, -50%) scale(0);
+  }
+}
+
+@keyframes anim-scale-out-keyframes {
+  to {
+    transform: translate(-50%, -50%) scale(0);
+  }
+}
+
+.anim-scale-in {
+  animation: anim-scale-in-keyframes 400ms ease-in;
+}
+
+.anim-scale-out {
+  animation: anim-scale-out-keyframes 400ms ease-out;
+}
+
 .description-inside-card {
   position: relative;
   text-align: left;

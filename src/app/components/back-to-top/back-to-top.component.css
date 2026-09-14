@@ -1,6 +1,8 @@
 #scroll-to-top-btn {
   display: block;
   position: fixed;
+  bottom: 1rem;
+  right: 1rem;
   z-index: 99;
   font-size: 200%;
   font-weight: 900;
@@ -14,12 +16,21 @@
   padding-left: 6px;
   padding-right: 6px;
   border-radius: 8px;
-  transition: all 0.2s;
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s,
+    bottom 300ms,
+    right 300ms;
   -webkit-box-shadow: 4px 4px var(--dark-main-color);
   box-shadow: 4px 4px var(--dark-main-color);
   border: 0.1px solid var(--dark-main-color);
   text-align: center;
   pointer-events: auto;
+}
+
+#scroll-to-top-btn.hidden {
+  bottom: -3rem;
+  right: -3rem;
 }
 
 #scroll-to-top-btn:active {

@@ -1,24 +1,17 @@
 import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
-import { Component, HostListener, inject } from '@angular/core';
+  ChangeDetectionStrategy,
+  Component,
+  HostListener,
+  inject,
+  signal,
+} from '@angular/core';
 import { ScrollerService } from '../../services/scroller.service';
 
 @Component({
   selector: 'app-back-to-top',
   templateUrl: './back-to-top.component.html',
   styleUrl: './back-to-top.component.css',
-  animations: [
-    trigger('slide', [
-      state('visible', style({ bottom: '1rem', right: '1rem' })),
-      state('hidden', style({ bottom: '-3rem', right: '-3rem' })),
-      transition('visible <=> hidden', animate('300ms')),
-    ]),
-  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BackToTopComponent {
   scrollerService = inject(ScrollerService);
@@ -26,7 +19,7 @@ export class BackToTopComponent {
   private prevScrollPos: number = 0;
   SHOW_BUTTON_THRESHOLD: number = 600;
 
-  shouldShowBackToTopButton: boolean = false;
+  shouldShowBackToTopButton = signal(false);
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll($event: any): void {
@@ -34,8 +27,9 @@ export class BackToTopComponent {
     const scrolledEnough: boolean =
       Math.abs(currentScrollPos - this.prevScrollPos) > 200;
     if (scrolledEnough) {
-      this.shouldShowBackToTopButton =
-        currentScrollPos > this.SHOW_BUTTON_THRESHOLD;
+      this.shouldShowBackToTopButton.set(
+        currentScrollPos > this.SHOW_BUTTON_THRESHOLD,
+      );
       this.prevScrollPos = currentScrollPos;
     }
   }

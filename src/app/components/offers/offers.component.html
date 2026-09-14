@@ -23,6 +23,7 @@
           class="card-upper-icon"
           src="/assets/images/sun.svg"
           alt="Imalo Afterschool Sibiu Summerschool"
+          loading="lazy"
         />
         <div class="card-lower-text">
           @if (languageRO()) {
@@ -44,6 +45,7 @@
           class="card-upper-icon"
           src="/assets/images/books.svg"
           alt="Imalo Afterschool Sibiu School"
+          loading="lazy"
         />
         <div class="card-lower-text">
           @if (languageRO()) {
@@ -69,6 +71,7 @@
           class="card-upper-icon"
           src="/assets/images/brush.svg"
           alt="Imalo Afterschool Sibiu Freetime"
+          loading="lazy"
         />
         <div class="card-lower-text">
           @if (languageRO()) {
@@ -363,15 +366,19 @@
   </div>
 </div>
 
-@if (isCourseModalOpen) {
+@if (isCourseModalOpen()) {
 <div
   class="full-view-background"
-  @fadeIn
-  @fadeOut
+  animate.enter="anim-fade-in"
+  animate.leave="anim-fade-out"
   (click)="closeCourseModal()"
 ></div>
-} @if (isCourseModalOpen) {
-<div class="get-course-modal" @transformIn @transformOut>
+} @if (isCourseModalOpen()) {
+<div
+  class="get-course-modal"
+  animate.enter="anim-scale-in"
+  animate.leave="anim-scale-out"
+>
   <div class="customModal-header">
     @if (languageRO()) {
     <div class="title">Doriți să aplicați pentru acest pachet?</div>
