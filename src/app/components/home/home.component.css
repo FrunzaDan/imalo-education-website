@@ -1,13 +1,9 @@
 #background_image_home {
-  background-image: -webkit-linear-gradient(
-      rgb(253, 241, 232, 1),
-      rgb(253, 241, 232, 0.4)
-    ),
+  background-image:
+    -webkit-linear-gradient(rgb(253, 241, 232, 1), rgb(253, 241, 232, 0.4)),
     url('/assets/images/gallery/imalo_sibiu_5.webp');
-  background-image: linear-gradient(
-      rgb(253, 241, 232, 1),
-      rgb(253, 241, 232, 0.6)
-    ),
+  background-image:
+    linear-gradient(rgb(253, 241, 232, 1), rgb(253, 241, 232, 0.6)),
     url('/assets/images/gallery/imalo_sibiu_5.webp');
   background-repeat: no-repeat;
   width: 100%;
@@ -97,11 +93,16 @@
   color: var(--light-main-color);
   font-weight: bold;
   letter-spacing: 1px;
-  -webkit-text-shadow: -1px 0 var(--cyan-darker-color),
-    0 1px var(--cyan-darker-color), 1px 0 var(--cyan-darker-color),
+  -webkit-text-shadow:
+    -1px 0 var(--cyan-darker-color),
+    0 1px var(--cyan-darker-color),
+    1px 0 var(--cyan-darker-color),
     0 -1px var(--cyan-darker-color);
-  text-shadow: -1px 0 var(--cyan-darker-color), 0 1px var(--cyan-darker-color),
-    1px 0 var(--cyan-darker-color), 0 -1px var(--cyan-darker-color);
+  text-shadow:
+    -1px 0 var(--cyan-darker-color),
+    0 1px var(--cyan-darker-color),
+    1px 0 var(--cyan-darker-color),
+    0 -1px var(--cyan-darker-color);
 }
 
 #upper-text-motto {

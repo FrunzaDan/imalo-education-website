@@ -4,9 +4,10 @@
       class="container-fluid d-flex justify-content-center align-items-center my-2"
     >
       @if (languageRO()) {
-      <h1 class="subtitle-1">Program școala de vară:</h1>
-      } @if (!languageRO()) {
-      <h1 class="subtitle-1">Programm während der Sommerschule:</h1>
+        <h1 class="subtitle-1">Program școala de vară:</h1>
+      }
+      @if (!languageRO()) {
+        <h1 class="subtitle-1">Programm während der Sommerschule:</h1>
       }
     </div>
   </div>
@@ -16,31 +17,33 @@
         <div class="liquid-shape-1">
           <div class="description-inside-card">
             @if (languageRO()) {
-            <p>
-              În fiecare zi, micul dejun și prânzul vor fi servite la sediu.
-              Fiecare săptămână de vacanță va avea o tematică specifică, oferind
-              o gamă variată de activități distractive și educative.
-              <br />Copiii vor explora diverse domenii de interes, de la știință
-              și artă la cultură și sport. Totodată, oferim copiilor sprijinul
-              necesar pentru rezolvarea temelor, asigurând o abordare calmă și
-              eficientă a materialului școlar. <br />Ne dorim ca programul
-              nostru de vară să ofere copiilor o experiență memorabilă, plină de
-              descoperiri, prietenii noi și momente de neuitat.
-            </p>
-            } @if (!languageRO()) {
-            <p>
-              Jeden Tag werden Frühstück und Mittagessen bei Imalo serviert.
-              Jede Ferienwoche steht unter einem bestimmten Thema und bietet
-              eine Reihe von unterhaltsamen und lehrreichen Aktivitäten.
-              <br />Die Kinder erkunden verschiedene Interessengebiete, von
-              Wissenschaft und Kunst bis hin zu Kultur und Sport. Gleichzeitig
-              bieten wir den Kindern die nötige Unterstützung bei der Erledigung
-              ihrer Hausaufgaben, um einen ruhigen und effizienten Umgang mit
-              dem Schulstoff zu gewährleisten. <br />Wir möchten, dass unser
-              Sommerprogramm den Kindern eine unvergessliche Erfahrung voller
-              Entdeckungen, neuer Freundschaften und unvergesslicher Momente
-              bietet.
-            </p>
+              <p>
+                În fiecare zi, micul dejun și prânzul vor fi servite la sediu.
+                Fiecare săptămână de vacanță va avea o tematică specifică,
+                oferind o gamă variată de activități distractive și educative.
+                <br />Copiii vor explora diverse domenii de interes, de la
+                știință și artă la cultură și sport. Totodată, oferim copiilor
+                sprijinul necesar pentru rezolvarea temelor, asigurând o
+                abordare calmă și eficientă a materialului școlar. <br />Ne
+                dorim ca programul nostru de vară să ofere copiilor o experiență
+                memorabilă, plină de descoperiri, prietenii noi și momente de
+                neuitat.
+              </p>
+            }
+            @if (!languageRO()) {
+              <p>
+                Jeden Tag werden Frühstück und Mittagessen bei Imalo serviert.
+                Jede Ferienwoche steht unter einem bestimmten Thema und bietet
+                eine Reihe von unterhaltsamen und lehrreichen Aktivitäten.
+                <br />Die Kinder erkunden verschiedene Interessengebiete, von
+                Wissenschaft und Kunst bis hin zu Kultur und Sport. Gleichzeitig
+                bieten wir den Kindern die nötige Unterstützung bei der
+                Erledigung ihrer Hausaufgaben, um einen ruhigen und effizienten
+                Umgang mit dem Schulstoff zu gewährleisten. <br />Wir möchten,
+                dass unser Sommerprogramm den Kindern eine unvergessliche
+                Erfahrung voller Entdeckungen, neuer Freundschaften und
+                unvergesslicher Momente bietet.
+              </p>
             }
           </div>
         </div>
@@ -49,111 +52,122 @@
     <div class="col-sm-4 d-flex flex-column justify-content-between block-2">
       <div class="card scheduleContent p-2 m-2">
         @if (languageRO()) {
-        <p>
-          Luni - Vineri: <br />
-          07:30 - 17:30
-        </p>
-        } @if (!languageRO()) {
-        <p>
-          Montag - Freitag: <br />
-          07:30 - 17:30
-        </p>
+          <p>
+            Luni - Vineri: <br />
+            07:30 - 17:30
+          </p>
+        }
+        @if (!languageRO()) {
+          <p>
+            Montag - Freitag: <br />
+            07:30 - 17:30
+          </p>
         }
       </div>
       <div class="card scheduleContent p-2 m-2">
         @if (languageRO()) {
-        <p>
-          Sâmbătă - Duminică: <br />
-          închis
-        </p>
-        } @if (!languageRO()) {
-        <p>
-          Samstag - Sonntag: <br />
-          geschlossen
-        </p>
+          <p>
+            Sâmbătă - Duminică: <br />
+            închis
+          </p>
+        }
+        @if (!languageRO()) {
+          <p>
+            Samstag - Sonntag: <br />
+            geschlossen
+          </p>
         }
       </div>
     </div>
   </div>
 
   <section class="w-100" aria-labelledby="schedule-schoolyear-heading">
-  <div class="row w-100 my-2 generic-row-padding">
-    <div
-      class="container-fluid d-flex justify-content-center align-items-center my-2"
-    >
-      @if (languageRO()) {
-      <h2 class="subtitle-1" id="schedule-schoolyear-heading">Program în timpul anului școlar:</h2>
-      } @if (!languageRO()) {
-      <h2 class="subtitle-1" id="schedule-schoolyear-heading">Programm während des Schuljahres:</h2>
-      }
-    </div>
-  </div>
-  <div class="row w-100 my-2 diagonal-2 generic-row-padding">
-    <div class="col-sm-4 d-flex flex-column justify-content-between">
-      <div class="card scheduleContent p-2 m-2">
+    <div class="row w-100 my-2 generic-row-padding">
+      <div
+        class="container-fluid d-flex justify-content-center align-items-center my-2"
+      >
         @if (languageRO()) {
-        <p>
-          Luni - Vineri: <br />
-          11:30 - 17:30
-        </p>
-        } @if (!languageRO()) {
-        <p>
-          Montag - Freitag: <br />
-          11:30 - 17:30
-        </p>
+          <h2 class="subtitle-1" id="schedule-schoolyear-heading">
+            Program în timpul anului școlar:
+          </h2>
         }
-      </div>
-      <div class="card scheduleContent p-2 m-2">
-        @if (languageRO()) {
-        <p>
-          Sâmbătă - Duminică: <br />
-          închis
-        </p>
-        } @if (!languageRO()) {
-        <p>
-          Samstag - Sonntag: <br />
-          geschlossen
-        </p>
+        @if (!languageRO()) {
+          <h2 class="subtitle-1" id="schedule-schoolyear-heading">
+            Programm während des Schuljahres:
+          </h2>
         }
       </div>
     </div>
-    <div class="col-sm-8 d-flex flex-column justify-content-between">
-      <div class="card card-with-liquid h-100 m-2">
-        <div class="liquid-shape-2">
-          <div class="description-inside-card">
-            @if (languageRO()) {
+    <div class="row w-100 my-2 diagonal-2 generic-row-padding">
+      <div class="col-sm-4 d-flex flex-column justify-content-between">
+        <div class="card scheduleContent p-2 m-2">
+          @if (languageRO()) {
             <p>
-              Dupa terminarea orelor de curs, copiii vor fi preluați de la
-              școală si vor fi adusi la sediu. Odată sosiți, copiii se vor
-              bucura de o masă variata si echilibrata, preparată în regim
-              catering.
-              <br />Oferim copiilor sprijinul necesar pentru rezolvarea temelor
-              de la școală. Vom facilita un mediu cu o abordare eficientă a
-              materialului școlar, asigurând înțelegerea și consolidarea
-              cunoștințelor dobândite. <br />Programul zilnic va fi structurat
-              astfel încât să ofere copiilor un echilibru perfect între
-              activități educative, timp de joacă și relaxare. Până la ora
-              17:30, părinții vor putea să preia copiii de la sediul nostru.
+              Luni - Vineri: <br />
+              11:30 - 17:30
             </p>
-            } @if (!languageRO()) {
+          }
+          @if (!languageRO()) {
             <p>
-              Nach der Schule werden die Kinder abgeholt und zu Imalo gebracht.
-              Dort angekommen, erhalten die Kinder eine abwechslungsreiche und
-              ausgewogene Mahlzeit.
-              <br />Wir bieten den Kindern die notwendige Unterstützung bei der
-              Erledigung ihrer Hausaufgaben. Wir sorgen für ein Umfeld, in dem
-              der Schulstoff effektiv behandelt wird, um das Verständnis und die
-              Festigung des erworbenen Wissens zu gewährleisten. <br />Der
-              Tagesablauf ist so strukturiert, dass die Kinder ein perfektes
-              Gleichgewicht zwischen pädagogischen Aktivitäten, Spielzeit und
-              Entspannung finden. Bis 17:30 Uhr können die Eltern ihre Kinder
-              abholen.
+              Montag - Freitag: <br />
+              11:30 - 17:30
             </p>
-            }
+          }
+        </div>
+        <div class="card scheduleContent p-2 m-2">
+          @if (languageRO()) {
+            <p>
+              Sâmbătă - Duminică: <br />
+              închis
+            </p>
+          }
+          @if (!languageRO()) {
+            <p>
+              Samstag - Sonntag: <br />
+              geschlossen
+            </p>
+          }
+        </div>
+      </div>
+      <div class="col-sm-8 d-flex flex-column justify-content-between">
+        <div class="card card-with-liquid h-100 m-2">
+          <div class="liquid-shape-2">
+            <div class="description-inside-card">
+              @if (languageRO()) {
+                <p>
+                  Dupa terminarea orelor de curs, copiii vor fi preluați de la
+                  școală si vor fi adusi la sediu. Odată sosiți, copiii se vor
+                  bucura de o masă variata si echilibrata, preparată în regim
+                  catering.
+                  <br />Oferim copiilor sprijinul necesar pentru rezolvarea
+                  temelor de la școală. Vom facilita un mediu cu o abordare
+                  eficientă a materialului școlar, asigurând înțelegerea și
+                  consolidarea cunoștințelor dobândite. <br />Programul zilnic
+                  va fi structurat astfel încât să ofere copiilor un echilibru
+                  perfect între activități educative, timp de joacă și relaxare.
+                  Până la ora 17:30, părinții vor putea să preia copiii de la
+                  sediul nostru.
+                </p>
+              }
+              @if (!languageRO()) {
+                <p>
+                  Nach der Schule werden die Kinder abgeholt und zu Imalo
+                  gebracht. Dort angekommen, erhalten die Kinder eine
+                  abwechslungsreiche und ausgewogene Mahlzeit.
+                  <br />Wir bieten den Kindern die notwendige Unterstützung bei
+                  der Erledigung ihrer Hausaufgaben. Wir sorgen für ein Umfeld,
+                  in dem der Schulstoff effektiv behandelt wird, um das
+                  Verständnis und die Festigung des erworbenen Wissens zu
+                  gewährleisten. <br />Der Tagesablauf ist so strukturiert, dass
+                  die Kinder ein perfektes Gleichgewicht zwischen pädagogischen
+                  Aktivitäten, Spielzeit und Entspannung finden. Bis 17:30 Uhr
+                  können die Eltern ihre Kinder abholen.
+                </p>
+              }
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
   </section>
 </div>

@@ -6,9 +6,10 @@
       class="container-fluid d-flex justify-content-center align-items-center my-2"
     >
       @if (languageRO()) {
-      <h1 class="subtitle-1">Despre noi</h1>
-      } @if (!languageRO()) {
-      <h1 class="subtitle-1">Über uns</h1>
+        <h1 class="subtitle-1">Despre noi</h1>
+      }
+      @if (!languageRO()) {
+        <h1 class="subtitle-1">Über uns</h1>
       }
     </div>
   </div>
@@ -20,25 +21,26 @@
         <div class="liquid-shape-1">
           <div class="description-inside-card">
             @if (languageRO()) {
-            <p>
-              Imalo Education este un centru educativ în limba germană dedicat
-              elevilor din clasele primare - de la clasa pregătitoare până la
-              clasa a IV-a.
-              <br />Imalo Education oferă copilului tău un mediu sigur și
-              relaxant în care să învețe, să se dezvolte și să se exprime liber.
-              <br />Activitățile se desfășoară exclusiv în limba germană, pentru
-              a-i îmbogăți vocabularul și exprimarea.
-            </p>
-            } @if (!languageRO()) {
-            <p>
-              Imalo Education ist ein deutschsprachiges Bildungszentrum für
-              Grundschüler - von der Vorschule bis zur vierten Klasse.
-              <br />Imalo Education bietet Ihrem Kind eine sichere und
-              entspannende Umgebung, in der es lernen, sich entwickeln und frei
-              ausdrücken kann. <br />Die Aktivitäten werden ausschließlich in
-              deutscher Sprache durchgeführt, um den Wortschatz und die
-              Ausdrucksfähigkeit zu erweitern.
-            </p>
+              <p>
+                Imalo Education este un centru educativ în limba germană dedicat
+                elevilor din clasele primare - de la clasa pregătitoare până la
+                clasa a IV-a.
+                <br />Imalo Education oferă copilului tău un mediu sigur și
+                relaxant în care să învețe, să se dezvolte și să se exprime
+                liber. <br />Activitățile se desfășoară exclusiv în limba
+                germană, pentru a-i îmbogăți vocabularul și exprimarea.
+              </p>
+            }
+            @if (!languageRO()) {
+              <p>
+                Imalo Education ist ein deutschsprachiges Bildungszentrum für
+                Grundschüler - von der Vorschule bis zur vierten Klasse.
+                <br />Imalo Education bietet Ihrem Kind eine sichere und
+                entspannende Umgebung, in der es lernen, sich entwickeln und
+                frei ausdrücken kann. <br />Die Aktivitäten werden
+                ausschließlich in deutscher Sprache durchgeführt, um den
+                Wortschatz und die Ausdrucksfähigkeit zu erweitern.
+              </p>
             }
           </div>
         </div>
@@ -60,85 +62,93 @@
     </div>
   </div>
   <section class="w-100" aria-labelledby="who-am-I-Section">
-  <div
-    class="row w-100 d-flex justify-content-center align-items-center my-2 generic-row-padding"
-  >
     <div
-      class="container-fluid d-flex justify-content-center align-items-center my-2"
+      class="row w-100 d-flex justify-content-center align-items-center my-2 generic-row-padding"
     >
-      @if (languageRO()) {
-      <h2 class="subtitle-1" id="who-am-I-Section">Cine sunt</h2>
-      } @if (!languageRO()) {
-      <h2 class="subtitle-1" id="who-am-I-Section">Wer bin ich</h2>
-      }
-    </div>
-  </div>
-  <div class="row w-100 my-2 diagonal-2 generic-row-padding">
-    <div class="col-sm-4 d-flex flex-column justify-content-between my-2 px-2">
-      <div class="card about-us-image-card h-100 my-2">
-        <img
-          class="round-img"
-          ngSrc="assets/images/Maria_Solomon_Profile_Pic.webp"
-          width="1066"
-          height="1066"
-          alt="Maria Solomon"
-          title="Maria Solomon"
-        />
+      <div
+        class="container-fluid d-flex justify-content-center align-items-center my-2"
+      >
+        @if (languageRO()) {
+          <h2 class="subtitle-1" id="who-am-I-Section">Cine sunt</h2>
+        }
+        @if (!languageRO()) {
+          <h2 class="subtitle-1" id="who-am-I-Section">Wer bin ich</h2>
+        }
       </div>
     </div>
-    <div class="col-sm-8 d-flex flex-column justify-content-between my-2 px-2">
-      <div class="card card-with-liquid h-100 my-2">
-        <div class="liquid-shape-2">
-          <div class="description-inside-card">
-            @if (languageRO()) {
-            <p>
-              Numele meu este Maria și am început acest proiect din pasiunea de
-              a preda și dragul pentru copii.
-              <br />
-              Am absolvit Facultatea de Litere și Arte de la Universitatea
-              „Lucian Blaga” din Sibiu, specializarea Limbi Moderne Aplicate -
-              Germanistică și Engleză.
-              <br />
-              De asemenea, dețin un master în Comunicare Interculturală în
-              Domeniul Economic, obținut de asemenea la Universitatea „Lucian
-              Blaga” din Sibiu, completat de modulul psihopedagogic, nivelul I
-              si II.
-              <br />
-              Cu peste 5 ani de experiență profesională în sectorul educațional,
-              sunt complet dedicată dezvoltării intelectuale și recreative a
-              micuților.
-              <br />
-              Prin intermediul unor activități interactive și variate, copiii se
-              vor bucura să descopere limba germană sub toate formele sale.
-            </p>
-            } @if (!languageRO()) {
-            <p>
-              Mein Name ist Maria und ich habe dieses Projekt aus Leidenschaft
-              für das Unterrichten und aus Liebe zu den Kindern ins Leben
-              gerufen.
-              <br />
-              Ich habe mein Studium an der Fakultät für Literatur und Kunst der
-              Lucian-Blaga Universität in Sibiu mit den Hauptfächern Angewandte
-              Moderne Sprachen - Deutsch und Englisch - abgeschlossen.
-              <br />
-              Außerdem habe ich einen Master-Abschluss in Interkultureller
-              Kommunikation im Bereich Wirtschaft, ebenfalls an der
-              Lucian-Blaga-Universität Sibiu, mit dem psychopädagogischen Modul,
-              Stufe I und II.
-              <br />
-              Mit mehr als 5 Jahren Berufserfahrung im Bildungsbereich widme ich
-              mich ganz der intellektuellen und freizeitlichen Entwicklung der
-              Kleinen.
-              <br />
-              Durch interaktive und abwechslungsreiche Aktivitäten werden die
-              Kinder mit Freude die deutsche Sprache in all ihren Formen
-              entdecken.
-            </p>
-            }
+    <div class="row w-100 my-2 diagonal-2 generic-row-padding">
+      <div
+        class="col-sm-4 d-flex flex-column justify-content-between my-2 px-2"
+      >
+        <div class="card about-us-image-card h-100 my-2">
+          <img
+            class="round-img"
+            ngSrc="assets/images/Maria_Solomon_Profile_Pic.webp"
+            width="1066"
+            height="1066"
+            alt="Maria Solomon"
+            title="Maria Solomon"
+          />
+        </div>
+      </div>
+      <div
+        class="col-sm-8 d-flex flex-column justify-content-between my-2 px-2"
+      >
+        <div class="card card-with-liquid h-100 my-2">
+          <div class="liquid-shape-2">
+            <div class="description-inside-card">
+              @if (languageRO()) {
+                <p>
+                  Numele meu este Maria și am început acest proiect din pasiunea
+                  de a preda și dragul pentru copii.
+                  <br />
+                  Am absolvit Facultatea de Litere și Arte de la Universitatea
+                  „Lucian Blaga” din Sibiu, specializarea Limbi Moderne Aplicate
+                  - Germanistică și Engleză.
+                  <br />
+                  De asemenea, dețin un master în Comunicare Interculturală în
+                  Domeniul Economic, obținut de asemenea la Universitatea
+                  „Lucian Blaga” din Sibiu, completat de modulul psihopedagogic,
+                  nivelul I si II.
+                  <br />
+                  Cu peste 5 ani de experiență profesională în sectorul
+                  educațional, sunt complet dedicată dezvoltării intelectuale și
+                  recreative a micuților.
+                  <br />
+                  Prin intermediul unor activități interactive și variate,
+                  copiii se vor bucura să descopere limba germană sub toate
+                  formele sale.
+                </p>
+              }
+              @if (!languageRO()) {
+                <p>
+                  Mein Name ist Maria und ich habe dieses Projekt aus
+                  Leidenschaft für das Unterrichten und aus Liebe zu den Kindern
+                  ins Leben gerufen.
+                  <br />
+                  Ich habe mein Studium an der Fakultät für Literatur und Kunst
+                  der Lucian-Blaga Universität in Sibiu mit den Hauptfächern
+                  Angewandte Moderne Sprachen - Deutsch und Englisch -
+                  abgeschlossen.
+                  <br />
+                  Außerdem habe ich einen Master-Abschluss in Interkultureller
+                  Kommunikation im Bereich Wirtschaft, ebenfalls an der
+                  Lucian-Blaga-Universität Sibiu, mit dem psychopädagogischen
+                  Modul, Stufe I und II.
+                  <br />
+                  Mit mehr als 5 Jahren Berufserfahrung im Bildungsbereich widme
+                  ich mich ganz der intellektuellen und freizeitlichen
+                  Entwicklung der Kleinen.
+                  <br />
+                  Durch interaktive und abwechslungsreiche Aktivitäten werden
+                  die Kinder mit Freude die deutsche Sprache in all ihren Formen
+                  entdecken.
+                </p>
+              }
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
   </section>
 </div>

@@ -75,13 +75,19 @@ describe('GalleryComponent', () => {
   it('navigates with the arrow keys only while the full view is open', () => {
     component.openFullView(1);
 
-    component.handleKeyboardEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
+    component.handleKeyboardEvent(
+      new KeyboardEvent('keydown', { key: 'ArrowRight' }),
+    );
     expect(component.currentIndex()).toBe(2);
 
-    component.handleKeyboardEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+    component.handleKeyboardEvent(
+      new KeyboardEvent('keydown', { key: 'Escape' }),
+    );
     expect(component.isFullViewOpen()).toBe(false);
 
-    component.handleKeyboardEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft' }));
+    component.handleKeyboardEvent(
+      new KeyboardEvent('keydown', { key: 'ArrowLeft' }),
+    );
     expect(component.currentIndex()).toBe(2);
   });
 });

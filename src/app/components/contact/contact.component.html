@@ -6,9 +6,10 @@
       class="container-fluid d-flex justify-content-center align-items-center my-2"
     >
       @if (languageRO()) {
-      <h1 class="subtitle-1">Cum ne puteți contacta?</h1>
-      } @if (!languageRO()) {
-      <h1 class="subtitle-1">Wie können Sie uns kontaktieren?</h1>
+        <h1 class="subtitle-1">Cum ne puteți contacta?</h1>
+      }
+      @if (!languageRO()) {
+        <h1 class="subtitle-1">Wie können Sie uns kontaktieren?</h1>
       }
     </div>
   </div>
@@ -22,9 +23,10 @@
           <form [formGroup]="contactMeForm" (ngSubmit)="onSubmit()">
             <div class="mb-3">
               @if (languageRO()) {
-              <label for="name" class="form-label">Nume:</label>
-              } @if (!languageRO()) {
-              <label for="name" class="form-label">Name:</label>
+                <label for="name" class="form-label">Nume:</label>
+              }
+              @if (!languageRO()) {
+                <label for="name" class="form-label">Name:</label>
               }
               <input
                 class="form-control"
@@ -36,18 +38,19 @@
                 [class.is-invalid]="isNameInvalid"
               />
               @if (isNameInvalid) {
-              <div class="invalid-feedback">
-                @if (name?.errors?.['required']) {
-                <div>Numele este necesar.</div>
-                }
-              </div>
+                <div class="invalid-feedback">
+                  @if (name?.errors?.['required']) {
+                    <div>Numele este necesar.</div>
+                  }
+                </div>
               }
             </div>
             <div class="mb-3">
               @if (languageRO()) {
-              <label for="email" class="form-label">Adresă de E-mail:</label>
-              } @if (!languageRO()) {
-              <label for="email" class="form-label">E-mail Adresse:</label>
+                <label for="email" class="form-label">Adresă de E-mail:</label>
+              }
+              @if (!languageRO()) {
+                <label for="email" class="form-label">E-mail Adresse:</label>
               }
               <input
                 class="form-control"
@@ -59,20 +62,22 @@
                 [class.is-invalid]="isEmailInvalid"
               />
               @if (isEmailInvalid) {
-              <div class="invalid-feedback">
-                @if (email?.errors?.['required']) {
-                <div>E-mail-ul este necesar.</div>
-                } @if (email?.errors?.['email']) {
-                <div>Un E-mail valid este necesar.</div>
-                }
-              </div>
+                <div class="invalid-feedback">
+                  @if (email?.errors?.['required']) {
+                    <div>E-mail-ul este necesar.</div>
+                  }
+                  @if (email?.errors?.['email']) {
+                    <div>Un E-mail valid este necesar.</div>
+                  }
+                </div>
               }
             </div>
             <div class="mb-3">
               @if (languageRO()) {
-              <label for="phone" class="form-label">Număr de telefon:</label>
-              } @if (!languageRO()) {
-              <label for="phone" class="form-label">Telefonnummer:</label>
+                <label for="phone" class="form-label">Număr de telefon:</label>
+              }
+              @if (!languageRO()) {
+                <label for="phone" class="form-label">Telefonnummer:</label>
               }
               <input
                 class="form-control"
@@ -84,20 +89,22 @@
                 [class.is-invalid]="isPhoneInvalid"
               />
               @if (isPhoneInvalid) {
-              <div class="invalid-feedback">
-                @if (phone?.errors?.['required']) {
-                <div>Numărul de telefon este necesar.</div>
-                } @if (phone?.errors?.['pattern']) {
-                <div>Un număr de telefon mobil valid este necesar.</div>
-                }
-              </div>
+                <div class="invalid-feedback">
+                  @if (phone?.errors?.['required']) {
+                    <div>Numărul de telefon este necesar.</div>
+                  }
+                  @if (phone?.errors?.['pattern']) {
+                    <div>Un număr de telefon mobil valid este necesar.</div>
+                  }
+                </div>
               }
             </div>
             <div class="mb-3">
               @if (languageRO()) {
-              <label for="message" class="form-label">Mesaj:</label>
-              } @if (!languageRO()) {
-              <label for="message" class="form-label">Nachricht:</label>
+                <label for="message" class="form-label">Mesaj:</label>
+              }
+              @if (!languageRO()) {
+                <label for="message" class="form-label">Nachricht:</label>
               }
               <textarea
                 class="form-control"
@@ -110,38 +117,39 @@
                 style="height: 10rem"
               ></textarea>
               @if (isMessageInvalid) {
-              <div class="invalid-feedback">
-                @if (message?.errors?.['required']) {
-                <div>Un mesaj este necesar.</div>
-                }
-              </div>
+                <div class="invalid-feedback">
+                  @if (message?.errors?.['required']) {
+                    <div>Un mesaj este necesar.</div>
+                  }
+                </div>
               }
             </div>
             <div class="d-grid">
               @if (languageRO()) {
-              <button class="generic-button" type="submit">Trimite</button>
-              } @if (!languageRO()) {
-              <button class="generic-button" type="submit">Senden</button>
+                <button class="generic-button" type="submit">Trimite</button>
+              }
+              @if (!languageRO()) {
+                <button class="generic-button" type="submit">Senden</button>
               }
             </div>
           </form>
         </div>
         @if (isEmailModalOpen()) {
-        <div
-          class="send-email-modal"
-          animate.enter="anim-scale-in"
-          animate.leave="anim-scale-out"
-        >
-          <h2 id="email-popup-text-header">{{ emailPopUpHeader() }}</h2>
-          <p id="email-popup-text-paragraph">{{ emailPopUpParagraph() }}</p>
-          <button
-            type="submit"
-            class="generic-button"
-            (click)="closeEmailModal()"
+          <div
+            class="send-email-modal"
+            animate.enter="anim-scale-in"
+            animate.leave="anim-scale-out"
           >
-            OK
-          </button>
-        </div>
+            <h2 id="email-popup-text-header">{{ emailPopUpHeader() }}</h2>
+            <p id="email-popup-text-paragraph">{{ emailPopUpParagraph() }}</p>
+            <button
+              type="submit"
+              class="generic-button"
+              (click)="closeEmailModal()"
+            >
+              OK
+            </button>
+          </div>
         }
       </div>
     </div>
@@ -149,11 +157,14 @@
       <div class="card contactCard my-2">
         <div class="card-body">
           @if (languageRO()) {
-          <p class="card-title card-contact-text mt-2 mb-4">Detalii contact:</p>
-          } @if (!languageRO()) {
-          <p class="card-title card-contact-text mt-2 mb-4">
-            Kontaktinformationen:
-          </p>
+            <p class="card-title card-contact-text mt-2 mb-4">
+              Detalii contact:
+            </p>
+          }
+          @if (!languageRO()) {
+            <p class="card-title card-contact-text mt-2 mb-4">
+              Kontaktinformationen:
+            </p>
           }
           <div class="mb-2">
             <i class="bi bi-telephone contactIconsCard me-2"></i
@@ -232,48 +243,54 @@
   </div>
 
   <section class="w-100" aria-labelledby="contact-location-heading">
-  <div
-    class="row w-100 d-flex justify-content-center align-items-center my-2 generic-row-padding"
-  >
     <div
-      class="container-fluid d-flex justify-content-center align-items-center my-2"
+      class="row w-100 d-flex justify-content-center align-items-center my-2 generic-row-padding"
     >
-      @if (languageRO()) {
-      <h2 class="subtitle-1" id="contact-location-heading">Unde ne găsiți?</h2>
-      } @if (!languageRO()) {
-      <h2 class="subtitle-1" id="contact-location-heading">Wo können Sie uns finden?</h2>
-      }
+      <div
+        class="container-fluid d-flex justify-content-center align-items-center my-2"
+      >
+        @if (languageRO()) {
+          <h2 class="subtitle-1" id="contact-location-heading">
+            Unde ne găsiți?
+          </h2>
+        }
+        @if (!languageRO()) {
+          <h2 class="subtitle-1" id="contact-location-heading">
+            Wo können Sie uns finden?
+          </h2>
+        }
+      </div>
     </div>
-  </div>
 
-  <div
-    class="row w-100 d-flex justify-content-center align-items-center my-2 diagonal-2 generic-row-padding"
-  >
-    <div class="col d-flex flex-column justify-content-between my-2 px-2">
-      <div class="card my-2">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2780.8948754800153!2d24.145391576370393!3d45.81336371007396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x474c67c5ebc88d4b%3A0x494481146e1aac81!2sImalo%20Education!5e0!3m2!1sro!2sro!4v1715603852133!5m2!1sro!2sro"
-          id="googleMapsIframe"
-          allowfullscreen
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          class="card-img-top"
-          title="Imalo Education Afterschool Sibiu Gutuilor 6"
-        >
-        </iframe>
-        <div class="card-lower-text py-4 px-2">
-          @if (languageRO()) {
-          <p class="cyan-dark-text-with-shadow text-center">
-            Ne găsiți în Sibiu, strada Gutuilor nr. 6
-          </p>
-          } @if (!languageRO()) {
-          <p class="cyan-dark-text-with-shadow text-center">
-            Sie finden uns in Sibiu, Gutuilor Straße Nr. 6
-          </p>
-          }
+    <div
+      class="row w-100 d-flex justify-content-center align-items-center my-2 diagonal-2 generic-row-padding"
+    >
+      <div class="col d-flex flex-column justify-content-between my-2 px-2">
+        <div class="card my-2">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2780.8948754800153!2d24.145391576370393!3d45.81336371007396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x474c67c5ebc88d4b%3A0x494481146e1aac81!2sImalo%20Education!5e0!3m2!1sro!2sro!4v1715603852133!5m2!1sro!2sro"
+            id="googleMapsIframe"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            class="card-img-top"
+            title="Imalo Education Afterschool Sibiu Gutuilor 6"
+          >
+          </iframe>
+          <div class="card-lower-text py-4 px-2">
+            @if (languageRO()) {
+              <p class="cyan-dark-text-with-shadow text-center">
+                Ne găsiți în Sibiu, strada Gutuilor nr. 6
+              </p>
+            }
+            @if (!languageRO()) {
+              <p class="cyan-dark-text-with-shadow text-center">
+                Sie finden uns in Sibiu, Gutuilor Straße Nr. 6
+              </p>
+            }
+          </div>
         </div>
       </div>
     </div>
-  </div>
   </section>
 </div>

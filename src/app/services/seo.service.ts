@@ -1,4 +1,3 @@
-
 import { Injectable, inject, DOCUMENT } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
 
@@ -11,7 +10,6 @@ const DEFAULT_ROBOTS_CONTENT =
 export class SEOService {
   private doc = inject<Document>(DOCUMENT);
   private meta = inject(Meta);
-
 
   updateRobots(content: string): void {
     this.meta.updateTag({ name: 'robots', content });

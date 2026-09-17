@@ -12,7 +12,9 @@ describe('SEOService', () => {
 
   afterEach(() => {
     document.head
-      .querySelectorAll('link[rel="canonical"], meta[property^="og:"], meta[name^="twitter:"], meta[name="description"]')
+      .querySelectorAll(
+        'link[rel="canonical"], meta[property^="og:"], meta[name^="twitter:"], meta[name="description"]',
+      )
       .forEach((el) => el.remove());
   });
 
@@ -64,16 +66,24 @@ describe('SEOService', () => {
     service.updateOpenGraphTags('Galeria Imalo Education.');
 
     expect(
-      document.querySelector('meta[property="og:title"]')?.getAttribute('content'),
+      document
+        .querySelector('meta[property="og:title"]')
+        ?.getAttribute('content'),
     ).toBe('Galerie - Imalo Afterschool Germana Sibiu');
     expect(
-      document.querySelector('meta[property="og:description"]')?.getAttribute('content'),
+      document
+        .querySelector('meta[property="og:description"]')
+        ?.getAttribute('content'),
     ).toBe('Galeria Imalo Education.');
     expect(
-      document.querySelector('meta[property="og:url"]')?.getAttribute('content'),
+      document
+        .querySelector('meta[property="og:url"]')
+        ?.getAttribute('content'),
     ).toBe('https://imalo-education.web.app/gallery');
     expect(
-      document.querySelector('meta[name="twitter:url"]')?.getAttribute('content'),
+      document
+        .querySelector('meta[name="twitter:url"]')
+        ?.getAttribute('content'),
     ).toBe('https://imalo-education.web.app/gallery');
   });
 });

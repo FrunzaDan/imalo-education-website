@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { SEOService } from '../../services/seo.service';
 
 @Component({
@@ -10,7 +15,6 @@ import { SEOService } from '../../services/seo.service';
 })
 export class PrivacyComponent implements OnInit {
   private seoService = inject(SEOService);
-
 
   ngOnInit(): void {
     this.seoService.createLinkForCanonicalURL();

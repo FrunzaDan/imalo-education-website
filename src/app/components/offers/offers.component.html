@@ -4,9 +4,10 @@
       class="container-fluid d-flex justify-content-center align-items-center my-2"
     >
       @if (languageRO()) {
-      <h1 class="subtitle-1">Avem 3 tipuri de oferte educaționale:</h1>
-      } @if (!languageRO()) {
-      <h1 class="subtitle-1">Wir haben 3 Arten von Bildungsangeboten:</h1>
+        <h1 class="subtitle-1">Avem 3 tipuri de oferte educaționale:</h1>
+      }
+      @if (!languageRO()) {
+        <h1 class="subtitle-1">Wir haben 3 Arten von Bildungsangeboten:</h1>
       }
     </div>
   </div>
@@ -34,9 +35,10 @@
         />
         <div class="card-lower-text">
           @if (languageRO()) {
-          <h2 class="subtitle-2">Școala <br />de vară</h2>
-          } @if (!languageRO()) {
-          <h2 class="subtitle-2">Sommerschule</h2>
+            <h2 class="subtitle-2">Școala <br />de vară</h2>
+          }
+          @if (!languageRO()) {
+            <h2 class="subtitle-2">Sommerschule</h2>
           }
         </div>
       </div>
@@ -63,13 +65,14 @@
         />
         <div class="card-lower-text">
           @if (languageRO()) {
-          <h2 class="subtitle-2">
-            În timpul <br />anului școlar <br />2025-2026
-          </h2>
-          } @if (!languageRO()) {
-          <h2 class="subtitle-2">
-            Während <br />des Schuljahres<br />2025-2026
-          </h2>
+            <h2 class="subtitle-2">
+              În timpul <br />anului școlar <br />2025-2026
+            </h2>
+          }
+          @if (!languageRO()) {
+            <h2 class="subtitle-2">
+              Während <br />des Schuljahres<br />2025-2026
+            </h2>
           }
         </div>
       </div>
@@ -96,9 +99,10 @@
         />
         <div class="card-lower-text">
           @if (languageRO()) {
-          <h2 class="subtitle-2">Activități <br />extracuriculare</h2>
-          } @if (!languageRO()) {
-          <h2 class="subtitle-2">Außerschulische <br />Aktivitäten</h2>
+            <h2 class="subtitle-2">Activități <br />extracuriculare</h2>
+          }
+          @if (!languageRO()) {
+            <h2 class="subtitle-2">Außerschulische <br />Aktivitäten</h2>
           }
         </div>
       </div>
@@ -110,359 +114,412 @@
     id="offers-summerschool"
     aria-labelledby="offers-summerschool-heading"
   >
-  <div class="row w-100 my-2 generic-row-padding">
-    <div
-      class="container-fluid d-flex justify-content-center align-items-center my-2"
-    >
-      @if (languageRO()) {
-      <h2 class="subtitle-1" id="offers-summerschool-heading">Ofertă școala de vară</h2>
-      } @if (!languageRO()) {
-      <h2 class="subtitle-1" id="offers-summerschool-heading">Angebot für die Sommerschule</h2>
-      }
+    <div class="row w-100 my-2 generic-row-padding">
+      <div
+        class="container-fluid d-flex justify-content-center align-items-center my-2"
+      >
+        @if (languageRO()) {
+          <h2 class="subtitle-1" id="offers-summerschool-heading">
+            Ofertă școala de vară
+          </h2>
+        }
+        @if (!languageRO()) {
+          <h2 class="subtitle-1" id="offers-summerschool-heading">
+            Angebot für die Sommerschule
+          </h2>
+        }
+      </div>
     </div>
-  </div>
 
-  <div class="row w-100 diagonal-1 generic-row-padding">
-    <div class="col-sm-12 d-flex justify-content-center align-items-center p-4">
-      <div class="card offer-card card-main-gradient-color">
-        <div class="container offer-container p-4">
-          @if (languageRO()) {
-          <div class="circle">
-            Școala<br />
-            de vară
+    <div class="row w-100 diagonal-1 generic-row-padding">
+      <div
+        class="col-sm-12 d-flex justify-content-center align-items-center p-4"
+      >
+        <div class="card offer-card card-main-gradient-color">
+          <div class="container offer-container p-4">
+            @if (languageRO()) {
+              <div class="circle">
+                Școala<br />
+                de vară
+              </div>
+            }
+            @if (!languageRO()) {
+              <div class="circle">Sommer-<br />schule</div>
+            }
           </div>
-          } @if (!languageRO()) {
-          <div class="circle">Sommer-<br />schule</div>
-          }
-        </div>
-        <div class="package-description">
-          @if (languageRO()) {
-          <ul>
-            <li>Suport in efectuarea temelor de vacanță</li>
-            <li>Ateliere (artă, ceramica, culinare, etc.)</li>
-            <li>Activițăți in natură</li>
-            <li>Dans, balet, tir cu arcul</li>
-            <li>Curs de engleză</li>
-          </ul>
-          } @if (!languageRO()) {
-          <ul>
-            <li>
-              Unterstützung bei der Erledigung der Hausaufgaben für die Ferien
-            </li>
-            <li>Workshops (Kunst, Keramik, Kochen, usw.)</li>
-            <li>Aktivitäten in der Natur</li>
-            <li>Tanzen, Ballett, Bogenschießen</li>
-            <li>Englischkurs</li>
-          </ul>
-          }
-        </div>
-        <div class="insideoffer-card pt-4 px-4 pb-4">
-          @if (languageRO()) {
-          <button
-            (click)="openCourseModal('Școala de vară')"
-            class="generic-button"
-          >
-            Cere Oferta
-          </button>
-          } @if (!languageRO()) {
-          <button
-            (click)="openCourseModal('Sommerschule')"
-            class="generic-button"
-          >
-            Bewerbung
-          </button>
-          }
+          <div class="package-description">
+            @if (languageRO()) {
+              <ul>
+                <li>Suport in efectuarea temelor de vacanță</li>
+                <li>Ateliere (artă, ceramica, culinare, etc.)</li>
+                <li>Activițăți in natură</li>
+                <li>Dans, balet, tir cu arcul</li>
+                <li>Curs de engleză</li>
+              </ul>
+            }
+            @if (!languageRO()) {
+              <ul>
+                <li>
+                  Unterstützung bei der Erledigung der Hausaufgaben für die
+                  Ferien
+                </li>
+                <li>Workshops (Kunst, Keramik, Kochen, usw.)</li>
+                <li>Aktivitäten in der Natur</li>
+                <li>Tanzen, Ballett, Bogenschießen</li>
+                <li>Englischkurs</li>
+              </ul>
+            }
+          </div>
+          <div class="insideoffer-card pt-4 px-4 pb-4">
+            @if (languageRO()) {
+              <button
+                (click)="openCourseModal('Școala de vară')"
+                class="generic-button"
+              >
+                Cere Oferta
+              </button>
+            }
+            @if (!languageRO()) {
+              <button
+                (click)="openCourseModal('Sommerschule')"
+                class="generic-button"
+              >
+                Bewerbung
+              </button>
+            }
+          </div>
         </div>
       </div>
     </div>
-  </div>
   </section>
 
-  <section class="w-100" id="during-schoolyear" aria-labelledby="during-schoolyear-heading">
-  <div class="row w-100 my-2 generic-row-padding">
-    <div
-      class="container-fluid d-flex justify-content-center align-items-center my-2"
-    >
-      @if (languageRO()) {
-      <h2 class="subtitle-1" id="during-schoolyear-heading">Oferte în timpul anului școlar</h2>
-      } @if (!languageRO()) {
-      <h2 class="subtitle-1" id="during-schoolyear-heading">Angebote während des Schuljahres</h2>
-      }
+  <section
+    class="w-100"
+    id="during-schoolyear"
+    aria-labelledby="during-schoolyear-heading"
+  >
+    <div class="row w-100 my-2 generic-row-padding">
+      <div
+        class="container-fluid d-flex justify-content-center align-items-center my-2"
+      >
+        @if (languageRO()) {
+          <h2 class="subtitle-1" id="during-schoolyear-heading">
+            Oferte în timpul anului școlar
+          </h2>
+        }
+        @if (!languageRO()) {
+          <h2 class="subtitle-1" id="during-schoolyear-heading">
+            Angebote während des Schuljahres
+          </h2>
+        }
+      </div>
     </div>
-  </div>
 
-  <div class="row w-100 diagonal-2 generic-row-padding">
-    <div class="col-sm-6 d-flex justify-content-center align-items-center p-4">
-      <div class="card offer-card card-main-gradient-color">
-        <div class="container offer-container p-4">
-          @if (languageRO()) {
-          <div class="circle">
-            Pachet<br />
-            Simplu
+    <div class="row w-100 diagonal-2 generic-row-padding">
+      <div
+        class="col-sm-6 d-flex justify-content-center align-items-center p-4"
+      >
+        <div class="card offer-card card-main-gradient-color">
+          <div class="container offer-container p-4">
+            @if (languageRO()) {
+              <div class="circle">
+                Pachet<br />
+                Simplu
+              </div>
+            }
+            @if (!languageRO()) {
+              <div class="circle">
+                Grund<br />
+                Paket
+              </div>
+            }
           </div>
-          } @if (!languageRO()) {
-          <div class="circle">
-            Grund<br />
-            Paket
+          <div class="package-description">
+            @if (languageRO()) {
+              <ul>
+                <li>Preluarea zilnică nu este inclusă</li>
+                <li>Masa de prânz inclusă</li>
+                <li>Rezolvarea asistată a temelor</li>
+                <li>Activități educative</li>
+              </ul>
+            }
+            @if (!languageRO()) {
+              <ul>
+                <li>Tägliche Abholung nicht inklusive</li>
+                <li>Tägliches Mittagessen inklusive</li>
+                <li>Betreute Hausaufgabenhilfe</li>
+                <li>Bildungs- und Freizeitaktivitäten</li>
+              </ul>
+            }
           </div>
-          }
+          <div class="insideoffer-card pt-4 px-4 pb-4">
+            @if (languageRO()) {
+              <button
+                (click)="openCourseModal('Pachet Simplu')"
+                class="generic-button"
+              >
+                Cere Oferta
+              </button>
+            }
+            @if (!languageRO()) {
+              <button
+                (click)="openCourseModal('Grund Paket')"
+                class="generic-button"
+              >
+                Bewerbung
+              </button>
+            }
+          </div>
         </div>
-        <div class="package-description">
-          @if (languageRO()) {
-          <ul>
-            <li>Preluarea zilnică nu este inclusă</li>
-            <li>Masa de prânz inclusă</li>
-            <li>Rezolvarea asistată a temelor</li>
-            <li>Activități educative</li>
-          </ul>
-          } @if (!languageRO()) {
-          <ul>
-            <li>Tägliche Abholung nicht inklusive</li>
-            <li>Tägliches Mittagessen inklusive</li>
-            <li>Betreute Hausaufgabenhilfe</li>
-            <li>Bildungs- und Freizeitaktivitäten</li>
-          </ul>
-          }
-        </div>
-        <div class="insideoffer-card pt-4 px-4 pb-4">
-          @if (languageRO()) {
-          <button
-            (click)="openCourseModal('Pachet Simplu')"
-            class="generic-button"
-          >
-            Cere Oferta
-          </button>
-          } @if (!languageRO()) {
-          <button
-            (click)="openCourseModal('Grund Paket')"
-            class="generic-button"
-          >
-            Bewerbung
-          </button>
-          }
+      </div>
+      <div
+        class="col-sm-6 d-flex justify-content-center align-items-center p-4"
+      >
+        <div class="card offer-card card-main-gradient-color">
+          <div class="container offer-container p-4">
+            @if (languageRO()) {
+              <div class="circle">
+                Pachet<br />
+                Complet
+              </div>
+            }
+            @if (!languageRO()) {
+              <div class="circle">
+                Komplettes<br />
+                Paket
+              </div>
+            }
+          </div>
+          <div class="package-description">
+            @if (languageRO()) {
+              <ul>
+                <li>Preluarea zilnică este inclusă</li>
+                <li>Masa de prânz inclusă</li>
+                <li>Rezolvarea asistată a temelor</li>
+                <li>Activități educative</li>
+              </ul>
+            }
+            @if (!languageRO()) {
+              <ul>
+                <li>Tägliche Abholung inklusive</li>
+                <li>Tägliches Mittagessen inklusive</li>
+                <li>Betreute Hausaufgabenhilfe</li>
+                <li>Bildungs- und Freizeitaktivitäten</li>
+              </ul>
+            }
+          </div>
+          <div class="insideoffer-card pt-4 px-4 pb-4">
+            @if (languageRO()) {
+              <button
+                (click)="openCourseModal('Pachet Complet')"
+                class="generic-button"
+              >
+                Cere Oferta
+              </button>
+            }
+            @if (!languageRO()) {
+              <button
+                (click)="openCourseModal('Komplettes Paket')"
+                class="generic-button"
+              >
+                Bewerbung
+              </button>
+            }
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-sm-6 d-flex justify-content-center align-items-center p-4">
-      <div class="card offer-card card-main-gradient-color">
-        <div class="container offer-container p-4">
-          @if (languageRO()) {
-          <div class="circle">
-            Pachet<br />
-            Complet
-          </div>
-          } @if (!languageRO()) {
-          <div class="circle">
-            Komplettes<br />
-            Paket
-          </div>
-          }
-        </div>
-        <div class="package-description">
-          @if (languageRO()) {
-          <ul>
-            <li>Preluarea zilnică este inclusă</li>
-            <li>Masa de prânz inclusă</li>
-            <li>Rezolvarea asistată a temelor</li>
-            <li>Activități educative</li>
-          </ul>
-          } @if (!languageRO()) {
-          <ul>
-            <li>Tägliche Abholung inklusive</li>
-            <li>Tägliches Mittagessen inklusive</li>
-            <li>Betreute Hausaufgabenhilfe</li>
-            <li>Bildungs- und Freizeitaktivitäten</li>
-          </ul>
-          }
-        </div>
-        <div class="insideoffer-card pt-4 px-4 pb-4">
-          @if (languageRO()) {
-          <button
-            (click)="openCourseModal('Pachet Complet')"
-            class="generic-button"
-          >
-            Cere Oferta
-          </button>
-          } @if (!languageRO()) {
-          <button
-            (click)="openCourseModal('Komplettes Paket')"
-            class="generic-button"
-          >
-            Bewerbung
-          </button>
-          }
-        </div>
-      </div>
-    </div>
-  </div>
   </section>
 
-  <section class="w-100" id="extra-activities" aria-labelledby="extra-activities-heading">
-  <div class="row w-100 my-2 generic-row-padding">
-    <div
-      class="container-fluid d-flex justify-content-center align-items-center my-2"
-    >
-      @if (languageRO()) {
-      <h2 class="subtitle-1" id="extra-activities-heading">Activități extracuriculare</h2>
-      } @if (!languageRO()) {
-      <h2 class="subtitle-1" id="extra-activities-heading">Außerschulische Aktivitäten</h2>
-      }
+  <section
+    class="w-100"
+    id="extra-activities"
+    aria-labelledby="extra-activities-heading"
+  >
+    <div class="row w-100 my-2 generic-row-padding">
+      <div
+        class="container-fluid d-flex justify-content-center align-items-center my-2"
+      >
+        @if (languageRO()) {
+          <h2 class="subtitle-1" id="extra-activities-heading">
+            Activități extracuriculare
+          </h2>
+        }
+        @if (!languageRO()) {
+          <h2 class="subtitle-1" id="extra-activities-heading">
+            Außerschulische Aktivitäten
+          </h2>
+        }
+      </div>
     </div>
-  </div>
 
-  <div class="row w-100 diagonal-1 generic-row-padding">
-    <div class="col-sm-12 d-flex justify-content-center align-items-center p-4">
-      <div class="card offer-card card-main-gradient-color">
-        <div class="container offer-container p-4">
-          @if (languageRO()) {
-          <div class="circle">Activități <br />extra</div>
-          } @if (!languageRO()) {
-          <div class="circle">Extra <br />Aktivitäten</div>
-          }
-        </div>
-        <div class="package-description">
-          @if (languageRO()) {
-          <ul>
-            <li>
-              Cursuri de limba engleză axate pe dezvoltarea vocabularului prin
-              metode interactive și distractive
-            </li>
-            <li>
-              Ateliere creative precum pictura, ceramica, arta pe textil și
-              lemn, pirogravură
-            </li>
-            <li>
-              Cursuri de istoria artei: O călătorie între timp și spațiu alături
-              de Primitiv Entertainment
-            </li>
-            <li>
-              Ateliere culinare ce includ brutărie, cofetărie, salate delicioase
-              și alte gustări creative și delicioase
-            </li>
-            <li>Cursuri de balet și dans alături de Dance for you Studio</li>
-            <li>
-              Excursii în aer liber, drumeții, jocuri de orientare și
-              descoperire a unor specii de plante și animale, vânătoare de
-              comori în natură
-            </li>
-            <li>Cursuri de tir cu arcul</li>
-          </ul>
-          } @if (!languageRO()) {
-          <ul>
-            <li>
-              Englischkurse mit Fokus auf Wortschatzerweiterung durch
-              interaktive und unterhaltsame Methoden
-            </li>
-            <li>
-              Kreative Workshops wie Malerei, Keramik, Textil- und Holzkunst,
-              Pyrografie
-            </li>
-            <li>
-              Kunstgeschichtskurse: Eine Reise durch Zeit und Raum mit Primitiv
-              Entertainment
-            </li>
-            <li>
-              Kulinarische Workshops mit Backen, Konditorei, köstlichen Salaten
-              und anderen kreativen und köstlichen Snacks
-            </li>
-            <li>CBallett- und Tanzkurse mit Dance for you Studio</li>
-            <li>
-              Freiluftausflüge, Wanderungen, Orientierungsspiele und Entdeckung
-              von Pflanzen- und Tierarten, Schatzsuche in der Natur
-            </li>
-            <li>Bogenschießkurse</li>
-          </ul>
-          }
-        </div>
-        <div class="insideoffer-card pt-4 px-4 pb-4">
-          @if (languageRO()) {
-          <button
-            (click)="openCourseModal('Activități extra')"
-            class="generic-button"
-          >
-            Cere Oferta
-          </button>
-          } @if (!languageRO()) {
-          <button
-            (click)="openCourseModal('Extra Aktivitäten')"
-            class="generic-button"
-          >
-            Bewerbung
-          </button>
-          }
+    <div class="row w-100 diagonal-1 generic-row-padding">
+      <div
+        class="col-sm-12 d-flex justify-content-center align-items-center p-4"
+      >
+        <div class="card offer-card card-main-gradient-color">
+          <div class="container offer-container p-4">
+            @if (languageRO()) {
+              <div class="circle">Activități <br />extra</div>
+            }
+            @if (!languageRO()) {
+              <div class="circle">Extra <br />Aktivitäten</div>
+            }
+          </div>
+          <div class="package-description">
+            @if (languageRO()) {
+              <ul>
+                <li>
+                  Cursuri de limba engleză axate pe dezvoltarea vocabularului
+                  prin metode interactive și distractive
+                </li>
+                <li>
+                  Ateliere creative precum pictura, ceramica, arta pe textil și
+                  lemn, pirogravură
+                </li>
+                <li>
+                  Cursuri de istoria artei: O călătorie între timp și spațiu
+                  alături de Primitiv Entertainment
+                </li>
+                <li>
+                  Ateliere culinare ce includ brutărie, cofetărie, salate
+                  delicioase și alte gustări creative și delicioase
+                </li>
+                <li>
+                  Cursuri de balet și dans alături de Dance for you Studio
+                </li>
+                <li>
+                  Excursii în aer liber, drumeții, jocuri de orientare și
+                  descoperire a unor specii de plante și animale, vânătoare de
+                  comori în natură
+                </li>
+                <li>Cursuri de tir cu arcul</li>
+              </ul>
+            }
+            @if (!languageRO()) {
+              <ul>
+                <li>
+                  Englischkurse mit Fokus auf Wortschatzerweiterung durch
+                  interaktive und unterhaltsame Methoden
+                </li>
+                <li>
+                  Kreative Workshops wie Malerei, Keramik, Textil- und
+                  Holzkunst, Pyrografie
+                </li>
+                <li>
+                  Kunstgeschichtskurse: Eine Reise durch Zeit und Raum mit
+                  Primitiv Entertainment
+                </li>
+                <li>
+                  Kulinarische Workshops mit Backen, Konditorei, köstlichen
+                  Salaten und anderen kreativen und köstlichen Snacks
+                </li>
+                <li>CBallett- und Tanzkurse mit Dance for you Studio</li>
+                <li>
+                  Freiluftausflüge, Wanderungen, Orientierungsspiele und
+                  Entdeckung von Pflanzen- und Tierarten, Schatzsuche in der
+                  Natur
+                </li>
+                <li>Bogenschießkurse</li>
+              </ul>
+            }
+          </div>
+          <div class="insideoffer-card pt-4 px-4 pb-4">
+            @if (languageRO()) {
+              <button
+                (click)="openCourseModal('Activități extra')"
+                class="generic-button"
+              >
+                Cere Oferta
+              </button>
+            }
+            @if (!languageRO()) {
+              <button
+                (click)="openCourseModal('Extra Aktivitäten')"
+                class="generic-button"
+              >
+                Bewerbung
+              </button>
+            }
+          </div>
         </div>
       </div>
     </div>
-  </div>
   </section>
 </div>
 
 @if (isCourseModalOpen()) {
-<div
-  class="full-view-background"
-  animate.enter="anim-fade-in"
-  animate.leave="anim-fade-out"
-  (click)="closeCourseModal()"
-></div>
-} @if (isCourseModalOpen()) {
-<div
-  class="get-course-modal"
-  animate.enter="anim-scale-in"
-  animate.leave="anim-scale-out"
->
-  <div class="customModal-header">
-    @if (languageRO()) {
-    <div class="title">Doriți să aplicați pentru acest pachet?</div>
-    } @if (!languageRO()) {
-    <div class="title">Möchten Sie sich für dieses Paket bewerben?</div>
-    }
-    <button (click)="closeCourseModal()" class="close-button">&times;</button>
-  </div>
-  <div class="customModal-body">
-    <div class="row modalRow">
+  <div
+    class="full-view-background"
+    animate.enter="anim-fade-in"
+    animate.leave="anim-fade-out"
+    (click)="closeCourseModal()"
+  ></div>
+}
+@if (isCourseModalOpen()) {
+  <div
+    class="get-course-modal"
+    animate.enter="anim-scale-in"
+    animate.leave="anim-scale-out"
+  >
+    <div class="customModal-header">
       @if (languageRO()) {
-      <p>Oferta selectată: {{ this.courseTitle }}</p>
-      } @if (!languageRO()) {
-      <p>Ausgewähltes Angebot: {{ this.courseTitle }}</p>
+        <div class="title">Doriți să aplicați pentru acest pachet?</div>
       }
-    </div>
-    <div class="row modalRow">
-      @if (languageRO()) {
-      <p>Alegeți cum să mă contactați:</p>
-      } @if (!languageRO()) {
-      <p>Wählen Sie, wie Sie mich kontaktieren möchten:</p>
+      @if (!languageRO()) {
+        <div class="title">Möchten Sie sich für dieses Paket bewerben?</div>
       }
+      <button (click)="closeCourseModal()" class="close-button">&times;</button>
     </div>
-    <div class="row modalRow">
-      <div class="col-sm-6 modalCol">
-        <a class="fullSpaceHref" href="tel:+40741711006">
-          <button class="generic-button">
-            <span>
-              <i class="bi bi-telephone white-icon"></i>
-            </span>
-            @if (languageRO()) {
-            <span> Sunați-mă </span>
-            } @if (!languageRO()) {
-            <span> Per Anruf </span>
-            }
-          </button>
-        </a>
+    <div class="customModal-body">
+      <div class="row modalRow">
+        @if (languageRO()) {
+          <p>Oferta selectată: {{ this.courseTitle }}</p>
+        }
+        @if (!languageRO()) {
+          <p>Ausgewähltes Angebot: {{ this.courseTitle }}</p>
+        }
       </div>
-      <div class="col-sm-6 modalCol">
-        <a class="fullSpaceHref" href="mailto:imaloeducation@gmail.com">
-          <button class="generic-button">
-            <span>
-              <i class="bi bi-envelope white-icon"></i>
-            </span>
-            @if (languageRO()) {
-            <span> Scrieți un E-mail </span>
-            } @if (!languageRO()) {
-            <span> Per E-mail </span>
-            }
-          </button>
-        </a>
+      <div class="row modalRow">
+        @if (languageRO()) {
+          <p>Alegeți cum să mă contactați:</p>
+        }
+        @if (!languageRO()) {
+          <p>Wählen Sie, wie Sie mich kontaktieren möchten:</p>
+        }
+      </div>
+      <div class="row modalRow">
+        <div class="col-sm-6 modalCol">
+          <a class="fullSpaceHref" href="tel:+40741711006">
+            <button class="generic-button">
+              <span>
+                <i class="bi bi-telephone white-icon"></i>
+              </span>
+              @if (languageRO()) {
+                <span> Sunați-mă </span>
+              }
+              @if (!languageRO()) {
+                <span> Per Anruf </span>
+              }
+            </button>
+          </a>
+        </div>
+        <div class="col-sm-6 modalCol">
+          <a class="fullSpaceHref" href="mailto:imaloeducation@gmail.com">
+            <button class="generic-button">
+              <span>
+                <i class="bi bi-envelope white-icon"></i>
+              </span>
+              @if (languageRO()) {
+                <span> Scrieți un E-mail </span>
+              }
+              @if (!languageRO()) {
+                <span> Per E-mail </span>
+              }
+            </button>
+          </a>
+        </div>
       </div>
     </div>
   </div>
-</div>
 }
