@@ -3,6 +3,7 @@ import {
   Component,
   OnInit,
   Signal,
+  effect,
   inject,
   signal,
 } from '@angular/core';
@@ -37,6 +38,14 @@ export class ContactComponent implements OnInit {
 
   constructor() {
     this.languageRO = this.languageService.language;
+
+    effect(() => {
+      this.seoService.updateForLanguage(
+        this.languageRO(),
+        'Pagina de contact Imalo Education, afterschool pe limba germana din Sibiu.',
+        'Kontaktseite von Imalo Education, dem deutschsprachigen Afterschool-Programm in Sibiu.',
+      );
+    });
   }
 
   contactMeForm = new FormGroup({
@@ -100,10 +109,6 @@ export class ContactComponent implements OnInit {
 
   ngOnInit(): void {
     this.seoService.createLinkForCanonicalURL();
-    const description =
-      'Pagina de contact Imalo Education, afterschool pe limba germana din Sibiu.';
-    this.seoService.updateMetaDescription(description);
-    this.seoService.updateOpenGraphTags(description);
   }
 
   async onSubmit() {

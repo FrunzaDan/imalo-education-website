@@ -5,6 +5,7 @@ import {
   OnDestroy,
   OnInit,
   Signal,
+  effect,
   inject,
   signal,
 } from '@angular/core';
@@ -29,14 +30,18 @@ export class OffersComponent implements OnInit, OnDestroy {
 
   constructor() {
     this.languageRO = this.languageService.language;
+
+    effect(() => {
+      this.seoService.updateForLanguage(
+        this.languageRO(),
+        'Pagina cu oferte Imalo Education, afterschool pe limba germana din Sibiu.',
+        'Angebotsseite von Imalo Education, dem deutschsprachigen Afterschool-Programm in Sibiu.',
+      );
+    });
   }
 
   ngOnInit(): void {
     this.seoService.createLinkForCanonicalURL();
-    const description =
-      'Pagina cu oferte Imalo Education, afterschool pe limba germana din Sibiu.';
-    this.seoService.updateMetaDescription(description);
-    this.seoService.updateOpenGraphTags(description);
   }
 
   ngOnDestroy(): void {

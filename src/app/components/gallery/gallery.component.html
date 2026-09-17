@@ -12,7 +12,9 @@
     @for (galleryImage of galleryImageList(); track galleryImage.imagePath;
     let i = $index) {
     <img
-      src="{{ galleryImage.imagePath }}"
+      [ngSrc]="galleryImage.imagePath"
+      width="1920"
+      height="1440"
       class="full-card-img"
       alt="Imalo Afterschool Germana Sibiu #{{ i + 1 }}"
       title="Imalo Afterschool Germana Sibiu #{{ i + 1 }}"
@@ -37,7 +39,9 @@
   <img
     animate.enter="anim-scale-in"
     animate.leave="anim-scale-out"
-    [src]="galleryImageList()[currentIndex()].imagePath"
+    [ngSrc]="galleryImageList()[currentIndex()].imagePath"
+    width="1920"
+    height="1440"
     class="full-view-img"
     alt="Imalo Afterschool Germana Sibiu"
   />
@@ -59,6 +63,7 @@
     (click)="navigateLeft()"
     class="galleryNavigationButton"
     id="prev-button"
+    [attr.aria-label]="languageRO() ? 'Poza anterioară' : 'Vorheriges Bild'"
     animate.enter="anim-fade-in"
     animate.leave="anim-fade-out"
   >
@@ -69,6 +74,7 @@
     (click)="navigateRight()"
     class="galleryNavigationButton"
     id="next-button"
+    [attr.aria-label]="languageRO() ? 'Poza următoare' : 'Nächstes Bild'"
     animate.enter="anim-fade-in"
     animate.leave="anim-fade-out"
   >
@@ -76,17 +82,18 @@
   </button>
   }
 
+  <section class="w-100" aria-labelledby="gallery-social-heading">
   <div
     class="row w-100 d-flex justify-content-center align-items-center my-2 generic-row-padding"
   >
     @if (languageRO()) {
-    <h1 class="subtitle-1">
+    <h2 class="subtitle-1" id="gallery-social-heading">
       Vrei să vezi mai multe poze și să afli mai multe noutăți?
-    </h1>
+    </h2>
     } @if (!languageRO()) {
-    <h1 class="subtitle-1">
+    <h2 class="subtitle-1" id="gallery-social-heading">
       Möchten Sie mehr Bilder sehen und mehr Neuigkeiten erfahren?
-    </h1>
+    </h2>
     }
   </div>
 
@@ -194,4 +201,5 @@
       </a>
     </div>
   </div>
+  </section>
 </div>

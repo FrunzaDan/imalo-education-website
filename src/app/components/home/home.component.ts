@@ -4,6 +4,7 @@ import {
   Component,
   OnInit,
   Signal,
+  effect,
   inject,
 } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
@@ -25,13 +26,17 @@ export class HomeComponent implements OnInit {
   languageRO: Signal<boolean>;
   constructor() {
     this.languageRO = this.languageService.language;
+
+    effect(() => {
+      this.seoService.updateForLanguage(
+        this.languageRO(),
+        'Imalo Education este un program tip afterschool pe limba germana din Sibiu unde copilul Dvs. va fi întâmpinat cu toată căldura și atenția noastră.',
+        'Imalo Education ist ein deutschsprachiges Afterschool-Programm in Sibiu, in dem Ihr Kind mit all unserer Herzlichkeit und Aufmerksamkeit empfangen wird.',
+      );
+    });
   }
 
   ngOnInit(): void {
     this.seoService.createLinkForCanonicalURL();
-    const description =
-      'Imalo Education este un program tip afterschool pe limba germana din Sibiu unde copilul Dvs. va fi întâmpinat cu toată căldura și atenția noastră.';
-    this.seoService.updateMetaDescription(description);
-    this.seoService.updateOpenGraphTags(description);
   }
 }

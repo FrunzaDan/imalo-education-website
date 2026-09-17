@@ -2,13 +2,6 @@
   "hosting": {
     "public": "dist/imalo-education/browser",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-    "rewrites": [
-      {
-        "source": "!/404",
-        "destination": "/index.html"
-      }
-    ],
-    "errorPage": "/404.html",
     "trailingSlash": false
   }
 }

@@ -5,6 +5,7 @@ import {
   HostListener,
   OnInit,
   Signal,
+  effect,
   inject,
   signal,
 } from '@angular/core';
@@ -36,15 +37,18 @@ export class GalleryComponent implements OnInit {
 
   constructor() {
     this.languageRO = this.languageService.language;
+
+    effect(() => {
+      this.seoService.updateForLanguage(
+        this.languageRO(),
+        'Galeria Imalo Education, afterschool pe limba germana din Sibiu.',
+        'Galerie von Imalo Education, dem deutschsprachigen Afterschool-Programm in Sibiu.',
+      );
+    });
   }
 
   ngOnInit(): void {
     this.seoService.createLinkForCanonicalURL();
-    const description =
-      'Galeria Imalo Education, afterschool pe limba germana din Sibiu.';
-    this.seoService.updateMetaDescription(description);
-    this.seoService.updateOpenGraphTags(description);
-
     this.galleryImageList.set(this.loadGalleryService.loadGallery());
   }
 

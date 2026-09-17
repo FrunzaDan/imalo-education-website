@@ -105,14 +105,19 @@
     </div>
   </div>
 
-  <div class="row w-100 my-2 generic-row-padding" id="offers-summerschool">
+  <section
+    class="w-100"
+    id="offers-summerschool"
+    aria-labelledby="offers-summerschool-heading"
+  >
+  <div class="row w-100 my-2 generic-row-padding">
     <div
       class="container-fluid d-flex justify-content-center align-items-center my-2"
     >
       @if (languageRO()) {
-      <h1 class="subtitle-1">Ofertă școala de vară</h1>
+      <h2 class="subtitle-1" id="offers-summerschool-heading">Ofertă școala de vară</h2>
       } @if (!languageRO()) {
-      <h1 class="subtitle-1">Angebot für die Sommerschule</h1>
+      <h2 class="subtitle-1" id="offers-summerschool-heading">Angebot für die Sommerschule</h2>
       }
     </div>
   </div>
@@ -171,15 +176,17 @@
       </div>
     </div>
   </div>
+  </section>
 
-  <div class="row w-100 my-2 generic-row-padding" id="during-schoolyear">
+  <section class="w-100" id="during-schoolyear" aria-labelledby="during-schoolyear-heading">
+  <div class="row w-100 my-2 generic-row-padding">
     <div
       class="container-fluid d-flex justify-content-center align-items-center my-2"
     >
       @if (languageRO()) {
-      <h1 class="subtitle-1">Oferte în timpul anului școlar</h1>
+      <h2 class="subtitle-1" id="during-schoolyear-heading">Oferte în timpul anului școlar</h2>
       } @if (!languageRO()) {
-      <h1 class="subtitle-1">Angebote während des Schuljahres</h1>
+      <h2 class="subtitle-1" id="during-schoolyear-heading">Angebote während des Schuljahres</h2>
       }
     </div>
   </div>
@@ -288,15 +295,17 @@
       </div>
     </div>
   </div>
+  </section>
 
-  <div class="row w-100 my-2 generic-row-padding" id="extra-activities">
+  <section class="w-100" id="extra-activities" aria-labelledby="extra-activities-heading">
+  <div class="row w-100 my-2 generic-row-padding">
     <div
       class="container-fluid d-flex justify-content-center align-items-center my-2"
     >
       @if (languageRO()) {
-      <h1 class="subtitle-1">Activități extracuriculare</h1>
+      <h2 class="subtitle-1" id="extra-activities-heading">Activități extracuriculare</h2>
       } @if (!languageRO()) {
-      <h1 class="subtitle-1">Außerschulische Aktivitäten</h1>
+      <h2 class="subtitle-1" id="extra-activities-heading">Außerschulische Aktivitäten</h2>
       }
     </div>
   </div>
@@ -385,6 +394,7 @@
       </div>
     </div>
   </div>
+  </section>
 </div>
 
 @if (isCourseModalOpen()) {
