@@ -137,13 +137,19 @@
         @if (isEmailModalOpen()) {
           <div
             class="send-email-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="email-popup-text-header"
+            tabindex="-1"
+            #emailModal
+            (keydown)="onModalKeydown($event)"
             animate.enter="anim-scale-in"
             animate.leave="anim-scale-out"
           >
             <h2 id="email-popup-text-header">{{ emailPopUpHeader() }}</h2>
             <p id="email-popup-text-paragraph">{{ emailPopUpParagraph() }}</p>
             <button
-              type="submit"
+              type="button"
               class="generic-button"
               (click)="closeEmailModal()"
             >

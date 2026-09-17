@@ -2,6 +2,8 @@
   (click)="scrollerService.scrollToTop()"
   id="scroll-to-top-btn"
   [class.hidden]="!shouldShowBackToTopButton()"
+  aria-label="Scroll to top"
+  [attr.tabindex]="shouldShowBackToTopButton() ? 0 : -1"
 >
   &#8593;
 </button>

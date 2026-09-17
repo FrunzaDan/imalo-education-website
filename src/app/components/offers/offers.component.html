@@ -459,17 +459,33 @@
 @if (isCourseModalOpen()) {
   <div
     class="get-course-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="course-modal-title"
+    tabindex="-1"
+    #courseModal
+    (keydown)="onModalKeydown($event)"
     animate.enter="anim-scale-in"
     animate.leave="anim-scale-out"
   >
     <div class="customModal-header">
       @if (languageRO()) {
-        <div class="title">Doriți să aplicați pentru acest pachet?</div>
+        <div class="title" id="course-modal-title">
+          Doriți să aplicați pentru acest pachet?
+        </div>
       }
       @if (!languageRO()) {
-        <div class="title">Möchten Sie sich für dieses Paket bewerben?</div>
+        <div class="title" id="course-modal-title">
+          Möchten Sie sich für dieses Paket bewerben?
+        </div>
       }
-      <button (click)="closeCourseModal()" class="close-button">&times;</button>
+      <button
+        (click)="closeCourseModal()"
+        class="close-button"
+        [attr.aria-label]="languageRO() ? 'Închide' : 'Schließen'"
+      >
+        &times;
+      </button>
     </div>
     <div class="customModal-body">
       <div class="row modalRow">

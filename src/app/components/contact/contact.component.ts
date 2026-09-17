@@ -1,11 +1,15 @@
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   OnInit,
+  PLATFORM_ID,
   Signal,
   effect,
   inject,
   signal,
+  viewChild,
 } from '@angular/core';
 import {
   FormControl,
@@ -17,6 +21,7 @@ import { ContactMeForm } from '../../interfaces/contact-me-form';
 import { LanguageService } from '../../services/language.service';
 import { SendEmailService } from '../../services/send-email.service';
 import { SEOService } from '../../services/seo.service';
+import { trapTabKey } from '../../utils/focus-trap';
 
 @Component({
   selector: 'app-contact',
@@ -29,12 +34,17 @@ export class ContactComponent implements OnInit {
   private sendEmailService = inject(SendEmailService);
   private languageService = inject(LanguageService);
   private seoService = inject(SEOService);
+  private doc = inject(DOCUMENT);
+  private platformId = inject(PLATFORM_ID);
 
   emailPopUpHeader = signal('');
   emailPopUpParagraph = signal('');
   submitted = signal(false);
   isEmailModalOpen = signal(false);
   languageRO: Signal<boolean>;
+
+  private emailModal = viewChild<ElementRef<HTMLElement>>('emailModal');
+  private lastFocusedElement: HTMLElement | null = null;
 
   constructor() {
     this.languageRO = this.languageService.language;
@@ -45,6 +55,17 @@ export class ContactComponent implements OnInit {
         'Pagina de contact Imalo Education, afterschool pe limba germana din Sibiu.',
         'Kontaktseite von Imalo Education, dem deutschsprachigen Afterschool-Programm in Sibiu.',
       );
+    });
+
+    effect(() => {
+      const modal = this.emailModal()?.nativeElement;
+      if (
+        this.isEmailModalOpen() &&
+        modal &&
+        isPlatformBrowser(this.platformId)
+      ) {
+        modal.focus({ preventScroll: true });
+      }
     });
   }
 
@@ -123,6 +144,7 @@ export class ContactComponent implements OnInit {
       return;
     }
 
+    this.lastFocusedElement = this.doc.activeElement as HTMLElement | null;
     this.isEmailModalOpen.set(true);
     this.emailPopUpHeader.set('Bună, ' + this.contactMeForm.value.name);
     this.emailPopUpParagraph.set('Se trimite...');
@@ -168,5 +190,20 @@ export class ContactComponent implements OnInit {
 
   closeEmailModal(): void {
     this.isEmailModalOpen.set(false);
+    this.lastFocusedElement?.focus();
+    this.lastFocusedElement = null;
+  }
+
+  onModalKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Escape') {
+      this.closeEmailModal();
+      return;
+    }
+    if (event.key === 'Tab') {
+      const modal = this.emailModal()?.nativeElement;
+      if (modal) {
+        trapTabKey(event, modal);
+      }
+    }
   }
 }

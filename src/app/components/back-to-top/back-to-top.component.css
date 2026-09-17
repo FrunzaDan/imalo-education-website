@@ -7,7 +7,6 @@
   font-size: 200%;
   font-weight: 900;
   border: none;
-  outline: none;
   background-color: var(--cyan-main-color);
   color: var(--dark-main-color);
   cursor: pointer;
