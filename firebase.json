@@ -2,6 +2,43 @@
   "hosting": {
     "public": "dist/imalo-education/browser",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "headers": [
+      {
+        "source": "**",
+        "headers": [
+          { "key": "X-Content-Type-Options", "value": "nosniff" },
+          {
+            "key": "Referrer-Policy",
+            "value": "strict-origin-when-cross-origin"
+          },
+          { "key": "X-Frame-Options", "value": "SAMEORIGIN" }
+        ]
+      },
+      {
+        "source": "**/@(main|chunk|polyfills|styles)-*.@(js|css)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=31536000, immutable"
+          }
+        ]
+      },
+      {
+        "source": "media/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=31536000, immutable"
+          }
+        ]
+      },
+      {
+        "source": "assets/**/*.@(webp|png|jpg|svg|ico|woff2)",
+        "headers": [
+          { "key": "Cache-Control", "value": "public, max-age=604800" }
+        ]
+      }
+    ],
     "trailingSlash": false
   }
 }
