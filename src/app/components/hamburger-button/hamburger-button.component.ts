@@ -7,6 +7,7 @@ import { Component, input, output } from '@angular/core';
 })
 export class HamburgerButtonComponent {
   readonly isOpen = input(false);
+  readonly controls = input<string>();
   readonly toggleMenu = output<boolean>();
 
   toggleNavbar(): void {

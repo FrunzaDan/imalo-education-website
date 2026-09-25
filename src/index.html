@@ -1,24 +1,32 @@
 <!doctype html>
 <html lang="ro">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
     <title>Imalo Education: Afterschool Germana Sibiu</title>
     <base href="/" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
       content="Imalo Education este un program tip afterschool pe limba germana din Sibiu unde copilul Dvs. va fi întâmpinat cu toată căldura și atenția noastră. "
     />
     <meta
-      name="keywords"
-      content="Imalo, Education, afterschool, Sibiu, Romania, learning, development, children, kids, educational programs, scoala de vara, copii, educatie, germana, engleza"
-    />
-    <meta
       name="robots"
       content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large"
     />
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#00acb9" />
     <link rel="canonical" href="https://imalo-education.web.app" />
+
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/assets/fonts/Lora-Medium.woff2"
+      crossorigin
+    />
+
     <link rel="me" href="https://www.facebook.com/imaloeducation" />
     <link rel="me" href="https://www.instagram.com/imaloeducation" />
     <link rel="me" href="https://www.linkedin.com/company/imalo-education" />
@@ -32,6 +40,10 @@
       property="og:image"
       content="https://imalo-education.web.app/assets/images/Imalo_Education.webp"
     />
+    <meta property="og:image:type" content="image/webp" />
+    <meta property="og:image:width" content="2048" />
+    <meta property="og:image:height" content="2046" />
+    <meta property="og:image:alt" content="Imalo Education logo" />
     <meta property="og:url" content="https://imalo-education.web.app" />
     <meta property="og:site_name" content="Imalo Education Afterschool Sibiu" />
     <meta property="og:locale" content="ro_RO" />
@@ -47,11 +59,12 @@
       name="twitter:image"
       content="https://imalo-education.web.app/assets/images/Imalo_Education.webp"
     />
+    <meta name="twitter:image:alt" content="Imalo Education logo" />
     <meta name="twitter:url" content="https://imalo-education.web.app" />
     <!--Business Meta Tags -->
     <meta
       property="business:contact_data:street_address"
-      content="strada Gutuilor"
+      content="Strada Gutuilor 6"
     />
     <meta property="business:contact_data:locality" content="Sibiu" />
     <meta property="business:contact_data:region" content="Sibiu" />
@@ -62,15 +75,11 @@
       property="article:publisher"
       content="https://www.facebook.com/imaloeducation"
     />
-    <meta
-      property="article:modified_time"
-      content="2025-01-01T12:00:00+00:00"
-    />
 
     <!-- Schema Markup -->
     <script type="application/ld+json">
       {
-        "@context": "http://www.schema.org",
+        "@context": "https://schema.org",
         "@type": "ChildCare",
         "name": "Imalo Education Afterschool Sibiu",
         "url": "https://imalo-education.web.app",
@@ -84,7 +93,7 @@
         "description": "Imalo Education este un program tip afterschool pe limba germana din Sibiu unde copilul Dvs. va fi întâmpinat cu toată căldura și atenția noastră.",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Gutuilor 6",
+          "streetAddress": "Strada Gutuilor 6",
           "addressLocality": "Sibiu",
           "addressRegion": "Sibiu",
           "postalCode": "550092",
