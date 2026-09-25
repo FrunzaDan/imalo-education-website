@@ -1,3 +1,3 @@
 export interface GalleryImage {
-  imagePath: string;
+  readonly imagePath: string;
 }

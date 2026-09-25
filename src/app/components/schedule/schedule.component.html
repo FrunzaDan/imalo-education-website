@@ -5,8 +5,7 @@
     >
       @if (languageRO()) {
         <h1 class="subtitle-1">Program școala de vară:</h1>
-      }
-      @if (!languageRO()) {
+      } @else {
         <h1 class="subtitle-1">Programm während der Sommerschule:</h1>
       }
     </div>
@@ -29,8 +28,7 @@
                 memorabilă, plină de descoperiri, prietenii noi și momente de
                 neuitat.
               </p>
-            }
-            @if (!languageRO()) {
+            } @else {
               <p>
                 Jeden Tag werden Frühstück und Mittagessen bei Imalo serviert.
                 Jede Ferienwoche steht unter einem bestimmten Thema und bietet
@@ -56,8 +54,7 @@
             Luni - Vineri: <br />
             07:30 - 17:30
           </p>
-        }
-        @if (!languageRO()) {
+        } @else {
           <p>
             Montag - Freitag: <br />
             07:30 - 17:30
@@ -70,8 +67,7 @@
             Sâmbătă - Duminică: <br />
             închis
           </p>
-        }
-        @if (!languageRO()) {
+        } @else {
           <p>
             Samstag - Sonntag: <br />
             geschlossen
@@ -90,8 +86,7 @@
           <h2 class="subtitle-1" id="schedule-schoolyear-heading">
             Program în timpul anului școlar:
           </h2>
-        }
-        @if (!languageRO()) {
+        } @else {
           <h2 class="subtitle-1" id="schedule-schoolyear-heading">
             Programm während des Schuljahres:
           </h2>
@@ -106,8 +101,7 @@
               Luni - Vineri: <br />
               11:30 - 17:30
             </p>
-          }
-          @if (!languageRO()) {
+          } @else {
             <p>
               Montag - Freitag: <br />
               11:30 - 17:30
@@ -120,8 +114,7 @@
               Sâmbătă - Duminică: <br />
               închis
             </p>
-          }
-          @if (!languageRO()) {
+          } @else {
             <p>
               Samstag - Sonntag: <br />
               geschlossen
@@ -148,8 +141,7 @@
                   Până la ora 17:30, părinții vor putea să preia copiii de la
                   sediul nostru.
                 </p>
-              }
-              @if (!languageRO()) {
+              } @else {
                 <p>
                   Nach der Schule werden die Kinder abgeholt und zu Imalo
                   gebracht. Dort angekommen, erhalten die Kinder eine

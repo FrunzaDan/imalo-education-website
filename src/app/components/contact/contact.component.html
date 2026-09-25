@@ -7,8 +7,7 @@
     >
       @if (languageRO()) {
         <h1 class="subtitle-1">Cum ne puteți contacta?</h1>
-      }
-      @if (!languageRO()) {
+      } @else {
         <h1 class="subtitle-1">Wie können Sie uns kontaktieren?</h1>
       }
     </div>
@@ -20,117 +19,126 @@
           <div class="d-flex justify-content-center">
             <div class="loader2 mb-2"></div>
           </div>
-          <form [formGroup]="contactMeForm" (ngSubmit)="onSubmit()">
+          <form [formRoot]="contactForm">
+            @let name = contactForm.name();
+            @let nameError = name.touched() && name.invalid();
             <div class="mb-3">
-              @if (languageRO()) {
-                <label for="name" class="form-label">Nume:</label>
-              }
-              @if (!languageRO()) {
-                <label for="name" class="form-label">Name:</label>
-              }
+              <label for="name" class="form-label">
+                @if (languageRO()) {
+                  Nume:
+                } @else {
+                  Name:
+                }
+              </label>
               <input
+                id="name"
                 class="form-control"
-                formControlName="name"
-                name="name"
                 type="text"
                 placeholder="Numele tău"
-                autocomplete="on"
-                [class.is-invalid]="isNameInvalid"
+                autocomplete="name"
+                [formField]="contactForm.name"
+                [class.is-invalid]="nameError"
+                [attr.aria-invalid]="nameError"
+                [attr.aria-describedby]="nameError ? 'name-error' : null"
               />
-              @if (isNameInvalid) {
-                <div class="invalid-feedback">
-                  @if (name?.errors?.['required']) {
-                    <div>Numele este necesar.</div>
-                  }
+              @if (nameError) {
+                <div class="invalid-feedback" id="name-error">
+                  {{ name.errors()[0].message }}
                 </div>
               }
             </div>
+            @let email = contactForm.email();
+            @let emailError = email.touched() && email.invalid();
             <div class="mb-3">
-              @if (languageRO()) {
-                <label for="email" class="form-label">Adresă de E-mail:</label>
-              }
-              @if (!languageRO()) {
-                <label for="email" class="form-label">E-mail Adresse:</label>
-              }
+              <label for="email" class="form-label">
+                @if (languageRO()) {
+                  Adresă de E-mail:
+                } @else {
+                  E-mail Adresse:
+                }
+              </label>
               <input
+                id="email"
                 class="form-control"
-                formControlName="email"
-                name="email"
                 type="email"
                 placeholder="Adresa ta de E-mail"
-                autocomplete="on"
-                [class.is-invalid]="isEmailInvalid"
+                autocomplete="email"
+                [formField]="contactForm.email"
+                [class.is-invalid]="emailError"
+                [attr.aria-invalid]="emailError"
+                [attr.aria-describedby]="emailError ? 'email-error' : null"
               />
-              @if (isEmailInvalid) {
-                <div class="invalid-feedback">
-                  @if (email?.errors?.['required']) {
-                    <div>E-mail-ul este necesar.</div>
-                  }
-                  @if (email?.errors?.['email']) {
-                    <div>Un E-mail valid este necesar.</div>
-                  }
+              @if (emailError) {
+                <div class="invalid-feedback" id="email-error">
+                  {{ email.errors()[0].message }}
                 </div>
               }
             </div>
+            @let phone = contactForm.phone();
+            @let phoneError = phone.touched() && phone.invalid();
             <div class="mb-3">
-              @if (languageRO()) {
-                <label for="phone" class="form-label">Număr de telefon:</label>
-              }
-              @if (!languageRO()) {
-                <label for="phone" class="form-label">Telefonnummer:</label>
-              }
+              <label for="phone" class="form-label">
+                @if (languageRO()) {
+                  Număr de telefon:
+                } @else {
+                  Telefonnummer:
+                }
+              </label>
               <input
+                id="phone"
                 class="form-control"
-                formControlName="phone"
-                name="phone"
                 type="tel"
                 placeholder="Numărul tău de telefon"
-                autocomplete="on"
-                [class.is-invalid]="isPhoneInvalid"
+                autocomplete="tel"
+                [formField]="contactForm.phone"
+                [class.is-invalid]="phoneError"
+                [attr.aria-invalid]="phoneError"
+                [attr.aria-describedby]="phoneError ? 'phone-error' : null"
               />
-              @if (isPhoneInvalid) {
-                <div class="invalid-feedback">
-                  @if (phone?.errors?.['required']) {
-                    <div>Numărul de telefon este necesar.</div>
-                  }
-                  @if (phone?.errors?.['pattern']) {
-                    <div>Un număr de telefon mobil valid este necesar.</div>
-                  }
+              @if (phoneError) {
+                <div class="invalid-feedback" id="phone-error">
+                  {{ phone.errors()[0].message }}
                 </div>
               }
             </div>
+            @let message = contactForm.message();
+            @let messageError = message.touched() && message.invalid();
             <div class="mb-3">
-              @if (languageRO()) {
-                <label for="message" class="form-label">Mesaj:</label>
-              }
-              @if (!languageRO()) {
-                <label for="message" class="form-label">Nachricht:</label>
-              }
+              <label for="message" class="form-label">
+                @if (languageRO()) {
+                  Mesaj:
+                } @else {
+                  Nachricht:
+                }
+              </label>
               <textarea
+                id="message"
                 class="form-control"
-                formControlName="message"
-                name="message"
-                type="text"
                 placeholder="Mesajul tău"
-                autocomplete="off"
-                [class.is-invalid]="isMessageInvalid"
+                [formField]="contactForm.message"
+                [class.is-invalid]="messageError"
+                [attr.aria-invalid]="messageError"
+                [attr.aria-describedby]="messageError ? 'message-error' : null"
                 style="height: 10rem"
               ></textarea>
-              @if (isMessageInvalid) {
-                <div class="invalid-feedback">
-                  @if (message?.errors?.['required']) {
-                    <div>Un mesaj este necesar.</div>
-                  }
+              @if (messageError) {
+                <div class="invalid-feedback" id="message-error">
+                  {{ message.errors()[0].message }}
                 </div>
               }
             </div>
             <div class="d-grid">
-              @if (languageRO()) {
-                <button class="generic-button" type="submit">Trimite</button>
-              }
-              @if (!languageRO()) {
-                <button class="generic-button" type="submit">Senden</button>
-              }
+              <button
+                class="generic-button"
+                type="submit"
+                [disabled]="contactForm().submitting()"
+              >
+                @if (languageRO()) {
+                  Trimite
+                } @else {
+                  Senden
+                }
+              </button>
             </div>
           </form>
         </div>
@@ -166,8 +174,7 @@
             <p class="card-title card-contact-text mt-2 mb-4">
               Detalii contact:
             </p>
-          }
-          @if (!languageRO()) {
+          } @else {
             <p class="card-title card-contact-text mt-2 mb-4">
               Kontaktinformationen:
             </p>
@@ -259,8 +266,7 @@
           <h2 class="subtitle-1" id="contact-location-heading">
             Unde ne găsiți?
           </h2>
-        }
-        @if (!languageRO()) {
+        } @else {
           <h2 class="subtitle-1" id="contact-location-heading">
             Wo können Sie uns finden?
           </h2>
@@ -288,8 +294,7 @@
               <p class="cyan-dark-text-with-shadow text-center">
                 Ne găsiți în Sibiu, strada Gutuilor nr. 6
               </p>
-            }
-            @if (!languageRO()) {
+            } @else {
               <p class="cyan-dark-text-with-shadow text-center">
                 Sie finden uns in Sibiu, Gutuilor Straße Nr. 6
               </p>

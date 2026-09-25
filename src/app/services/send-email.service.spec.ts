@@ -42,15 +42,16 @@ describe('SendEmailService', () => {
     );
   });
 
-  it('resolves with the EmailJS response status on success', async () => {
+  it('resolves once EmailJS accepts the message', async () => {
     vi.mocked(emailjs.send).mockResolvedValue({ status: 200, text: 'OK' });
 
-    await expect(service.sendEmailJS(form)).resolves.toBe(200);
+    await expect(service.sendEmailJS(form)).resolves.toBeUndefined();
   });
 
-  it('resolves with 500 instead of throwing when EmailJS rejects', async () => {
-    vi.mocked(emailjs.send).mockRejectedValue(new Error('network error'));
+  it('rejects with the EmailJS error when sending fails', async () => {
+    const error = new Error('network error');
+    vi.mocked(emailjs.send).mockRejectedValue(error);
 
-    await expect(service.sendEmailJS(form)).resolves.toBe(500);
+    await expect(service.sendEmailJS(form)).rejects.toBe(error);
   });
 });

@@ -1,26 +1,19 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  inject,
-} from '@angular/core';
-import { SEOService } from '../../services/seo.service';
+import { Component, OnInit, inject } from '@angular/core';
+import { SeoService } from '../../services/seo.service';
 
 @Component({
   selector: 'app-privacy',
-  imports: [],
   templateUrl: './privacy.component.html',
   styleUrl: './privacy.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PrivacyComponent implements OnInit {
-  private seoService = inject(SEOService);
+  private readonly seoService = inject(SeoService);
 
   ngOnInit(): void {
-    this.seoService.createLinkForCanonicalURL();
-    const description =
-      'Pagina termenilor Imalo Education, afterschool pe limba germana din Sibiu.';
-    this.seoService.updateMetaDescription(description);
-    this.seoService.updateOpenGraphTags(description);
+    this.seoService.updateMetaTags({
+      description:
+        'Pagina termenilor Imalo Education, afterschool pe limba germana din Sibiu.',
+      path: '/privacy',
+    });
   }
 }

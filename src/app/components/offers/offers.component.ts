@@ -1,89 +1,69 @@
+import { NgOptimizedImage, ViewportScroller } from '@angular/common';
 import {
-  DOCUMENT,
-  isPlatformBrowser,
-  NgOptimizedImage,
-  ViewportScroller,
-} from '@angular/common';
-import {
-  ChangeDetectionStrategy,
   Component,
+  DOCUMENT,
   ElementRef,
-  OnDestroy,
-  OnInit,
-  PLATFORM_ID,
-  Signal,
+  Injector,
+  afterNextRender,
   effect,
   inject,
   signal,
   viewChild,
 } from '@angular/core';
 import { LanguageService } from '../../services/language.service';
-import { SEOService } from '../../services/seo.service';
-import { trapTabKey } from '../../utils/focus-trap';
+import { SeoService } from '../../services/seo.service';
+import { trapTabKey } from '../../shared/focus-trap';
 
 @Component({
   selector: 'app-offers',
   imports: [NgOptimizedImage],
   templateUrl: './offers.component.html',
   styleUrl: './offers.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OffersComponent implements OnInit, OnDestroy {
-  private languageService = inject(LanguageService);
-  private viewportScroller = inject(ViewportScroller);
-  private seoService = inject(SEOService);
-  private doc = inject(DOCUMENT);
-  private platformId = inject(PLATFORM_ID);
+export class OffersComponent {
+  private readonly viewportScroller = inject(ViewportScroller);
+  private readonly seoService = inject(SeoService);
+  private readonly document = inject(DOCUMENT);
+  private readonly injector = inject(Injector);
+  private focusBeforeModal: HTMLElement | null = null;
 
-  isCourseModalOpen = signal(false);
-  courseTitle?: string;
-  languageRO: Signal<boolean>;
+  private readonly courseModal =
+    viewChild<ElementRef<HTMLElement>>('courseModal');
 
-  private courseModal = viewChild<ElementRef<HTMLElement>>('courseModal');
-  private lastFocusedElement: HTMLElement | null = null;
+  readonly languageRO = inject(LanguageService).language;
+  readonly isCourseModalOpen = signal(false);
+  readonly courseTitle = signal<string | null>(null);
 
   constructor() {
-    this.languageRO = this.languageService.language;
-
     effect(() => {
-      this.seoService.updateForLanguage(
-        this.languageRO(),
-        'Pagina cu oferte Imalo Education, afterschool pe limba germana din Sibiu.',
-        'Angebotsseite von Imalo Education, dem deutschsprachigen Afterschool-Programm in Sibiu.',
-      );
-    });
-
-    effect(() => {
-      const modal = this.courseModal()?.nativeElement;
-      if (
-        this.isCourseModalOpen() &&
-        modal &&
-        isPlatformBrowser(this.platformId)
-      ) {
-        modal.focus({ preventScroll: true });
-      }
+      const isRomanian = this.languageRO();
+      this.seoService.updateMetaTags({
+        description: isRomanian
+          ? 'Pagina cu oferte Imalo Education, afterschool pe limba germana din Sibiu.'
+          : 'Angebotsseite von Imalo Education, dem deutschsprachigen Afterschool-Programm in Sibiu.',
+        path: '/offers',
+        locale: isRomanian ? 'ro_RO' : 'de_DE',
+      });
     });
   }
 
-  ngOnInit(): void {
-    this.seoService.createLinkForCanonicalURL();
-  }
-
-  ngOnDestroy(): void {
-    this.courseTitle = undefined;
-  }
-
-  openCourseModal(selectedCourseTitile?: string): void {
-    this.lastFocusedElement = this.doc.activeElement as HTMLElement | null;
+  /** Opens the modal and moves keyboard focus into it, remembering where it came from. */
+  openCourseModal(selectedCourseTitle: string): void {
+    const active = this.document.activeElement;
+    this.focusBeforeModal = active instanceof HTMLElement ? active : null;
+    this.courseTitle.set(selectedCourseTitle);
     this.isCourseModalOpen.set(true);
-    this.courseTitle = selectedCourseTitile;
+    afterNextRender(
+      () => this.courseModal()?.nativeElement.focus({ preventScroll: true }),
+      { injector: this.injector },
+    );
   }
 
   closeCourseModal(): void {
     this.isCourseModalOpen.set(false);
-    this.courseTitle = undefined;
-    this.lastFocusedElement?.focus();
-    this.lastFocusedElement = null;
+    this.courseTitle.set(null);
+    this.focusBeforeModal?.focus({ preventScroll: true });
+    this.focusBeforeModal = null;
   }
 
   onModalKeydown(event: KeyboardEvent): void {
@@ -91,15 +71,13 @@ export class OffersComponent implements OnInit, OnDestroy {
       this.closeCourseModal();
       return;
     }
-    if (event.key === 'Tab') {
-      const modal = this.courseModal()?.nativeElement;
-      if (modal) {
-        trapTabKey(event, modal);
-      }
+    const modal = this.courseModal()?.nativeElement;
+    if (event.key === 'Tab' && modal) {
+      trapTabKey(event, modal);
     }
   }
 
-  public scrollToSection(elementId: string): void {
+  scrollToSection(elementId: string): void {
     this.viewportScroller.scrollToAnchor(elementId);
   }
 }

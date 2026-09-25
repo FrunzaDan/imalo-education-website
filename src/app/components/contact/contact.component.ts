@@ -1,197 +1,97 @@
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
   Component,
+  DOCUMENT,
   ElementRef,
-  OnInit,
-  PLATFORM_ID,
-  Signal,
+  Injector,
+  afterNextRender,
   effect,
   inject,
   signal,
   viewChild,
 } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormField, FormRoot, form } from '@angular/forms/signals';
 import { ContactMeForm } from '../../interfaces/contact-me-form';
 import { LanguageService } from '../../services/language.service';
 import { SendEmailService } from '../../services/send-email.service';
-import { SEOService } from '../../services/seo.service';
-import { trapTabKey } from '../../utils/focus-trap';
+import { SeoService } from '../../services/seo.service';
+import { trapTabKey } from '../../shared/focus-trap';
+import { contactFormSchema, emptyContactForm } from './contact-form';
 
 @Component({
   selector: 'app-contact',
-  imports: [ReactiveFormsModule],
+  imports: [FormField, FormRoot],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ContactComponent implements OnInit {
-  private sendEmailService = inject(SendEmailService);
-  private languageService = inject(LanguageService);
-  private seoService = inject(SEOService);
-  private doc = inject(DOCUMENT);
-  private platformId = inject(PLATFORM_ID);
+export class ContactComponent {
+  private readonly sendEmailService = inject(SendEmailService);
+  private readonly seoService = inject(SeoService);
+  private readonly document = inject(DOCUMENT);
+  private readonly injector = inject(Injector);
+  private focusBeforeModal: HTMLElement | null = null;
 
-  emailPopUpHeader = signal('');
-  emailPopUpParagraph = signal('');
-  submitted = signal(false);
-  isEmailModalOpen = signal(false);
-  languageRO: Signal<boolean>;
+  private readonly emailModal =
+    viewChild<ElementRef<HTMLElement>>('emailModal');
 
-  private emailModal = viewChild<ElementRef<HTMLElement>>('emailModal');
-  private lastFocusedElement: HTMLElement | null = null;
+  readonly languageRO = inject(LanguageService).language;
+  readonly isEmailModalOpen = signal(false);
+  readonly emailPopUpHeader = signal('');
+  readonly emailPopUpParagraph = signal('');
 
-  constructor() {
-    this.languageRO = this.languageService.language;
-
-    effect(() => {
-      this.seoService.updateForLanguage(
-        this.languageRO(),
-        'Pagina de contact Imalo Education, afterschool pe limba germana din Sibiu.',
-        'Kontaktseite von Imalo Education, dem deutschsprachigen Afterschool-Programm in Sibiu.',
-      );
-    });
-
-    effect(() => {
-      const modal = this.emailModal()?.nativeElement;
-      if (
-        this.isEmailModalOpen() &&
-        modal &&
-        isPlatformBrowser(this.platformId)
-      ) {
-        modal.focus({ preventScroll: true });
-      }
-    });
-  }
-
-  contactMeForm = new FormGroup({
-    name: new FormControl('', {
-      validators: [Validators.required],
-      nonNullable: true,
-    }),
-    email: new FormControl('', {
-      validators: [
-        Validators.required,
-        Validators.email,
-        Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'),
-      ],
-      nonNullable: true,
-    }),
-    phone: new FormControl('', {
-      validators: [Validators.required, Validators.pattern('^[0-9]{9,12}$')],
-      nonNullable: true,
-    }),
-    message: new FormControl('', {
-      validators: [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(1000),
-      ],
-      nonNullable: true,
-    }),
+  readonly model = signal<ContactMeForm>(emptyContactForm());
+  readonly contactForm = form(this.model, contactFormSchema, {
+    submission: {
+      action: () => this.send(),
+      onInvalid: (field) =>
+        field().errorSummary()[0]?.fieldTree().focusBoundControl(),
+    },
   });
 
-  get name() {
-    return this.contactMeForm.get('name');
-  }
-
-  get email() {
-    return this.contactMeForm.get('email');
-  }
-
-  get phone() {
-    return this.contactMeForm.get('phone');
-  }
-
-  get message() {
-    return this.contactMeForm.get('message');
-  }
-
-  get isNameInvalid(): boolean {
-    return !!(this.submitted() && this.name?.errors);
-  }
-
-  get isEmailInvalid(): boolean {
-    return !!(this.submitted() && this.email?.errors);
-  }
-
-  get isPhoneInvalid(): boolean {
-    return !!(this.submitted() && this.phone?.errors);
-  }
-
-  get isMessageInvalid(): boolean {
-    return !!(this.submitted() && this.message?.errors);
-  }
-
-  ngOnInit(): void {
-    this.seoService.createLinkForCanonicalURL();
-  }
-
-  async onSubmit() {
-    this.submitted.set(true);
-
-    if (this.contactMeForm.invalid) {
-      // Mark all fields as touched to trigger validation display
-      Object.keys(this.contactMeForm.controls).forEach((key) => {
-        const control = this.contactMeForm.get(key);
-        control?.markAsTouched();
+  constructor() {
+    effect(() => {
+      const isRomanian = this.languageRO();
+      this.seoService.updateMetaTags({
+        description: isRomanian
+          ? 'Pagina de contact Imalo Education, afterschool pe limba germana din Sibiu.'
+          : 'Kontaktseite von Imalo Education, dem deutschsprachigen Afterschool-Programm in Sibiu.',
+        path: '/contact',
+        locale: isRomanian ? 'ro_RO' : 'de_DE',
       });
-      return;
-    }
+    });
+  }
 
-    this.lastFocusedElement = this.doc.activeElement as HTMLElement | null;
-    this.isEmailModalOpen.set(true);
-    this.emailPopUpHeader.set('Bună, ' + this.contactMeForm.value.name);
+  private async send(): Promise<void> {
+    this.openEmailModal();
+    this.emailPopUpHeader.set('Bună, ' + this.model().name);
     this.emailPopUpParagraph.set('Se trimite...');
 
     try {
-      const responseCode = await this.sendEmailService.sendEmailJS(
-        this.contactMeForm.value as ContactMeForm,
+      await this.sendEmailService.sendEmailJS(this.model());
+      this.emailPopUpParagraph.set('Mesajul tău a fost trimis cu succes!');
+      this.contactForm().reset(emptyContactForm());
+    } catch (error: unknown) {
+      console.error('Error sending the contact message:', error);
+      this.emailPopUpParagraph.set(
+        'Serverele noastre sunt pline, te rog să trimiți un E-mail către imaloeducation@gmail.com.',
       );
-
-      if (responseCode === 200) {
-        this.handleSuccessfulSubmission();
-      } else {
-        this.handleFailedSubmission(responseCode);
-      }
-    } catch (error) {
-      this.handleFailedSubmission(500);
-      console.error('Error sending email:', error);
     }
-    this.resetForm();
   }
 
-  private handleSuccessfulSubmission(): void {
-    this.emailPopUpParagraph.set('Mesajul tău a fost trimis cu succes! ');
-  }
-
-  private handleFailedSubmission(responseCode: number): void {
-    this.emailPopUpParagraph.set(
-      `(${responseCode}) Serverele noastre sunt pline, te rog să trimiți un E-mail către imaloeducation@gmail.com. `,
+  /** Opens the popup and moves keyboard focus into it, remembering where it came from. */
+  private openEmailModal(): void {
+    const active = this.document.activeElement;
+    this.focusBeforeModal = active instanceof HTMLElement ? active : null;
+    this.isEmailModalOpen.set(true);
+    afterNextRender(
+      () => this.emailModal()?.nativeElement.focus({ preventScroll: true }),
+      { injector: this.injector },
     );
-  }
-
-  private resetForm(): void {
-    this.submitted.set(false);
-    this.contactMeForm.reset();
-    Object.keys(this.contactMeForm.controls).forEach((key) => {
-      const control = this.contactMeForm.get(key);
-      control?.setErrors(null);
-      control?.markAsUntouched();
-      control?.markAsPristine();
-      control?.updateValueAndValidity();
-    });
   }
 
   closeEmailModal(): void {
     this.isEmailModalOpen.set(false);
-    this.lastFocusedElement?.focus();
-    this.lastFocusedElement = null;
+    this.focusBeforeModal?.focus({ preventScroll: true });
+    this.focusBeforeModal = null;
   }
 
   onModalKeydown(event: KeyboardEvent): void {
@@ -199,11 +99,9 @@ export class ContactComponent implements OnInit {
       this.closeEmailModal();
       return;
     }
-    if (event.key === 'Tab') {
-      const modal = this.emailModal()?.nativeElement;
-      if (modal) {
-        trapTabKey(event, modal);
-      }
+    const modal = this.emailModal()?.nativeElement;
+    if (event.key === 'Tab' && modal) {
+      trapTabKey(event, modal);
     }
   }
 }

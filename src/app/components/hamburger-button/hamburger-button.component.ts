@@ -1,21 +1,15 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  input,
-  output,
-} from '@angular/core';
+import { Component, input, output } from '@angular/core';
 
 @Component({
   selector: 'app-hamburger-button',
   templateUrl: './hamburger-button.component.html',
-  styleUrls: ['./hamburger-button.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrl: './hamburger-button.component.css',
 })
 export class HamburgerButtonComponent {
-  isOpen = input(false);
-  toggleMenu = output<boolean>();
+  readonly isOpen = input(false);
+  readonly toggleMenu = output<boolean>();
 
-  toggleNavbar() {
+  toggleNavbar(): void {
     this.toggleMenu.emit(!this.isOpen());
   }
 }

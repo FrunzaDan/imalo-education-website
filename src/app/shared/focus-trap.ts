@@ -15,7 +15,9 @@ export function trapTabKey(event: KeyboardEvent, container: HTMLElement): void {
   const last = focusable[focusable.length - 1];
   const active = container.ownerDocument.activeElement;
 
-  if (event.shiftKey && active === first) {
+  // Shift+Tab from the first control, or from the dialog itself right after it
+  // opened, wraps around to the last control.
+  if (event.shiftKey && (active === first || active === container)) {
     event.preventDefault();
     last.focus();
   } else if (!event.shiftKey && active === last) {

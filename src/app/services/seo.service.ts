@@ -1,94 +1,81 @@
-import { Injectable, inject, DOCUMENT } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { inject, Injectable } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
 
-const DEFAULT_ROBOTS_CONTENT =
-  'index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large';
+/** Where the site is published; canonical links and social previews point here. */
+export const SITE_URL = 'https://imalo-education.web.app';
+
+export interface SeoMetaConfig {
+  description: string;
+  /** The page's path, such as `/gallery`. */
+  path: string;
+  /** A picture for link previews, such as `/assets/images/imalo.webp`. */
+  image?: string;
+  robots?: string;
+  /** The Open Graph locale of the page's text, `ro_RO` unless given. */
+  locale?: string;
+}
+
+const DEFAULT_ROBOTS =
+  'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1';
 
 @Injectable({
   providedIn: 'root',
 })
-export class SEOService {
-  private doc = inject<Document>(DOCUMENT);
-  private meta = inject(Meta);
+export class SeoService {
+  private readonly meta = inject(Meta);
+  private readonly document = inject(DOCUMENT);
 
-  updateRobots(content: string): void {
-    this.meta.updateTag({ name: 'robots', content });
-  }
+  /** Call after the page title is set, since the social title is copied from it. */
+  updateMetaTags(config: SeoMetaConfig): void {
+    const title = this.document.title;
+    const url = SITE_URL + (config.path === '/' ? '' : config.path);
 
-  resetRobotsToDefault(): void {
-    this.updateRobots(DEFAULT_ROBOTS_CONTENT);
-  }
-
-  updateMetaDescription(metaDescription: string): void {
+    this.meta.updateTag({ name: 'description', content: config.description });
     this.meta.updateTag({
-      name: 'description',
-      content: metaDescription,
+      name: 'robots',
+      content: config.robots ?? DEFAULT_ROBOTS,
     });
-  }
-
-  updateOpenGraphTags(description: string, locale = 'ro_RO'): void {
-    const title = this.doc.title;
-    const url = this.getCanonicalURL();
-
     this.meta.updateTag({ property: 'og:title', content: title });
-    this.meta.updateTag({ property: 'og:description', content: description });
+    this.meta.updateTag({
+      property: 'og:description',
+      content: config.description,
+    });
     this.meta.updateTag({ property: 'og:url', content: url });
-    this.meta.updateTag({ property: 'og:locale', content: locale });
+    this.meta.updateTag({
+      property: 'og:locale',
+      content: config.locale ?? 'ro_RO',
+    });
     this.meta.updateTag({ name: 'twitter:title', content: title });
-    this.meta.updateTag({ name: 'twitter:description', content: description });
+    this.meta.updateTag({
+      name: 'twitter:description',
+      content: config.description,
+    });
     this.meta.updateTag({ name: 'twitter:url', content: url });
-  }
 
-  updateHtmlLang(lang: string): void {
-    this.doc.documentElement.lang = lang;
-  }
-
-  /** Syncs description, OG/Twitter tags, and the `lang` attribute to the active language. */
-  updateForLanguage(
-    isRomanian: boolean,
-    descriptionRO: string,
-    descriptionDE: string,
-  ): void {
-    this.updateHtmlLang(isRomanian ? 'ro' : 'de');
-    const description = isRomanian ? descriptionRO : descriptionDE;
-    this.updateMetaDescription(description);
-    this.updateOpenGraphTags(description, isRomanian ? 'ro_RO' : 'de_DE');
-  }
-
-  createLinkForCanonicalURL(): void {
-    this.removeExistingCanonicalLink();
-
-    const link: HTMLLinkElement = this.doc.createElement('link');
-    link.setAttribute('rel', 'canonical');
-    link.setAttribute('href', this.getCanonicalURL());
-    this.doc.head.appendChild(link);
-  }
-
-  private getCanonicalURL(): string {
-    const firebaselink: string = 'https://imalo-education.web.app';
-    let canonicalURL: string = this.getCurrentPath();
-
-    // If the canonical URL is root "/", remove the trailing slash.
-    if (canonicalURL === '/') {
-      canonicalURL = '';
+    if (config.image) {
+      this.meta.updateTag({
+        property: 'og:image',
+        content: SITE_URL + config.image,
+      });
+      this.meta.updateTag({
+        name: 'twitter:image',
+        content: SITE_URL + config.image,
+      });
     }
 
-    return firebaselink + canonicalURL;
+    this.updateCanonicalUrl(url);
   }
 
-  private removeExistingCanonicalLink(): void {
-    const existingLinks: NodeListOf<Element> = this.doc.head.querySelectorAll(
+  private updateCanonicalUrl(url: string): void {
+    let link: HTMLLinkElement | null = this.document.querySelector(
       'link[rel="canonical"]',
     );
-
-    for (let i: number = 0; i < existingLinks.length; i++) {
-      this.doc.head.removeChild(existingLinks[i]);
+    if (!link) {
+      link = this.document.createElement('link');
+      link.setAttribute('rel', 'canonical');
+      this.document.head.appendChild(link);
     }
-  }
-
-  private getCurrentPath(): string {
-    // Extracts only the path and query string, excluding the protocol and domain.
-    const url = new URL(this.doc.URL);
-    return url.pathname + url.search;
+    link.setAttribute('href', url);
   }
 }

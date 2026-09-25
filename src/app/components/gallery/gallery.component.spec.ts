@@ -1,12 +1,14 @@
+import { signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { LoadGalleryService } from '../../services/load-gallery.service';
+import { GalleryImage } from '../../interfaces/gallery-image';
+import { GalleryCatalogService } from '../../services/gallery-catalog.service';
 import { GalleryComponent } from './gallery.component';
 
 describe('GalleryComponent', () => {
   let component: GalleryComponent;
 
-  const images = [
+  const images: readonly GalleryImage[] = [
     { imagePath: '/a.jpg' },
     { imagePath: '/b.jpg' },
     { imagePath: '/c.jpg' },
@@ -16,17 +18,19 @@ describe('GalleryComponent', () => {
     TestBed.configureTestingModule({
       providers: [
         {
-          provide: LoadGalleryService,
-          useValue: { loadGallery: () => images },
+          provide: GalleryCatalogService,
+          useValue: {
+            images: signal(images),
+            hasLoadError: signal(false),
+          },
         },
       ],
     });
 
     component = TestBed.createComponent(GalleryComponent).componentInstance;
-    component.ngOnInit();
   });
 
-  it('loads the gallery images on init', () => {
+  it('shows the images from the catalog', () => {
     expect(component.galleryImageList()).toEqual(images);
   });
 

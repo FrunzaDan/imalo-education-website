@@ -4,8 +4,7 @@
   >
     @if (languageRO()) {
       <h1 class="subtitle-1">Poze din incinta Imalo Education</h1>
-    }
-    @if (!languageRO()) {
+    } @else {
       <h1 class="subtitle-1">Bilder von Imalo Education</h1>
     }
   </div>
@@ -29,6 +28,17 @@
         (keydown.space)="$event.preventDefault(); openFullView(i)"
         loading="lazy"
       />
+    } @empty {
+      @if (hasLoadError()) {
+        <p role="alert">
+          @if (languageRO()) {
+            Pozele nu au putut fi încărcate. Vă rugăm să reveniți mai târziu.
+          } @else {
+            Die Bilder konnten nicht geladen werden. Bitte versuchen Sie es
+            später erneut.
+          }
+        </p>
+      }
     }
   </div>
 
@@ -98,8 +108,7 @@
         <h2 class="subtitle-1" id="gallery-social-heading">
           Vrei să vezi mai multe poze și să afli mai multe noutăți?
         </h2>
-      }
-      @if (!languageRO()) {
+      } @else {
         <h2 class="subtitle-1" id="gallery-social-heading">
           Möchten Sie mehr Bilder sehen und mehr Neuigkeiten erfahren?
         </h2>
@@ -132,8 +141,7 @@
                 <p class="cyan-dark-text-with-shadow text-padding-1rem">
                   Nu uitați să ne dați like pe Facebook!
                 </p>
-              }
-              @if (!languageRO()) {
+              } @else {
                 <p class="cyan-dark-text-with-shadow text-padding-1rem">
                   Vergessen Sie nicht, uns zu uns auf Facebook zu liken!
                 </p>
@@ -167,8 +175,7 @@
                 <p class="cyan-dark-text-with-shadow text-padding-1rem">
                   Și pe Instagram!
                 </p>
-              }
-              @if (!languageRO()) {
+              } @else {
                 <p class="cyan-dark-text-with-shadow text-padding-1rem">
                   Und auf Instagram!
                 </p>
@@ -202,8 +209,7 @@
                 <p class="cyan-dark-text-with-shadow text-padding-1rem">
                   Și pe LinkedIn!
                 </p>
-              }
-              @if (!languageRO()) {
+              } @else {
                 <p class="cyan-dark-text-with-shadow text-padding-1rem">
                   Und auf LinkedIn!
                 </p>

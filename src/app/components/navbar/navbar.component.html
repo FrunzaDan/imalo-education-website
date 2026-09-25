@@ -6,17 +6,16 @@
         class="d-flex justify-content-center align-items-center cyan-dark-color"
         >RO</span
       >
-      <form [formGroup]="toggleLanguageForm">
-        <span class="form-check form-switch">
-          <input
-            class="form-check-input cursor-pointer"
-            type="checkbox"
-            formControlName="isGermanLang"
-            aria-labelledby="lang-ro-label lang-de-label"
-            aria-describedby="language-switcher-desc"
-          />
-        </span>
-      </form>
+      <span class="form-check form-switch">
+        <input
+          class="form-check-input cursor-pointer"
+          type="checkbox"
+          [checked]="!languageRO()"
+          (change)="toggleLanguage()"
+          aria-labelledby="lang-ro-label lang-de-label"
+          aria-describedby="language-switcher-desc"
+        />
+      </span>
       <span
         id="lang-de-label"
         class="d-flex justify-content-center align-items-center cyan-dark-color"
@@ -97,8 +96,7 @@
           >
             @if (languageRO()) {
               <span> Acasă </span>
-            }
-            @if (!languageRO()) {
+            } @else {
               <span> Home </span>
             }
           </a>
@@ -113,8 +111,7 @@
           >
             @if (languageRO()) {
               <span> Despre noi </span>
-            }
-            @if (!languageRO()) {
+            } @else {
               <span> Über uns </span>
             }
           </a>
@@ -129,8 +126,7 @@
           >
             @if (languageRO()) {
               <span> Oferte </span>
-            }
-            @if (!languageRO()) {
+            } @else {
               <span> Angebote </span>
             }
           </a>
@@ -145,8 +141,7 @@
           >
             @if (languageRO()) {
               <span> Program </span>
-            }
-            @if (!languageRO()) {
+            } @else {
               <span> Programm </span>
             }
           </a>
@@ -161,8 +156,7 @@
           >
             @if (languageRO()) {
               <span> Galerie </span>
-            }
-            @if (!languageRO()) {
+            } @else {
               <span> Galerie </span>
             }
           </a>
@@ -177,8 +171,7 @@
           >
             @if (languageRO()) {
               <span> Contact </span>
-            }
-            @if (!languageRO()) {
+            } @else {
               <span> Kontakt </span>
             }
           </a>
@@ -193,8 +186,7 @@
     Afterschoolul Imalo Education și-a încetat activitatea începând cu data de
     19 iunie 2026. Mulțumim tuturor părinților și copiilor care au făcut posibil
     acest proiect și care ne-au fost alături pe parcursul acestei experiențe!
-  }
-  @if (!languageRO()) {
+  } @else {
     Der Afterschool Imalo Education hat seine Tätigkeit zum 19. Juni 2026
     eingestellt. Wir danken allen Eltern und Kindern, die dieses Projekt möglich
     gemacht haben und uns im Laufe dieser Erfahrung begleitet haben!

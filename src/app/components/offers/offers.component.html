@@ -5,8 +5,7 @@
     >
       @if (languageRO()) {
         <h1 class="subtitle-1">Avem 3 tipuri de oferte educaționale:</h1>
-      }
-      @if (!languageRO()) {
+      } @else {
         <h1 class="subtitle-1">Wir haben 3 Arten von Bildungsangeboten:</h1>
       }
     </div>
@@ -36,8 +35,7 @@
         <div class="card-lower-text">
           @if (languageRO()) {
             <h2 class="subtitle-2">Școala <br />de vară</h2>
-          }
-          @if (!languageRO()) {
+          } @else {
             <h2 class="subtitle-2">Sommerschule</h2>
           }
         </div>
@@ -68,8 +66,7 @@
             <h2 class="subtitle-2">
               În timpul <br />anului școlar <br />2025-2026
             </h2>
-          }
-          @if (!languageRO()) {
+          } @else {
             <h2 class="subtitle-2">
               Während <br />des Schuljahres<br />2025-2026
             </h2>
@@ -100,8 +97,7 @@
         <div class="card-lower-text">
           @if (languageRO()) {
             <h2 class="subtitle-2">Activități <br />extracuriculare</h2>
-          }
-          @if (!languageRO()) {
+          } @else {
             <h2 class="subtitle-2">Außerschulische <br />Aktivitäten</h2>
           }
         </div>
@@ -122,8 +118,7 @@
           <h2 class="subtitle-1" id="offers-summerschool-heading">
             Ofertă școala de vară
           </h2>
-        }
-        @if (!languageRO()) {
+        } @else {
           <h2 class="subtitle-1" id="offers-summerschool-heading">
             Angebot für die Sommerschule
           </h2>
@@ -142,8 +137,7 @@
                 Școala<br />
                 de vară
               </div>
-            }
-            @if (!languageRO()) {
+            } @else {
               <div class="circle">Sommer-<br />schule</div>
             }
           </div>
@@ -156,8 +150,7 @@
                 <li>Dans, balet, tir cu arcul</li>
                 <li>Curs de engleză</li>
               </ul>
-            }
-            @if (!languageRO()) {
+            } @else {
               <ul>
                 <li>
                   Unterstützung bei der Erledigung der Hausaufgaben für die
@@ -178,8 +171,7 @@
               >
                 Cere Oferta
               </button>
-            }
-            @if (!languageRO()) {
+            } @else {
               <button
                 (click)="openCourseModal('Sommerschule')"
                 class="generic-button"
@@ -206,8 +198,7 @@
           <h2 class="subtitle-1" id="during-schoolyear-heading">
             Oferte în timpul anului școlar
           </h2>
-        }
-        @if (!languageRO()) {
+        } @else {
           <h2 class="subtitle-1" id="during-schoolyear-heading">
             Angebote während des Schuljahres
           </h2>
@@ -226,8 +217,7 @@
                 Pachet<br />
                 Simplu
               </div>
-            }
-            @if (!languageRO()) {
+            } @else {
               <div class="circle">
                 Grund<br />
                 Paket
@@ -242,8 +232,7 @@
                 <li>Rezolvarea asistată a temelor</li>
                 <li>Activități educative</li>
               </ul>
-            }
-            @if (!languageRO()) {
+            } @else {
               <ul>
                 <li>Tägliche Abholung nicht inklusive</li>
                 <li>Tägliches Mittagessen inklusive</li>
@@ -260,8 +249,7 @@
               >
                 Cere Oferta
               </button>
-            }
-            @if (!languageRO()) {
+            } @else {
               <button
                 (click)="openCourseModal('Grund Paket')"
                 class="generic-button"
@@ -282,8 +270,7 @@
                 Pachet<br />
                 Complet
               </div>
-            }
-            @if (!languageRO()) {
+            } @else {
               <div class="circle">
                 Komplettes<br />
                 Paket
@@ -298,8 +285,7 @@
                 <li>Rezolvarea asistată a temelor</li>
                 <li>Activități educative</li>
               </ul>
-            }
-            @if (!languageRO()) {
+            } @else {
               <ul>
                 <li>Tägliche Abholung inklusive</li>
                 <li>Tägliches Mittagessen inklusive</li>
@@ -316,8 +302,7 @@
               >
                 Cere Oferta
               </button>
-            }
-            @if (!languageRO()) {
+            } @else {
               <button
                 (click)="openCourseModal('Komplettes Paket')"
                 class="generic-button"
@@ -344,8 +329,7 @@
           <h2 class="subtitle-1" id="extra-activities-heading">
             Activități extracuriculare
           </h2>
-        }
-        @if (!languageRO()) {
+        } @else {
           <h2 class="subtitle-1" id="extra-activities-heading">
             Außerschulische Aktivitäten
           </h2>
@@ -361,8 +345,7 @@
           <div class="container offer-container p-4">
             @if (languageRO()) {
               <div class="circle">Activități <br />extra</div>
-            }
-            @if (!languageRO()) {
+            } @else {
               <div class="circle">Extra <br />Aktivitäten</div>
             }
           </div>
@@ -395,8 +378,7 @@
                 </li>
                 <li>Cursuri de tir cu arcul</li>
               </ul>
-            }
-            @if (!languageRO()) {
+            } @else {
               <ul>
                 <li>
                   Englischkurse mit Fokus auf Wortschatzerweiterung durch
@@ -432,8 +414,7 @@
               >
                 Cere Oferta
               </button>
-            }
-            @if (!languageRO()) {
+            } @else {
               <button
                 (click)="openCourseModal('Extra Aktivitäten')"
                 class="generic-button"
@@ -473,8 +454,7 @@
         <div class="title" id="course-modal-title">
           Doriți să aplicați pentru acest pachet?
         </div>
-      }
-      @if (!languageRO()) {
+      } @else {
         <div class="title" id="course-modal-title">
           Möchten Sie sich für dieses Paket bewerben?
         </div>
@@ -490,17 +470,15 @@
     <div class="customModal-body">
       <div class="row modalRow">
         @if (languageRO()) {
-          <p>Oferta selectată: {{ this.courseTitle }}</p>
-        }
-        @if (!languageRO()) {
-          <p>Ausgewähltes Angebot: {{ this.courseTitle }}</p>
+          <p>Oferta selectată: {{ courseTitle() }}</p>
+        } @else {
+          <p>Ausgewähltes Angebot: {{ courseTitle() }}</p>
         }
       </div>
       <div class="row modalRow">
         @if (languageRO()) {
           <p>Alegeți cum să mă contactați:</p>
-        }
-        @if (!languageRO()) {
+        } @else {
           <p>Wählen Sie, wie Sie mich kontaktieren möchten:</p>
         }
       </div>
@@ -513,8 +491,7 @@
               </span>
               @if (languageRO()) {
                 <span> Sunați-mă </span>
-              }
-              @if (!languageRO()) {
+              } @else {
                 <span> Per Anruf </span>
               }
             </button>
@@ -528,8 +505,7 @@
               </span>
               @if (languageRO()) {
                 <span> Scrieți un E-mail </span>
-              }
-              @if (!languageRO()) {
+              } @else {
                 <span> Per E-mail </span>
               }
             </button>

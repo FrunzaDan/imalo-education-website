@@ -1,22 +1,19 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  inject,
-} from '@angular/core';
-import { SEOService } from '../../services/seo.service';
+import { Component, OnInit, inject } from '@angular/core';
+import { SeoService } from '../../services/seo.service';
 
 @Component({
   selector: 'app-page-not-found',
-  imports: [],
   templateUrl: './page-not-found.component.html',
   styleUrl: './page-not-found.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PageNotFoundComponent implements OnInit {
-  private seoService = inject(SEOService);
+  private readonly seoService = inject(SeoService);
 
   ngOnInit(): void {
-    this.seoService.updateRobots('noindex, follow');
+    this.seoService.updateMetaTags({
+      description: 'Pagina căutată nu există sau a fost mutată.',
+      path: '/404',
+      robots: 'noindex, follow',
+    });
   }
 }

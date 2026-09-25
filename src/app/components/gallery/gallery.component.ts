@@ -1,54 +1,46 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  HostListener,
-  OnInit,
-  Signal,
-  effect,
-  inject,
-  signal,
-} from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
-import { GalleryImage } from '../../interfaces/gallery-image';
+import { GalleryCatalogService } from '../../services/gallery-catalog.service';
 import { LanguageService } from '../../services/language.service';
-import { LoadGalleryService } from '../../services/load-gallery.service';
-import { SEOService } from '../../services/seo.service';
+import { SeoService } from '../../services/seo.service';
+
+/** How far a finger has to travel sideways before it counts as a swipe. */
+const SWIPE_THRESHOLD_PX = 50;
 
 @Component({
   selector: 'app-gallery',
   imports: [NgOptimizedImage],
   templateUrl: './gallery.component.html',
   styleUrl: './gallery.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '(document:keydown)': 'handleKeyboardEvent($event)',
+    '(touchstart)': 'onTouchStart($event)',
+    '(touchend)': 'onTouchEnd($event)',
+  },
 })
-export class GalleryComponent implements OnInit {
-  private loadGalleryService = inject(LoadGalleryService);
-  private languageService = inject(LanguageService);
-  private seoService = inject(SEOService);
+export class GalleryComponent {
+  private readonly galleryCatalog = inject(GalleryCatalogService);
+  private readonly seoService = inject(SeoService);
 
-  galleryImageList = signal<GalleryImage[]>([]);
-  languageRO: Signal<boolean>;
-  currentIndex = signal(-1);
-  isFullViewOpen = signal(false);
+  readonly languageRO = inject(LanguageService).language;
+  readonly galleryImageList = this.galleryCatalog.images;
+  readonly hasLoadError = this.galleryCatalog.hasLoadError;
+  readonly currentIndex = signal(-1);
+  readonly isFullViewOpen = signal(false);
 
   private touchStartX = 0;
-  private touchEndX = 0;
 
   constructor() {
-    this.languageRO = this.languageService.language;
-
     effect(() => {
-      this.seoService.updateForLanguage(
-        this.languageRO(),
-        'Galeria Imalo Education, afterschool pe limba germana din Sibiu.',
-        'Galerie von Imalo Education, dem deutschsprachigen Afterschool-Programm in Sibiu.',
-      );
+      const isRomanian = this.languageRO();
+      this.seoService.updateMetaTags({
+        description: isRomanian
+          ? 'Galeria Imalo Education, afterschool pe limba germana din Sibiu.'
+          : 'Galerie von Imalo Education, dem deutschsprachigen Afterschool-Programm in Sibiu.',
+        path: '/gallery',
+        locale: isRomanian ? 'ro_RO' : 'de_DE',
+      });
     });
-  }
-
-  ngOnInit(): void {
-    this.seoService.createLinkForCanonicalURL();
-    this.galleryImageList.set(this.loadGalleryService.loadGallery());
   }
 
   openFullView(index: number): void {
@@ -61,52 +53,39 @@ export class GalleryComponent implements OnInit {
   }
 
   navigateLeft(): void {
-    this.currentIndex.set(Math.max(0, this.currentIndex() - 1));
+    this.currentIndex.update((index) => Math.max(0, index - 1));
   }
 
   navigateRight(): void {
-    this.currentIndex.set(
-      Math.min(this.galleryImageList().length - 1, this.currentIndex() + 1),
-    );
+    const lastIndex = this.galleryImageList().length - 1;
+    this.currentIndex.update((index) => Math.min(lastIndex, index + 1));
   }
 
-  @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent): void {
-    if (this.isFullViewOpen()) {
-      switch (event.key) {
-        case 'ArrowLeft':
-          this.navigateLeft();
-          break;
-        case 'ArrowRight':
-          this.navigateRight();
-          break;
-        case 'Escape':
-          this.closeFullView();
-          break;
-      }
+    if (!this.isFullViewOpen()) return;
+
+    switch (event.key) {
+      case 'ArrowLeft':
+        this.navigateLeft();
+        break;
+      case 'ArrowRight':
+        this.navigateRight();
+        break;
+      case 'Escape':
+        this.closeFullView();
+        break;
     }
   }
 
-  // Handle touch events for swipe navigation
-  @HostListener('touchstart', ['$event'])
   onTouchStart(event: TouchEvent): void {
     this.touchStartX = event.changedTouches[0].screenX;
   }
 
-  @HostListener('touchend', ['$event'])
   onTouchEnd(event: TouchEvent): void {
-    this.touchEndX = event.changedTouches[0].screenX;
-    this.handleSwipe();
-  }
-
-  private handleSwipe(): void {
-    if (this.touchStartX - this.touchEndX > 50) {
-      // Swipe Left
+    const swipeDistance = this.touchStartX - event.changedTouches[0].screenX;
+    if (swipeDistance > SWIPE_THRESHOLD_PX) {
       this.navigateRight();
-    }
-
-    if (this.touchEndX - this.touchStartX > 50) {
-      // Swipe Right
+    } else if (swipeDistance < -SWIPE_THRESHOLD_PX) {
       this.navigateLeft();
     }
   }

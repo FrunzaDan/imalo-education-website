@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -7,6 +7,5 @@ import { RouterModule } from '@angular/router';
   imports: [RouterModule, NgOptimizedImage],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {}

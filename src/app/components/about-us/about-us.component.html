@@ -7,8 +7,7 @@
     >
       @if (languageRO()) {
         <h1 class="subtitle-1">Despre noi</h1>
-      }
-      @if (!languageRO()) {
+      } @else {
         <h1 class="subtitle-1">Über uns</h1>
       }
     </div>
@@ -30,8 +29,7 @@
                 liber. <br />Activitățile se desfășoară exclusiv în limba
                 germană, pentru a-i îmbogăți vocabularul și exprimarea.
               </p>
-            }
-            @if (!languageRO()) {
+            } @else {
               <p>
                 Imalo Education ist ein deutschsprachiges Bildungszentrum für
                 Grundschüler - von der Vorschule bis zur vierten Klasse.
@@ -70,8 +68,7 @@
       >
         @if (languageRO()) {
           <h2 class="subtitle-1" id="who-am-I-Section">Cine sunt</h2>
-        }
-        @if (!languageRO()) {
+        } @else {
           <h2 class="subtitle-1" id="who-am-I-Section">Wer bin ich</h2>
         }
       </div>
@@ -119,8 +116,7 @@
                   copiii se vor bucura să descopere limba germană sub toate
                   formele sale.
                 </p>
-              }
-              @if (!languageRO()) {
+              } @else {
                 <p>
                   Mein Name ist Maria und ich habe dieses Projekt aus
                   Leidenschaft für das Unterrichten und aus Liebe zu den Kindern

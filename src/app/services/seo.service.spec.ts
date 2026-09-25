@@ -1,89 +1,72 @@
 import { TestBed } from '@angular/core/testing';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { SEOService } from './seo.service';
+import { Title } from '@angular/platform-browser';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { SeoService, SITE_URL } from './seo.service';
 
-describe('SEOService', () => {
-  let service: SEOService;
+describe('SeoService', () => {
+  let service: SeoService;
+
+  const metaContent = (selector: string) =>
+    document.head.querySelector(`meta[${selector}]`)?.getAttribute('content');
+  const canonicalLinks = () =>
+    document.head.querySelectorAll('link[rel="canonical"]');
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(SEOService);
-  });
-
-  afterEach(() => {
     document.head
-      .querySelectorAll(
-        'link[rel="canonical"], meta[property^="og:"], meta[name^="twitter:"], meta[name="description"]',
-      )
-      .forEach((el) => el.remove());
+      .querySelectorAll('link[rel="canonical"], meta[name], meta[property]')
+      .forEach((element) => element.remove());
+
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(SeoService);
   });
 
-  it('builds the canonical link from the production domain and current path', () => {
-    window.history.pushState({}, '', '/gallery?tab=recent');
+  it('sets the description and the social tags from the page title', () => {
+    TestBed.inject(Title).setTitle('Galerie - Imalo Afterschool Germana Sibiu');
+    service.updateMetaTags({
+      description: 'Galeria Imalo Education.',
+      path: '/gallery',
+    });
 
-    service.createLinkForCanonicalURL();
-
-    const link = document.head.querySelector('link[rel="canonical"]');
-    expect(link?.getAttribute('href')).toBe(
-      'https://imalo-education.web.app/gallery?tab=recent',
+    expect(metaContent('name="description"')).toBe('Galeria Imalo Education.');
+    expect(metaContent('property="og:title"')).toBe(
+      'Galerie - Imalo Afterschool Germana Sibiu',
     );
-  });
-
-  it('drops the trailing slash for the root path', () => {
-    window.history.pushState({}, '', '/');
-
-    service.createLinkForCanonicalURL();
-
-    const link = document.head.querySelector('link[rel="canonical"]');
-    expect(link?.getAttribute('href')).toBe('https://imalo-education.web.app');
-  });
-
-  it('replaces the previous canonical link instead of stacking a new one', () => {
-    window.history.pushState({}, '', '/offers');
-    service.createLinkForCanonicalURL();
-
-    window.history.pushState({}, '', '/schedule');
-    service.createLinkForCanonicalURL();
-
-    const links = document.head.querySelectorAll('link[rel="canonical"]');
-    expect(links.length).toBe(1);
-    expect(links[0].getAttribute('href')).toBe(
-      'https://imalo-education.web.app/schedule',
+    expect(metaContent('property="og:description"')).toBe(
+      'Galeria Imalo Education.',
     );
+    expect(metaContent('property="og:url"')).toBe(`${SITE_URL}/gallery`);
+    expect(metaContent('name="twitter:url"')).toBe(`${SITE_URL}/gallery`);
   });
 
-  it('sets the meta description tag', () => {
-    service.updateMetaDescription('Afterschool germana Sibiu');
+  it('lets search engines index pages unless told otherwise', () => {
+    service.updateMetaTags({ description: 'Acasă', path: '/' });
+    expect(metaContent('name="robots"')).toContain('index, follow');
 
-    const meta = document.querySelector('meta[name="description"]');
-    expect(meta?.getAttribute('content')).toBe('Afterschool germana Sibiu');
+    service.updateMetaTags({
+      description: '404',
+      path: '/404',
+      robots: 'noindex, follow',
+    });
+    expect(metaContent('name="robots"')).toBe('noindex, follow');
   });
 
-  it('derives Open Graph and Twitter tags from the document title and canonical URL', () => {
-    document.title = 'Galerie - Imalo Afterschool Germana Sibiu';
-    window.history.pushState({}, '', '/gallery');
+  it('uses the Romanian locale unless given another one', () => {
+    service.updateMetaTags({ description: 'Acasă', path: '/' });
+    expect(metaContent('property="og:locale"')).toBe('ro_RO');
 
-    service.updateOpenGraphTags('Galeria Imalo Education.');
+    service.updateMetaTags({
+      description: 'Start',
+      path: '/',
+      locale: 'de_DE',
+    });
+    expect(metaContent('property="og:locale"')).toBe('de_DE');
+  });
 
-    expect(
-      document
-        .querySelector('meta[property="og:title"]')
-        ?.getAttribute('content'),
-    ).toBe('Galerie - Imalo Afterschool Germana Sibiu');
-    expect(
-      document
-        .querySelector('meta[property="og:description"]')
-        ?.getAttribute('content'),
-    ).toBe('Galeria Imalo Education.');
-    expect(
-      document
-        .querySelector('meta[property="og:url"]')
-        ?.getAttribute('content'),
-    ).toBe('https://imalo-education.web.app/gallery');
-    expect(
-      document
-        .querySelector('meta[name="twitter:url"]')
-        ?.getAttribute('content'),
-    ).toBe('https://imalo-education.web.app/gallery');
+  it('reuses one canonical link and drops the trailing slash for the home page', () => {
+    service.updateMetaTags({ description: 'Oferte', path: '/offers' });
+    service.updateMetaTags({ description: 'Acasă', path: '/' });
+
+    expect(canonicalLinks().length).toBe(1);
+    expect(canonicalLinks()[0].getAttribute('href')).toBe(SITE_URL);
   });
 });
