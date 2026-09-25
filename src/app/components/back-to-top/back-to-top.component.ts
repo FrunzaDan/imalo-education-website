@@ -1,4 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
+import { LanguageService } from '../../services/language.service';
 import { ScrollerService } from '../../services/scroller.service';
 
 /** How far down the page the button appears. */
@@ -16,6 +17,7 @@ const SCROLL_CHECK_DISTANCE = 200;
 })
 export class BackToTopComponent {
   readonly scrollerService = inject(ScrollerService);
+  readonly languageRO = inject(LanguageService).language;
 
   private prevScrollPos = 0;
 

@@ -14,6 +14,8 @@ export class NavbarComponent {
   private readonly languageService = inject(LanguageService);
 
   readonly languageRO = this.languageService.language;
+  readonly localize = (romanianPath: string) =>
+    this.languageService.localize(romanianPath);
   readonly isMenuOpen = signal(false);
 
   toggleLanguage(): void {

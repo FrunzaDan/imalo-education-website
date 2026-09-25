@@ -3,7 +3,7 @@
   [class.open]="isOpen()"
   (click)="toggleNavbar()"
   type="button"
-  aria-label="Toggle navigation menu"
+  [attr.aria-label]="label()"
   [attr.aria-controls]="controls()"
   [attr.aria-expanded]="isOpen()"
 >

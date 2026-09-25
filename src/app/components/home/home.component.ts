@@ -13,7 +13,11 @@ import { SeoService } from '../../services/seo.service';
 export class HomeComponent {
   private readonly seoService = inject(SeoService);
 
-  readonly languageRO = inject(LanguageService).language;
+  private readonly languageService = inject(LanguageService);
+
+  readonly languageRO = this.languageService.language;
+  readonly localize = (romanianPath: string) =>
+    this.languageService.localize(romanianPath);
 
   constructor() {
     effect(() => {
@@ -23,7 +27,6 @@ export class HomeComponent {
           ? 'Imalo Education este un program tip afterschool pe limba germana din Sibiu unde copilul Dvs. va fi întâmpinat cu toată căldura și atenția noastră.'
           : 'Imalo Education ist ein deutschsprachiges Afterschool-Programm in Sibiu, in dem Ihr Kind mit all unserer Herzlichkeit und Aufmerksamkeit empfangen wird.',
         path: '/',
-        locale: isRomanian ? 'ro_RO' : 'de_DE',
       });
     });
   }

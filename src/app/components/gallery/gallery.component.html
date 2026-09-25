@@ -14,20 +14,24 @@
       track galleryImage.imagePath;
       let i = $index
     ) {
-      <img
-        [ngSrc]="galleryImage.imagePath"
-        width="1920"
-        height="1440"
-        class="full-card-img"
-        alt="Imalo Afterschool Germana Sibiu #{{ i + 1 }}"
-        title="Imalo Afterschool Germana Sibiu #{{ i + 1 }}"
-        role="button"
-        tabindex="0"
+      <button
+        type="button"
+        class="gallery-thumb"
+        [attr.aria-label]="
+          (languageRO() ? 'Mărește: ' : 'Vergrößern: ') +
+          describe(galleryImage, i)
+        "
         (click)="openFullView(i)"
-        (keydown.enter)="openFullView(i)"
-        (keydown.space)="$event.preventDefault(); openFullView(i)"
-        loading="lazy"
-      />
+      >
+        <img
+          [ngSrc]="galleryImage.imagePath"
+          width="1920"
+          height="1440"
+          class="full-card-img"
+          alt=""
+          loading="lazy"
+        />
+      </button>
     } @empty {
       @if (hasLoadError()) {
         <p role="alert">
@@ -47,57 +51,77 @@
       class="full-view-background"
       animate.enter="anim-fade-in"
       animate.leave="anim-fade-out"
+      aria-hidden="true"
       (click)="closeFullView()"
     ></div>
   }
   @if (isFullViewOpen() && currentIndex() >= 0) {
-    <img
-      animate.enter="anim-scale-in"
-      animate.leave="anim-scale-out"
-      [ngSrc]="galleryImageList()[currentIndex()].imagePath"
-      width="1920"
-      height="1440"
-      class="full-view-img"
-      alt="Imalo Afterschool Germana Sibiu"
-    />
-  }
-  @if (isFullViewOpen()) {
-    <span
-      animate.enter="anim-fade-in"
-      animate.leave="anim-fade-out"
-      role="button"
-      tabindex="0"
-      aria-label="Închide galeria"
-      (click)="closeFullView()"
-      (keydown.enter)="closeFullView()"
-      (keydown.space)="$event.preventDefault(); closeFullView()"
-      id="close-view-button"
-      ><span class="grow-to-bottom-right">&times;</span></span
+    @let image = galleryImageList()[currentIndex()];
+    <div
+      #fullView
+      role="dialog"
+      aria-modal="true"
+      [attr.aria-label]="languageRO() ? 'Galerie foto' : 'Fotogalerie'"
     >
-  }
-  @if (isFullViewOpen() && currentIndex() > 0) {
-    <button
-      (click)="navigateLeft()"
-      class="galleryNavigationButton"
-      id="prev-button"
-      [attr.aria-label]="languageRO() ? 'Poza anterioară' : 'Vorheriges Bild'"
-      animate.enter="anim-fade-in"
-      animate.leave="anim-fade-out"
-    >
-      &rarr;
-    </button>
-  }
-  @if (isFullViewOpen() && currentIndex() < galleryImageList().length - 1) {
-    <button
-      (click)="navigateRight()"
-      class="galleryNavigationButton"
-      id="next-button"
-      [attr.aria-label]="languageRO() ? 'Poza următoare' : 'Nächstes Bild'"
-      animate.enter="anim-fade-in"
-      animate.leave="anim-fade-out"
-    >
-      &rarr;
-    </button>
+      <img
+        animate.enter="anim-scale-in"
+        animate.leave="anim-scale-out"
+        [ngSrc]="image.imagePath"
+        width="1920"
+        height="1440"
+        class="full-view-img"
+        [alt]="describe(image, currentIndex())"
+      />
+      <p class="visually-hidden" aria-live="polite">
+        @if (languageRO()) {
+          Fotografia {{ currentIndex() + 1 }} din
+          {{ galleryImageList().length }}
+        } @else {
+          Foto {{ currentIndex() + 1 }} von {{ galleryImageList().length }}
+        }
+      </p>
+      <button
+        #closeButton
+        type="button"
+        animate.enter="anim-fade-in"
+        animate.leave="anim-fade-out"
+        [attr.aria-label]="
+          languageRO() ? 'Închide galeria' : 'Galerie schließen'
+        "
+        (click)="closeFullView()"
+        id="close-view-button"
+      >
+        <span class="grow-to-bottom-right" aria-hidden="true">&times;</span>
+      </button>
+      @if (currentIndex() > 0) {
+        <button
+          type="button"
+          (click)="navigateLeft()"
+          class="galleryNavigationButton"
+          id="prev-button"
+          [attr.aria-label]="
+            languageRO() ? 'Poza anterioară' : 'Vorheriges Bild'
+          "
+          animate.enter="anim-fade-in"
+          animate.leave="anim-fade-out"
+        >
+          <span aria-hidden="true">&rarr;</span>
+        </button>
+      }
+      @if (currentIndex() < galleryImageList().length - 1) {
+        <button
+          type="button"
+          (click)="navigateRight()"
+          class="galleryNavigationButton"
+          id="next-button"
+          [attr.aria-label]="languageRO() ? 'Poza următoare' : 'Nächstes Bild'"
+          animate.enter="anim-fade-in"
+          animate.leave="anim-fade-out"
+        >
+          <span aria-hidden="true">&rarr;</span>
+        </button>
+      }
+    </div>
   }
 
   <section class="w-100" aria-labelledby="gallery-social-heading">
@@ -124,7 +148,6 @@
           class="h-100"
           target="_blank"
           rel="me"
-          aria-label="Imalo Facebook"
         >
           <div
             class="card w-100 justify-content-center align-items-center h-100 text-center mb-2 py-4"
@@ -134,7 +157,7 @@
               ngSrc="/assets/images/social media/Facebook_svg.svg"
               width="500"
               height="500"
-              alt="Imalo Afterschool Sibiu Facebook"
+              alt=""
             />
             <div class="card-lower-text">
               @if (languageRO()) {
@@ -158,7 +181,6 @@
           class="h-100 w-100"
           target="_blank"
           rel="me"
-          aria-label="Imalo Instagram"
         >
           <div
             class="card w-100 justify-content-center align-items-center h-100 text-center mb-2 py-4"
@@ -168,7 +190,7 @@
               ngSrc="/assets/images/social media/Instagram_svg.svg"
               width="750"
               height="749"
-              alt="Imalo Afterschool Sibiu Instagram"
+              alt=""
             />
             <div class="card-lower-text">
               @if (languageRO()) {
@@ -192,7 +214,6 @@
           class="h-100 w-100"
           target="_blank"
           rel="me"
-          aria-label="Imalo LinkedIn"
         >
           <div
             class="card w-100 justify-content-center align-items-center h-100 text-center mb-2 py-4"
@@ -202,7 +223,7 @@
               ngSrc="/assets/images/social media/LinkedIn_svg.svg"
               width="36"
               height="36"
-              alt="Imalo Afterschool Sibiu LinkedIn"
+              alt=""
             />
             <div class="card-lower-text">
               @if (languageRO()) {

@@ -13,7 +13,28 @@
   transform: translate(-50%, -50%);
 }
 
+/* The thumbnail's own styles live on the image; the button only makes it operable. */
+.gallery-thumb {
+  padding: 0;
+  border: 0;
+  background: none;
+  line-height: 0;
+}
+
+.gallery-thumb:focus-visible {
+  outline: none;
+}
+
+.gallery-thumb:focus-visible .full-card-img {
+  outline: 3px solid var(--cyan-dark-color);
+  outline-offset: 2px;
+}
+
 #close-view-button {
+  padding: 0;
+  border: 0;
+  background: none;
+  line-height: 1;
   z-index: 999;
   position: fixed;
   top: 0.6rem;

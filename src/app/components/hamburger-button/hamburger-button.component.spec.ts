@@ -54,6 +54,14 @@ describe('HamburgerButtonComponent', () => {
     expect(fixture.nativeElement.hasAttribute('aria-controls')).toBe(false);
   });
 
+  it('names the button with the given label', () => {
+    fixture.componentRef.setInput('label', 'Menü');
+    fixture.detectChanges();
+
+    const button = fixture.nativeElement.querySelector('button') as HTMLElement;
+    expect(button.getAttribute('aria-label')).toBe('Menü');
+  });
+
   it('omits aria-controls when no controlled id is given', () => {
     fixture.detectChanges();
 

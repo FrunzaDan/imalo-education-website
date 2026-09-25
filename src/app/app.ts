@@ -6,6 +6,7 @@ import { filter, skip } from 'rxjs';
 import { BackToTopComponent } from './components/back-to-top/back-to-top.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { LanguageService } from './services/language.service';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,8 @@ export class App {
   private readonly document = inject(DOCUMENT);
   private readonly platformId = inject(PLATFORM_ID);
 
+  readonly languageRO = inject(LanguageService).language;
+
   constructor() {
     // After every navigation but the first, move focus to the new page's heading
     // so screen readers announce it.
@@ -27,6 +30,15 @@ export class App {
         takeUntilDestroyed(),
       )
       .subscribe(() => this.focusMainHeading());
+  }
+
+  /**
+   * Moves focus to the main content in place. Following the `#main-content` link
+   * would resolve against `<base href="/">` and open the home page instead.
+   */
+  skipToMainContent(event: Event): void {
+    event.preventDefault();
+    this.document.getElementById('main-content')?.focus();
   }
 
   private focusMainHeading(): void {

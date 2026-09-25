@@ -1,0 +1,6 @@
+.home-link {
+  color: var(--cyan-dark-color);
+  font-size: 1.25rem;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}

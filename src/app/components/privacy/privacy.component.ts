@@ -14,6 +14,7 @@ export class PrivacyComponent implements OnInit {
       description:
         'Pagina termenilor Imalo Education, afterschool pe limba germana din Sibiu.',
       path: '/privacy',
+      hasGermanVersion: false,
     });
   }
 }

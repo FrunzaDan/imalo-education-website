@@ -8,6 +8,20 @@ describe('parseGalleryImages', () => {
     );
   });
 
+  it('keeps a description only when it has both languages', () => {
+    const description = { ro: 'Sală de clasă', de: 'Klassenzimmer' };
+
+    expect(
+      parseGalleryImages([
+        { imagePath: '/a.webp', description },
+        { imagePath: '/b.webp', description: { ro: 'Sală de clasă' } },
+      ]),
+    ).toEqual([
+      { imagePath: '/a.webp', description },
+      { imagePath: '/b.webp' },
+    ]);
+  });
+
   it('skips malformed entries instead of failing the whole list', () => {
     vi.spyOn(console, 'warn').mockImplementation(() => undefined);
 

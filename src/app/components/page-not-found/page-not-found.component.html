@@ -1,9 +1,19 @@
 <div class="generic-page-container">
   <div class="row w-100 my-2 generic-row-padding">
     <div
-      class="container-fluid d-flex justify-content-center align-items-center my-2"
+      class="container-fluid d-flex flex-column justify-content-center align-items-center my-2"
     >
-      <h1 class="subtitle-1">404: Page Not Found</h1>
+      @if (languageRO()) {
+        <h1 class="subtitle-1">404: Pagina nu a fost găsită</h1>
+        <p>Pagina căutată nu există sau a fost mutată.</p>
+        <a class="home-link" [routerLink]="homeLink()"
+          >Înapoi la pagina principală</a
+        >
+      } @else {
+        <h1 class="subtitle-1">404: Seite nicht gefunden</h1>
+        <p>Die gesuchte Seite existiert nicht oder wurde verschoben.</p>
+        <a class="home-link" [routerLink]="homeLink()">Zurück zur Startseite</a>
+      }
     </div>
   </div>
 </div>

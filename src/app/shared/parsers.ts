@@ -15,8 +15,18 @@ function isNonBlankString(value: unknown): value is string {
 
 export function parseGalleryImage(value: unknown): GalleryImage | undefined {
   if (!isRecord(value)) return undefined;
-  const { imagePath } = value;
+  const { imagePath, description } = value;
   if (!isNonBlankString(imagePath)) return undefined;
+  if (
+    isRecord(description) &&
+    isNonBlankString(description['ro']) &&
+    isNonBlankString(description['de'])
+  ) {
+    return {
+      imagePath,
+      description: { ro: description['ro'], de: description['de'] },
+    };
+  }
   return { imagePath };
 }
 

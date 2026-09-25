@@ -21,49 +21,90 @@
         class="d-flex justify-content-center align-items-center cyan-dark-color"
         >DE</span
       >
-      <span id="language-switcher-desc" class="visually-hidden"
-        >Comută limba site-ului între română și germană</span
-      >
+      <span id="language-switcher-desc" class="visually-hidden">
+        @if (languageRO()) {
+          Comută limba site-ului între română și germană
+        } @else {
+          Wechselt die Sprache der Website zwischen Rumänisch und Deutsch
+        }
+      </span>
     </div>
     <div class="col-6 d-flex flex-row-reverse">
       <ul class="nav gap-3 list-unstyled">
         <li class="d-flex align-items-center hovericon">
-          <a href="tel:+40741711006" aria-label="Call Imalo at +40741711006"
-            ><i class="bi bi-telephone cyan-dark-color hovericon"></i>
+          <a
+            href="tel:+40741711006"
+            [attr.aria-label]="
+              languageRO()
+                ? 'Sunați la Imalo: +40741711006'
+                : 'Imalo anrufen: +40741711006'
+            "
+            ><i
+              class="bi bi-telephone cyan-dark-color hovericon"
+              aria-hidden="true"
+            ></i>
           </a>
         </li>
         <li class="d-flex align-items-center hovericon">
           <a
             href="mailto:imaloeducation@gmail.com"
-            aria-label="Email Imalo at imaloeducation@gmail.com"
-            ><i class="bi bi-envelope cyan-dark-color hovericon"></i>
+            [attr.aria-label]="
+              languageRO()
+                ? 'Scrieți-ne un e-mail: imaloeducation@gmail.com'
+                : 'Schreiben Sie uns eine E-Mail: imaloeducation@gmail.com'
+            "
+            ><i
+              class="bi bi-envelope cyan-dark-color hovericon"
+              aria-hidden="true"
+            ></i>
           </a>
         </li>
         <li class="d-flex align-items-center hovericon">
           <a
             href="https://www.facebook.com/imaloeducation"
-            aria-label="Visit Imalo's Facebook page"
+            [attr.aria-label]="
+              languageRO()
+                ? 'Imalo pe Facebook (se deschide într-o filă nouă)'
+                : 'Imalo auf Facebook (öffnet in einem neuen Tab)'
+            "
             target="_blank"
             rel="noopener noreferrer"
-            ><i class="bi bi-facebook cyan-dark-color hovericon"></i>
+            ><i
+              class="bi bi-facebook cyan-dark-color hovericon"
+              aria-hidden="true"
+            ></i>
           </a>
         </li>
         <li class="d-flex align-items-center hovericon">
           <a
             href="https://www.instagram.com/imaloeducation"
-            aria-label="Visit Imalo's Instagram profile"
+            [attr.aria-label]="
+              languageRO()
+                ? 'Imalo pe Instagram (se deschide într-o filă nouă)'
+                : 'Imalo auf Instagram (öffnet in einem neuen Tab)'
+            "
             target="_blank"
             rel="noopener noreferrer"
-            ><i class="bi bi-instagram cyan-dark-color hovericon"></i>
+            ><i
+              class="bi bi-instagram cyan-dark-color hovericon"
+              aria-hidden="true"
+            ></i>
           </a>
         </li>
         <li class="d-flex align-items-center hovericon">
           <a
             href="https://www.linkedin.com/company/imalo-education"
-            aria-label="Visit Imalo's LinkedIn page"
+            [attr.aria-label]="
+              languageRO()
+                ? 'Imalo pe LinkedIn (se deschide într-o filă nouă)'
+                : 'Imalo auf LinkedIn (öffnet in einem neuen Tab)'
+            "
             target="_blank"
             rel="noopener noreferrer"
-            ><i class="bi bi-linkedin cyan-dark-color hovericon"></i>
+            ><i
+              class="bi bi-linkedin cyan-dark-color hovericon"
+              aria-hidden="true"
+            ></i>
           </a>
         </li>
       </ul>
@@ -73,23 +114,28 @@
 
 <div class="container imalo-logo-nav">
   <div class="logo-container">
-    <img ngSrc="/assets/imalo.svg" width="491" height="521" alt="Imalo Logo" />
+    <img ngSrc="/assets/imalo.svg" width="491" height="521" alt="" />
   </div>
   Imalo Education
 </div>
-<nav class="navbar navbar-expand-sm" aria-label="Main navigation">
+<nav
+  class="navbar navbar-expand-sm"
+  [attr.aria-label]="languageRO() ? 'Navigare principală' : 'Hauptnavigation'"
+>
   <div class="container-fluid justify-content-center">
     <app-hamburger-button
       [isOpen]="isMenuOpen()"
       (toggleMenu)="onToggleMenu($event)"
       controls="main-nav"
+      [label]="languageRO() ? 'Meniu' : 'Menü'"
     ></app-hamburger-button>
     <div class="navbar-collapse" [class.show]="isMenuOpen()" id="main-nav">
       <ul class="navbar-nav container-fluid justify-content-between">
         <li class="nav-item">
           <a
-            routerLink=""
+            [routerLink]="localize('/')"
             routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
             ariaCurrentWhenActive="page"
             class="nav-link hover-item"
             (click)="closeMenu()"
@@ -97,13 +143,13 @@
             @if (languageRO()) {
               <span> Acasă </span>
             } @else {
-              <span> Home </span>
+              <span> Startseite </span>
             }
           </a>
         </li>
         <li class="nav-item">
           <a
-            routerLink="/about-us"
+            [routerLink]="localize('/about-us')"
             routerLinkActive="active"
             ariaCurrentWhenActive="page"
             class="nav-link hover-item"
@@ -118,7 +164,7 @@
         </li>
         <li class="nav-item">
           <a
-            routerLink="/offers"
+            [routerLink]="localize('/offers')"
             routerLinkActive="active"
             ariaCurrentWhenActive="page"
             class="nav-link hover-item"
@@ -133,7 +179,7 @@
         </li>
         <li class="nav-item">
           <a
-            routerLink="/schedule"
+            [routerLink]="localize('/schedule')"
             routerLinkActive="active"
             ariaCurrentWhenActive="page"
             class="nav-link hover-item"
@@ -148,22 +194,18 @@
         </li>
         <li class="nav-item">
           <a
-            routerLink="/gallery"
+            [routerLink]="localize('/gallery')"
             routerLinkActive="active"
             ariaCurrentWhenActive="page"
             class="nav-link hover-item"
             (click)="closeMenu()"
           >
-            @if (languageRO()) {
-              <span> Galerie </span>
-            } @else {
-              <span> Galerie </span>
-            }
+            <span> Galerie </span>
           </a>
         </li>
         <li class="nav-item">
           <a
-            routerLink="/contact"
+            [routerLink]="localize('/contact')"
             routerLinkActive="active"
             ariaCurrentWhenActive="page"
             class="nav-link hover-item"

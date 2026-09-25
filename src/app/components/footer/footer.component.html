@@ -1,4 +1,4 @@
-<footer role="contentinfo">
+<footer>
   <div
     class="row d-flex flex-wrap align-items-center justify-content-between px-4 border-top"
   >
@@ -7,9 +7,15 @@
         <span class="hoverlink">Imalo Education</span>
       </div>
       <div class="innerColumnFooter12 col d-flex text-muted">
-        <span routerLink="/privacy" class="hoverlink cursor-pointer"
-          >Politica de confidențialitate</span
-        >
+        @if (languageRO()) {
+          <a routerLink="/privacy" class="hoverlink"
+            >Politica de confidențialitate</a
+          >
+        } @else {
+          <a routerLink="/privacy" class="hoverlink" hreflang="ro"
+            >Datenschutzerklärung (auf Rumänisch)</a
+          >
+        }
       </div>
     </div>
 
@@ -17,39 +23,55 @@
       <div class="innerColumnFooter21 col d-flex">
         <ul
           class="nav gap-3 list-unstyled"
-          aria-label="Imalo social media links"
+          [attr.aria-label]="
+            languageRO()
+              ? 'Imalo pe rețelele sociale'
+              : 'Imalo in sozialen Medien'
+          "
         >
           <li class="d-flex align-items-center hovericon">
             <a
               href="https://www.facebook.com/imaloeducation"
-              aria-label="Visit Imalo Education on Facebook"
+              [attr.aria-label]="
+                languageRO()
+                  ? 'Facebook (se deschide într-o filă nouă)'
+                  : 'Facebook (öffnet in einem neuen Tab)'
+              "
               target="_blank"
               rel="me noopener"
-              ><i class="bi bi-facebook hovericon"></i>
+              ><i class="bi bi-facebook hovericon" aria-hidden="true"></i>
             </a>
           </li>
           <li class="d-flex align-items-center hovericon">
             <a
               href="https://www.instagram.com/imaloeducation"
-              aria-label="Visit Imalo Education on Instagram"
+              [attr.aria-label]="
+                languageRO()
+                  ? 'Instagram (se deschide într-o filă nouă)'
+                  : 'Instagram (öffnet in einem neuen Tab)'
+              "
               target="_blank"
               rel="me noopener"
-              ><i class="bi bi-instagram hovericon"></i>
+              ><i class="bi bi-instagram hovericon" aria-hidden="true"></i>
             </a>
           </li>
           <li class="d-flex align-items-center hovericon">
             <a
               href="https://www.linkedin.com/company/imalo-education"
-              aria-label="Visit Imalo Education on LinkedIn"
+              [attr.aria-label]="
+                languageRO()
+                  ? 'LinkedIn (se deschide într-o filă nouă)'
+                  : 'LinkedIn (öffnet in einem neuen Tab)'
+              "
               target="_blank"
               rel="me noopener"
-              ><i class="bi bi-linkedin hovericon"></i>
+              ><i class="bi bi-linkedin hovericon" aria-hidden="true"></i>
             </a>
           </li>
         </ul>
       </div>
       <div class="innerColumnFooter22 col d-flex text-muted">
-        <span class="hoverlink" aria-label="Copyright 2024">©2024</span>
+        <span class="hoverlink">©2024</span>
       </div>
     </div>
   </div>
@@ -57,7 +79,11 @@
     class="row w-100 generic-row-padding d-flex justify-content-center align-items-center"
   >
     <div class="col-md-6 px-2 my-1">
-      <div class="card p-2" role="region" aria-label="Company Information">
+      <div
+        class="card p-2"
+        role="region"
+        [attr.aria-label]="languageRO() ? 'Date firmă' : 'Firmendaten'"
+      >
         <p>
           IMALO PROGRAM SRL
           <br />
@@ -70,24 +96,28 @@
       </div>
     </div>
     <div class="col-md-6 px-2 my-1">
-      <div class="card p-2" role="region" aria-label="Contact Information">
+      <div
+        class="card p-2"
+        role="region"
+        [attr.aria-label]="languageRO() ? 'Date de contact' : 'Kontaktdaten'"
+      >
         <p>
-          CONTACT
+          @if (languageRO()) {
+            CONTACT
+            <br />
+            Adresă: Sibiu, Str. Gutuilor, Nr. 6, Cod 550092
+          } @else {
+            KONTAKT
+            <br />
+            Adresse: Sibiu, Str. Gutuilor, Nr. 6, PLZ 550092
+          }
           <br />
-          <span aria-labelledby="contact-info"
-            >Adresă: Sibiu, Str. Gutuilor, Nr. 6, Cod 550092</span
-          >
-          <br />
-          <a
-            href="mailto:imaloeducation@gmail.com"
-            aria-label="Send email to imaloeducation@gmail.com"
+          <a href="mailto:imaloeducation@gmail.com"
             >E-Mail: imaloeducation&#64;gmail.com</a
           >
           <br />
           Telefon:
-          <a href="tel:+40741711006" aria-label="Call +40741711006"
-            >+40741711006</a
-          >
+          <a href="tel:+40741711006">+40741711006</a>
         </p>
       </div>
     </div>

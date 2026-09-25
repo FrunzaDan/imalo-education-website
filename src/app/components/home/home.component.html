@@ -5,7 +5,7 @@
   <div
     class="centere-hero-div d-flex justify-content-center align-items-center"
   >
-    <div class="motto-container">
+    <div class="motto-container" lang="de">
       <span class="motto-text" id="upper-text-motto">Aufblühen</span>
       <span class="motto-text" id="middle-text-motto">Wachsen</span>
       <span class="motto-text" id="lower-text-motto">Entdecken</span>
@@ -67,8 +67,7 @@
         ngSrc="assets/images/caterpillars/imalo_caterpillar_1.webp"
         width="443"
         height="314"
-        alt="Imalo Afterschool Sibiu Caterpillar 1"
-        title="Imalo Afterschool Sibiu"
+        alt=""
         priority
       />
       @if (languageRO()) {
@@ -90,8 +89,7 @@
         ngSrc="assets/images/caterpillars/imalo_caterpillar_2.webp"
         width="327"
         height="242"
-        alt="Imalo Afterschool Sibiu Caterpillar 2"
-        title="Imalo Afterschool Sibiu"
+        alt=""
       />
     </div>
     <div
@@ -146,15 +144,14 @@
         ngSrc="assets/images/caterpillars/imalo_caterpillar_3.webp"
         width="434"
         height="379"
-        alt="Imalo Afterschool Sibiu Caterpillar 3"
-        title="Imalo Afterschool Sibiu"
+        alt=""
       />
     </div>
   </div>
 
   <div class="row w-100 py-2 my-4 diagonal-2 generic-row-padding">
     <div class="col-sm-4 d-flex flex-column justify-content-between my-2 px-4">
-      <a routerLink="/about-us" class="h-100">
+      <a [routerLink]="localize('/about-us')" class="h-100">
         <div
           class="card justify-content-center align-items-center h-100 text-center secondary-custom-text p-4 my-2"
         >
@@ -167,7 +164,7 @@
       </a>
     </div>
     <div class="col-sm-4 d-flex flex-column justify-content-between my-2 px-4">
-      <a routerLink="/offers" class="h-100">
+      <a [routerLink]="localize('/offers')" class="h-100">
         <div
           class="card justify-content-center align-items-center h-100 text-center secondary-custom-text p-4 my-2"
         >
@@ -180,7 +177,7 @@
       </a>
     </div>
     <div class="col-sm-4 d-flex flex-column justify-content-between my-2 px-4">
-      <a routerLink="/schedule" class="h-100">
+      <a [routerLink]="localize('/schedule')" class="h-100">
         <div
           class="card justify-content-center align-items-center h-100 text-center secondary-custom-text p-4 my-2"
         >

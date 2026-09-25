@@ -15,7 +15,12 @@ import { LanguageService } from '../../services/language.service';
 import { SendEmailService } from '../../services/send-email.service';
 import { SeoService } from '../../services/seo.service';
 import { trapTabKey } from '../../shared/focus-trap';
-import { contactFormSchema, emptyContactForm } from './contact-form';
+import {
+  GERMAN_CONTACT_TEXTS,
+  ROMANIAN_CONTACT_TEXTS,
+  contactFormSchema,
+  emptyContactForm,
+} from './contact-form';
 
 @Component({
   selector: 'app-contact',
@@ -34,12 +39,16 @@ export class ContactComponent {
     viewChild<ElementRef<HTMLElement>>('emailModal');
 
   readonly languageRO = inject(LanguageService).language;
+  // Each language has its own route, so the page is rebuilt when the language changes.
+  private readonly texts = this.languageRO()
+    ? ROMANIAN_CONTACT_TEXTS
+    : GERMAN_CONTACT_TEXTS;
   readonly isEmailModalOpen = signal(false);
   readonly emailPopUpHeader = signal('');
   readonly emailPopUpParagraph = signal('');
 
   readonly model = signal<ContactMeForm>(emptyContactForm());
-  readonly contactForm = form(this.model, contactFormSchema, {
+  readonly contactForm = form(this.model, contactFormSchema(this.texts), {
     submission: {
       action: () => this.send(),
       onInvalid: (field) =>
@@ -55,25 +64,22 @@ export class ContactComponent {
           ? 'Pagina de contact Imalo Education, afterschool pe limba germana din Sibiu.'
           : 'Kontaktseite von Imalo Education, dem deutschsprachigen Afterschool-Programm in Sibiu.',
         path: '/contact',
-        locale: isRomanian ? 'ro_RO' : 'de_DE',
       });
     });
   }
 
   private async send(): Promise<void> {
     this.openEmailModal();
-    this.emailPopUpHeader.set('Bună, ' + this.model().name);
-    this.emailPopUpParagraph.set('Se trimite...');
+    this.emailPopUpHeader.set(this.texts.greeting + this.model().name);
+    this.emailPopUpParagraph.set(this.texts.sending);
 
     try {
       await this.sendEmailService.sendEmailJS(this.model());
-      this.emailPopUpParagraph.set('Mesajul tău a fost trimis cu succes!');
+      this.emailPopUpParagraph.set(this.texts.sent);
       this.contactForm().reset(emptyContactForm());
     } catch (error: unknown) {
       console.error('Error sending the contact message:', error);
-      this.emailPopUpParagraph.set(
-        'Serverele noastre sunt pline, te rog să trimiți un E-mail către imaloeducation@gmail.com.',
-      );
+      this.emailPopUpParagraph.set(this.texts.sendFailed);
     }
   }
 

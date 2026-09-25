@@ -1,43 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-      <url>
-            <loc>https://imalo-education.web.app</loc>
-            <lastmod>2025-01-01T12:00:00+00:00</lastmod>
-            <changefreq>daily</changefreq>
-            <priority>1.00</priority>
-      </url>
-      <url>
-            <loc>https://imalo-education.web.app/about-us</loc>
-            <lastmod>2025-01-01T12:00:00+00:00</lastmod>
-            <changefreq>daily</changefreq>
-            <priority>0.64</priority>
-      </url>
-      <url>
-            <loc>https://imalo-education.web.app/offers</loc>
-            <lastmod>2025-01-01T12:00:00+00:00</lastmod>
-            <changefreq>daily</changefreq>
-            <priority>0.64</priority>
-      </url>
-      <url>
-            <loc>https://imalo-education.web.app/schedule</loc>
-            <lastmod>2025-01-01T12:00:00+00:00</lastmod>
-            <changefreq>daily</changefreq>
-            <priority>0.64</priority>
-      </url>
-      <url>
-            <loc>https://imalo-education.web.app/gallery</loc>
-            <lastmod>2025-01-01T12:00:00+00:00</lastmod>
-            <changefreq>daily</changefreq>
-            <priority>0.64</priority>
-      </url>
-      <url>
-            <loc>https://imalo-education.web.app/contact</loc>
-            <lastmod>2025-01-01T12:00:00+00:00</lastmod>
-            <changefreq>daily</changefreq>
-            <priority>0.64</priority>
-      </url>
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+>
+  <url>
+    <loc>https://imalo-education.web.app</loc>
+    <lastmod>2026-09-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://imalo-education.web.app" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://imalo-education.web.app/de" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://imalo-education.web.app" />
+  </url>
+  <url>
+    <loc>https://imalo-education.web.app/de</loc>
+    <lastmod>2026-09-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://imalo-education.web.app" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://imalo-education.web.app/de" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://imalo-education.web.app" />
+  </url>
+  <url>
+    <loc>https://imalo-education.web.app/about-us</loc>
+    <lastmod>2026-09-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://imalo-education.web.app/about-us" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://imalo-education.web.app/de/about-us" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://imalo-education.web.app/about-us" />
+  </url>
+  <url>
+    <loc>https://imalo-education.web.app/de/about-us</loc>
+    <lastmod>2026-09-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://imalo-education.web.app/about-us" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://imalo-education.web.app/de/about-us" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://imalo-education.web.app/about-us" />
+  </url>
+  <url>
+    <loc>https://imalo-education.web.app/offers</loc>
+    <lastmod>2026-09-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://imalo-education.web.app/offers" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://imalo-education.web.app/de/offers" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://imalo-education.web.app/offers" />
+  </url>
+  <url>
+    <loc>https://imalo-education.web.app/de/offers</loc>
+    <lastmod>2026-09-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://imalo-education.web.app/offers" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://imalo-education.web.app/de/offers" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://imalo-education.web.app/offers" />
+  </url>
+  <url>
+    <loc>https://imalo-education.web.app/schedule</loc>
+    <lastmod>2026-09-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://imalo-education.web.app/schedule" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://imalo-education.web.app/de/schedule" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://imalo-education.web.app/schedule" />
+  </url>
+  <url>
+    <loc>https://imalo-education.web.app/de/schedule</loc>
+    <lastmod>2026-09-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://imalo-education.web.app/schedule" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://imalo-education.web.app/de/schedule" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://imalo-education.web.app/schedule" />
+  </url>
+  <url>
+    <loc>https://imalo-education.web.app/gallery</loc>
+    <lastmod>2026-09-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://imalo-education.web.app/gallery" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://imalo-education.web.app/de/gallery" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://imalo-education.web.app/gallery" />
+  </url>
+  <url>
+    <loc>https://imalo-education.web.app/de/gallery</loc>
+    <lastmod>2026-09-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://imalo-education.web.app/gallery" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://imalo-education.web.app/de/gallery" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://imalo-education.web.app/gallery" />
+  </url>
+  <url>
+    <loc>https://imalo-education.web.app/contact</loc>
+    <lastmod>2026-09-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://imalo-education.web.app/contact" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://imalo-education.web.app/de/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://imalo-education.web.app/contact" />
+  </url>
+  <url>
+    <loc>https://imalo-education.web.app/de/contact</loc>
+    <lastmod>2026-09-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://imalo-education.web.app/contact" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://imalo-education.web.app/de/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://imalo-education.web.app/contact" />
+  </url>
+  <url>
+    <loc>https://imalo-education.web.app/privacy</loc>
+    <lastmod>2026-09-25</lastmod>
+  </url>
 </urlset>

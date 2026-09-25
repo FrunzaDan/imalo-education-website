@@ -34,7 +34,7 @@
                 id="name"
                 class="form-control"
                 type="text"
-                placeholder="Numele tău"
+                [placeholder]="languageRO() ? 'Numele tău' : 'Ihr Name'"
                 autocomplete="name"
                 [formField]="contactForm.name"
                 [class.is-invalid]="nameError"
@@ -61,7 +61,9 @@
                 id="email"
                 class="form-control"
                 type="email"
-                placeholder="Adresa ta de E-mail"
+                [placeholder]="
+                  languageRO() ? 'Adresa ta de E-mail' : 'Ihre E-Mail-Adresse'
+                "
                 autocomplete="email"
                 [formField]="contactForm.email"
                 [class.is-invalid]="emailError"
@@ -88,7 +90,9 @@
                 id="phone"
                 class="form-control"
                 type="tel"
-                placeholder="Numărul tău de telefon"
+                [placeholder]="
+                  languageRO() ? 'Numărul tău de telefon' : 'Ihre Telefonnummer'
+                "
                 autocomplete="tel"
                 [formField]="contactForm.phone"
                 [class.is-invalid]="phoneError"
@@ -114,7 +118,7 @@
               <textarea
                 id="message"
                 class="form-control"
-                placeholder="Mesajul tău"
+                [placeholder]="languageRO() ? 'Mesajul tău' : 'Ihre Nachricht'"
                 [formField]="contactForm.message"
                 [class.is-invalid]="messageError"
                 [attr.aria-invalid]="messageError"
@@ -180,7 +184,10 @@
             </p>
           }
           <div class="mb-2">
-            <i class="bi bi-telephone contactIconsCard me-2"></i
+            <i
+              class="bi bi-telephone contactIconsCard me-2"
+              aria-hidden="true"
+            ></i
             ><span class="card-subtitle mb-2 card-contact-text">Telefon:</span>
           </div>
           <p class="card-text card-contact-text mb-4">
@@ -188,7 +195,10 @@
           </p>
 
           <div class="mb-2">
-            <i class="bi bi-envelope contactIconsCard me-2"></i
+            <i
+              class="bi bi-envelope contactIconsCard me-2"
+              aria-hidden="true"
+            ></i
             ><span class="card-subtitle mb-2 card-contact-text">E-mail:</span>
           </div>
           <p class="card-text card-contact-text mb-4">
@@ -198,7 +208,10 @@
           </p>
 
           <div class="mb-2">
-            <i class="bi bi-facebook contactIconsCard me-2"></i
+            <i
+              class="bi bi-facebook contactIconsCard me-2"
+              aria-hidden="true"
+            ></i
             ><span class="card-subtitle mb-2 card-contact-text">Facebook:</span>
           </div>
           <p class="card-text card-contact-text mb-4">
@@ -207,13 +220,15 @@
               class="h-100"
               target="_blank"
               rel="me"
-              aria-label="Imalo Facebook"
               >facebook.com/imaloeducation</a
             >
           </p>
 
           <div class="mb-2">
-            <i class="bi bi-instagram contactIconsCard me-2"></i
+            <i
+              class="bi bi-instagram contactIconsCard me-2"
+              aria-hidden="true"
+            ></i
             ><span class="card-subtitle mb-2 card-contact-text"
               >Instagram:</span
             >
@@ -224,13 +239,15 @@
               class="h-100"
               target="_blank"
               rel="me"
-              aria-label="Imalo Instagram"
               >instagram.com/imaloeducation</a
             >
           </p>
 
           <div class="mb-2">
-            <i class="bi bi-linkedin contactIconsCard me-2"></i
+            <i
+              class="bi bi-linkedin contactIconsCard me-2"
+              aria-hidden="true"
+            ></i
             ><span class="card-subtitle mb-2 card-contact-text">LinkedIn:</span>
           </div>
           <p class="card-text card-contact-text mb-4">
@@ -239,7 +256,6 @@
               class="h-100"
               target="_blank"
               rel="me"
-              aria-label="Imalo LinkedIn"
               >linkedin.com/imalo-education</a
             >
           </p>
@@ -286,7 +302,11 @@
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
             class="card-img-top"
-            title="Imalo Education Afterschool Sibiu Gutuilor 6"
+            [title]="
+              languageRO()
+                ? 'Hartă: Imalo Education, Sibiu, strada Gutuilor nr. 6'
+                : 'Karte: Imalo Education, Sibiu, Gutuilor-Straße Nr. 6'
+            "
           >
           </iframe>
           <div class="card-lower-text py-4 px-2">

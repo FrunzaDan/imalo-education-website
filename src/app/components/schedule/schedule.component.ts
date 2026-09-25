@@ -21,7 +21,6 @@ export class ScheduleComponent {
           ? 'Pagina cu programul Imalo Education, afterschool pe limba germana din Sibiu.'
           : 'Programmseite von Imalo Education, dem deutschsprachigen Afterschool-Programm in Sibiu.',
         path: '/schedule',
-        locale: isRomanian ? 'ro_RO' : 'de_DE',
       });
     });
   }

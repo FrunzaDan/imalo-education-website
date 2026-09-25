@@ -1,38 +1,86 @@
 [
   {
-    "imagePath": "/assets/images/gallery/imalo_sibiu_1.webp"
+    "imagePath": "/assets/images/gallery/imalo_sibiu_1.webp",
+    "description": {
+      "ro": "Colț de lectură cu pernuțe, jucării de pluș și rafturi cu cărți, lângă o fereastră luminoasă",
+      "de": "Leseecke mit Kissen, Plüschtieren und Bücherregalen an einem hellen Fenster"
+    }
   },
   {
-    "imagePath": "/assets/images/gallery/imalo_sibiu_2.webp"
+    "imagePath": "/assets/images/gallery/imalo_sibiu_2.webp",
+    "description": {
+      "ro": "Colțul de lectură de aproape: cărți, perne colorate și jucării de pluș",
+      "de": "Die Leseecke aus der Nähe: Bücher, bunte Kissen und Plüschtiere"
+    }
   },
   {
-    "imagePath": "/assets/images/gallery/imalo_sibiu_3.webp"
+    "imagePath": "/assets/images/gallery/imalo_sibiu_3.webp",
+    "description": {
+      "ro": "Sală cu rafturi, scaune albe și nori pictați pe perete",
+      "de": "Raum mit Regalen, weißen Stühlen und an die Wand gemalten Wolken"
+    }
   },
   {
-    "imagePath": "/assets/images/gallery/imalo_sibiu_4.webp"
+    "imagePath": "/assets/images/gallery/imalo_sibiu_4.webp",
+    "description": {
+      "ro": "Sală cu tablă interactivă, videoproiector și un soare, un nor și o lună pictate pe pereți",
+      "de": "Raum mit interaktiver Tafel, Beamer und an die Wände gemalter Sonne, Wolke und Mond"
+    }
   },
   {
-    "imagePath": "/assets/images/gallery/imalo_sibiu_5.webp"
+    "imagePath": "/assets/images/gallery/imalo_sibiu_5.webp",
+    "description": {
+      "ro": "Sală de clasă cu mese albe, flori pe masă și o girafă pictată în jurul ușii",
+      "de": "Klassenzimmer mit weißen Tischen, Blumen und einer um die Tür gemalten Giraffe"
+    }
   },
   {
-    "imagePath": "/assets/images/gallery/imalo_sibiu_6.webp"
+    "imagePath": "/assets/images/gallery/imalo_sibiu_6.webp",
+    "description": {
+      "ro": "Mese de lucru lângă fereastră și girafa pictată în jurul ușii",
+      "de": "Arbeitstische am Fenster und die um die Tür gemalte Giraffe"
+    }
   },
   {
-    "imagePath": "/assets/images/gallery/imalo_sibiu_7.webp"
+    "imagePath": "/assets/images/gallery/imalo_sibiu_7.webp",
+    "description": {
+      "ro": "Sală de clasă cu flori și fluturi pictați pe pereți, un raft cu cărți și o tablă albă",
+      "de": "Klassenzimmer mit an die Wände gemalten Blumen und Schmetterlingen, einem Bücherregal und einem Whiteboard"
+    }
   },
   {
-    "imagePath": "/assets/images/gallery/imalo_sibiu_8.webp"
+    "imagePath": "/assets/images/gallery/imalo_sibiu_8.webp",
+    "description": {
+      "ro": "Raft cu rechizite și jocuri, cu vedere spre sala alăturată",
+      "de": "Regal mit Schulsachen und Spielen, mit Blick in den Nebenraum"
+    }
   },
   {
-    "imagePath": "/assets/images/gallery/imalo_sibiu_9.webp"
+    "imagePath": "/assets/images/gallery/imalo_sibiu_9.webp",
+    "description": {
+      "ro": "Raft cu jocuri de societate, lângă o lună pictată pe perete",
+      "de": "Regal mit Gesellschaftsspielen neben einem an die Wand gemalten Mond"
+    }
   },
   {
-    "imagePath": "/assets/images/gallery/imalo_sibiu_10.webp"
+    "imagePath": "/assets/images/gallery/imalo_sibiu_10.webp",
+    "description": {
+      "ro": "Raft cu cărți pentru copii în limba germană și jucării de pluș",
+      "de": "Regal mit deutschen Kinderbüchern und Plüschtieren"
+    }
   },
   {
-    "imagePath": "/assets/images/gallery/imalo_sibiu_11.webp"
+    "imagePath": "/assets/images/gallery/imalo_sibiu_11.webp",
+    "description": {
+      "ro": "Hol cu o comodă pictată cu flori și motto-ul Imalo pe perete",
+      "de": "Flur mit einer mit Blumen bemalten Kommode und dem Imalo-Motto an der Wand"
+    }
   },
   {
-    "imagePath": "/assets/images/gallery/imalo_sibiu_12.webp"
+    "imagePath": "/assets/images/gallery/imalo_sibiu_12.webp",
+    "description": {
+      "ro": "Holul de la intrare, cu o canapea turcoaz, sigla Imalo Education și un copac pictat pe perete",
+      "de": "Eingangsbereich mit einem türkisen Sofa, dem Imalo-Education-Logo und einem an die Wand gemalten Baum"
+    }
   }
 ]

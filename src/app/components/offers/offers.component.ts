@@ -42,7 +42,6 @@ export class OffersComponent {
           ? 'Pagina cu oferte Imalo Education, afterschool pe limba germana din Sibiu.'
           : 'Angebotsseite von Imalo Education, dem deutschsprachigen Afterschool-Programm in Sibiu.',
         path: '/offers',
-        locale: isRomanian ? 'ro_RO' : 'de_DE',
       });
     });
   }
