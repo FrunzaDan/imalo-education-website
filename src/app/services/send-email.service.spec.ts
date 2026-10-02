@@ -1,12 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import emailjs from '@emailjs/browser';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { ContactMeForm } from '../interfaces/contact-me-form';
 import { SendEmailService } from './send-email.service';
-
-vi.mock('@emailjs/browser', () => ({
-  default: { send: vi.fn() },
-}));
 
 describe('SendEmailService', () => {
   let service: SendEmailService;
@@ -19,9 +14,13 @@ describe('SendEmailService', () => {
   };
 
   beforeEach(() => {
-    vi.mocked(emailjs.send).mockReset();
+    vi.spyOn(emailjs, 'send').mockResolvedValue({ status: 200, text: 'OK' });
     TestBed.configureTestingModule({});
     service = TestBed.inject(SendEmailService);
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
   });
 
   it('sends only the form fields EmailJS expects, using the configured template', async () => {

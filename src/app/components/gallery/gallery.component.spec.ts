@@ -1,6 +1,5 @@
 import { signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { beforeEach, describe, expect, it } from 'vitest';
 import { GalleryImage } from '../../interfaces/gallery-image';
 import { GalleryCatalogService } from '../../services/gallery-catalog.service';
 import { GalleryComponent } from './gallery.component';

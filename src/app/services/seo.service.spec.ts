@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { Title } from '@angular/platform-browser';
 import { Router, provideRouter } from '@angular/router';
-import { beforeEach, describe, expect, it } from 'vitest';
 import { SeoService, SITE_URL } from './seo.service';
 
 describe('SeoService', () => {
