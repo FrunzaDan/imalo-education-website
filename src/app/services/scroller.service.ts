@@ -5,7 +5,7 @@ import { Injectable, inject } from '@angular/core';
   providedIn: 'root',
 })
 export class ScrollerService {
-  private viewportScroller = inject(ViewportScroller);
+  private readonly viewportScroller = inject(ViewportScroller);
 
   scrollToTop(): void {
     this.viewportScroller.scrollToPosition([0, 0]);
