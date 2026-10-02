@@ -1,21 +1,21 @@
 # Imalo Education Website
 
-The public website for Imalo, a German-language afterschool program in Sibiu, Romania. It presents the program, offers, schedule and photo gallery in Romanian and German, and has a contact form. Pages are prerendered and served from Firebase Hosting.
+This is the public website for Imalo, a German-language afterschool program in Sibiu, Romania. It tells parents what the program offers, shows the schedule and a photo gallery, and lets them get in touch through a contact form. The whole site is available in Romanian and German, with each language on its own URLs so search engines can index both. Every page is prerendered at build time and served from Firebase Hosting, and Firebase Analytics loads only after the page has started. There's no backend: the contact form sends email from the browser through EmailJS, and the gallery is driven by a JSON file.
 
 ---
 
-## 🚀 Key Features
+## Key Features
 
-- **Two languages with their own URLs:** Romanian pages at the root and German pages under `/de`, with a navbar toggle that keeps you on the same page. Each page gets `hreflang` alternate links so search engines index both versions.
-- **Program pages:** Home, about us, offers, schedule and gallery, plus a Romanian-only privacy policy page.
-- **Photo gallery:** A lightbox with mouse and keyboard navigation (arrow keys, Escape) and bilingual image descriptions loaded from `galleryImages.json`.
-- **Contact form:** Validated form that sends messages client-side through EmailJS.
-- **SEO:** Per-page titles, meta description, Open Graph/Twitter tags and canonical URLs. Every route is prerendered at build time.
-- **Analytics:** Firebase Analytics, loaded in a separate chunk after the app starts.
+- **Two languages with their own URLs:** Romanian pages live at the root and German pages under `/de`. The navbar toggle switches language while keeping you on the same page, the `<html lang>` attribute follows the URL, and each page gets `hreflang` alternate links so search engines know the two versions belong together.
+- **Program pages:** Home, about us, offers, schedule and gallery exist in both languages, and there's a Romanian-only privacy policy page. Each route is lazy-loaded, and page changes use the browser's View Transitions.
+- **Photo gallery:** Images open in a lightbox that you can move through with the mouse or the keyboard (arrow keys, Escape to close). Image descriptions come in both languages from `galleryImages.json`, and the lightbox animates with Angular's built-in enter and leave bindings.
+- **Contact form:** A validated form (email, phone, message) sends messages through EmailJS straight from the browser, and shows success or failure messages.
+- **SEO:** Each page sets its own title, meta description, Open Graph/Twitter tags and canonical URL. Every route is prerendered at build time, so search engines get complete HTML.
+- **Analytics:** Firebase Analytics is loaded in a separate chunk after the app starts, so it doesn't slow the first render.
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - **Frontend:** Angular 22.2 (standalone components, signals, zoneless), TypeScript, per-component CSS, a vendored subset of Bootstrap's grid/utility CSS, Bootstrap Icons
 - **Backend:** N/A. Prerendering via `@angular/ssr`, with an Express server entry for running the SSR build
@@ -24,7 +24,7 @@ The public website for Imalo, a German-language afterschool program in Sibiu, Ro
 
 ---
 
-## 📋 Prerequisites
+## Prerequisites
 
 Before running this project, ensure you have the following installed:
 
@@ -33,7 +33,7 @@ Before running this project, ensure you have the following installed:
 
 ---
 
-## ⚙️ Local Setup & Running
+## Local Setup & Running
 
 ### 1. Clone the repository
 
@@ -62,7 +62,7 @@ npm run serve:ssr:Imalo_Education   # run the built SSR server
 
 ---
 
-## 🔌 API / App Usage
+## API / App Usage
 
 | Romanian | German |
 |---|---|
@@ -85,7 +85,7 @@ firebase deploy
 
 ---
 
-## 📝 License & Notes
+## License & Notes
 
 Built for Imalo; no license file. The photos, logo and texts belong to Imalo.
 
