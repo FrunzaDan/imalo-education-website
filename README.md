@@ -1,104 +1,92 @@
-# Imalo Education
+# Imalo Education Website
 
-Marketing/informational website for Imalo, a German-language afterschool program in Sibiu, Romania. Presents the offering, schedule, gallery and a contact form, is served as a fully prerendered/SSR site, and deploys to Firebase Hosting.
+The public website for Imalo, a German-language afterschool program in Sibiu, Romania. It presents the program, offers, schedule and photo gallery in Romanian and German, and has a contact form. Pages are prerendered and served from Firebase Hosting.
 
-## Tech Stack & Architecture
+---
 
-- **Framework:** Angular 21 — standalone components (no `NgModule`s), zoneless change detection (`provideZonelessChangeDetection`), `OnPush` everywhere.
-- **UI & Styling:** Bootstrap CSS utilities + `bootstrap-icons`, with per-component CSS files. No Angular Material/PrimeNG/Tailwind.
-- **State & Data:** Angular Signals only — no NgRx or other store. Cross-component state (e.g. current language) lives in small `providedIn: 'root'` services backed by a `signal`, exposed read-only and mutated through methods.
-- **Rendering:** SSR + build-time prerendering (`@angular/ssr`, `provideServerRendering`) with client hydration + event replay (`provideClientHydration(withEventReplay())`). Express (`src/server.ts`) serves the SSR output when run as a Node server.
-- **Data/Integrations:** Firebase (`@angular/fire`) for Hosting + Analytics only — no Firestore/Auth in use. EmailJS (`@emailjs/browser`) sends the contact form client-side with no backend API.
-- **Tooling:** Angular CLI with the `@angular/build` (esbuild) application builder, Prettier, strict TypeScript (`strict`, `strictTemplates`, `noImplicitOverride`, etc). Unit tests run on Vitest via the `@angular/build:unit-test` builder (jsdom, no browser/Karma involved).
+## 🚀 Key Features
 
-### Notable decisions
+- **Two languages with their own URLs:** Romanian pages at the root and German pages under `/de`, with a navbar toggle that keeps you on the same page. Each page gets `hreflang` alternate links so search engines index both versions.
+- **Program pages:** Home, about us, offers, schedule and gallery, plus a Romanian-only privacy policy page.
+- **Photo gallery:** A lightbox with mouse and keyboard navigation (arrow keys, Escape) and bilingual image descriptions loaded from `galleryImages.json`.
+- **Contact form:** Validated form that sends messages client-side through EmailJS.
+- **SEO:** Per-page titles, meta description, Open Graph/Twitter tags and canonical URLs. Every route is prerendered at build time.
+- **Analytics:** Firebase Analytics, loaded in a separate chunk after the app starts.
 
-- **Routing** (`src/app/app.routes.ts`): every route lazy-loads a standalone component via `loadComponent`. `withViewTransitions()` and `withInMemoryScrolling({ scrollPositionRestoration: 'top', anchorScrolling: 'enabled' })` are wired on the router; unmatched paths redirect to `/404`.
-- **Templates** use the modern control-flow syntax (`@if`, `@for`) and the native `animate.enter` / `animate.leave` template bindings for transitions (see `gallery.component.html`) instead of the Angular animations package.
-- **i18n is hand-rolled**, not `@angular/localize`: `LanguageService` holds a single boolean signal (`true` = Romanian), toggled from the navbar, and components branch copy inline with `@if (languageRO()) { ... } @if (!languageRO()) { ... }`.
-- **SEO** (`SEOService`) is applied per-route from each component's `ngOnInit`: canonical link injection, meta description, and Open Graph/Twitter tags.
-- Firebase config and the EmailJS service/template/public keys live in `src/environments/environment.ts` **unencrypted and committed** — this is intentional, since these are public client-side keys (Firebase web config and EmailJS public key are not secrets), not something you should add a `.env` mechanism for.
+---
 
-## Project Structure
+## 🛠 Tech Stack
 
-```text
-src/
-├── app/
-│   ├── app.ts / app.html / app.css   # Root component: navbar + <router-outlet> + footer + back-to-top
-│   ├── app.config.ts                 # Browser providers: router, hydration, Firebase, zoneless CD
-│   ├── app.config.server.ts          # Adds provideServerRendering() on top of app.config.ts
-│   ├── app.routes.ts                 # Route table, one lazy-loaded standalone component per page
-│   ├── components/                   # All feature + shared UI in one flat folder, one per route or reusable widget
-│   │   ├── home/ about-us/ offers/ schedule/ gallery/ contact/ privacy/ page-not-found/
-│   │   └── navbar/ footer/ hamburger-button/ back-to-top/   # cross-page chrome
-│   ├── services/                     # Signal-backed singletons: language, SEO, gallery loading, email sending, scroll
-│   └── interfaces/                   # Plain data shapes (ContactMeForm, GalleryImage)
-├── environments/environment.ts       # Firebase + EmailJS public config (single file, no prod/dev split)
-├── main.ts / main.server.ts          # Browser and server bootstrap entry points
-├── server.ts                         # Express server for the SSR build (serve:ssr:Imalo_Education)
-└── styles.css / bootstrap-essentials.css
+- **Frontend:** Angular 22.2 (standalone components, signals, zoneless), TypeScript, per-component CSS, a vendored subset of Bootstrap's grid/utility CSS, Bootstrap Icons
+- **Backend:** N/A. Prerendering via `@angular/ssr`, with an Express server entry for running the SSR build
+- **Database / Storage:** N/A. Gallery data is a static JSON file in `public/assets/`
+- **Tooling & Other:** Firebase JS SDK (Analytics), EmailJS, Vitest + jsdom, Prettier, Firebase Hosting
 
-public/assets/
-├── images/{gallery,logo,social media,caterpillars}/
-└── fonts/, galleryImages.json        # Static gallery image list, read by LoadGalleryService
+---
+
+## 📋 Prerequisites
+
+Before running this project, ensure you have the following installed:
+
+- Node.js `^22.22.3`, `^24.15.0` or `>=26` with npm
+- Firebase CLI (`npm install -g firebase-tools`), only if you want to deploy
+
+---
+
+## ⚙️ Local Setup & Running
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/FrunzaDan/imalo-education-website.git
+cd imalo-education-website
 ```
 
-There's no `core/` vs `feature/` vs `shared/` split — the app is small enough that every route component and the handful of shared services/interfaces live in one flat `components/`, `services/`, `interfaces/` tree.
+### 2. Configuration
 
-## Getting Started
+All runtime config is in `src/environments/environment.ts`: the Firebase web config (used for Analytics) and the EmailJS service ID, template ID and public key. These are public client-side keys, so there's no `.env` file and no separate production environment.
+
+To change the gallery, edit `public/assets/galleryImages.json` (image path plus a Romanian and German description) and add the images under `public/assets/images/gallery/`.
+
+### 3. Installation & Run
 
 ```bash
 npm install
-npm start          # ng serve, http://localhost:4201 (port set in angular.json)
+npm start          # dev server on http://localhost:4202
+npm test           # Vitest unit tests
+npm run build      # production build + prerender → dist/imalo-education
+npm run serve:ssr:Imalo_Education   # run the built SSR server
 ```
 
-## Available Scripts
+`npm run build` also copies the prerendered `404/index.html` to `404.html`, which Firebase Hosting serves for unknown URLs.
 
-| Command | Description |
+---
+
+## 🔌 API / App Usage
+
+| Romanian | German |
 |---|---|
-| `npm start` | Dev server (`ng serve`, development config, port 4201) |
-| `npm run build` | Production build (prerendered + SSR bundle) to `dist/imalo-education` |
-| `npm run watch` | Development build in watch mode |
-| `npm run serve:ssr:Imalo_Education` | Run the built SSR/Express server from `dist/imalo-education/server/server.mjs` |
-| `npm test` | Runs the Vitest suite (`ng test`) once, headless via jsdom |
+| `/` | `/de` |
+| `/about-us` | `/de/about-us` |
+| `/offers` | `/de/offers` |
+| `/schedule` | `/de/schedule` |
+| `/gallery` | `/de/gallery` |
+| `/contact` | `/de/contact` |
+| `/privacy` | (none; the toggle goes to `/de`) |
 
-There's no e2e setup — only unit tests. `ng generate component/service` defaults to scaffolding a Vitest `.spec.ts` alongside the new file (`testRunner: vitest` in `angular.json`).
+Unknown URLs redirect to `/404` (or `/de/404`).
 
-## Testing
-
-Unit tests run on **Vitest** through Angular's native `@angular/build:unit-test` builder (`angular.json` → `architect.test`), not Karma — there's no `karma.conf.js` or `src/test.ts`, and no browser is launched; specs execute in Node against jsdom.
-
-```bash
-npm test              # single run
-npx ng test --watch   # watch mode
-```
-
-Coverage so far focuses on units with actual logic rather than boilerplate "should create" smoke tests:
-
-- `language.service.spec.ts` — the shared signal toggles and is shared across injections (`providedIn: 'root'`).
-- `seo.service.spec.ts` — canonical URL construction (root-path trailing slash, replacing a stale `<link>`) and Open Graph/meta tag updates.
-- `send-email.service.spec.ts` — the EmailJS payload shape and the success/failure → status-code mapping, with `@emailjs/browser` mocked via `vi.mock`.
-- `contact.component.spec.ts` — reactive form validators (email/phone/message) and the submit flow (blocked when invalid, success/failure messaging, form reset).
-- `gallery.component.spec.ts` — lightbox navigation bounds (`navigateLeft`/`navigateRight` clamping) and keyboard handling, with `LoadGalleryService` stubbed.
-
-None of these render the template via `fixture.detectChanges()` — they exercise the component classes directly (calling `ngOnInit()`/public methods on the instance from `TestBed.createComponent(...).componentInstance`). That's a deliberate choice for this app: it keeps tests fast and avoids fighting `NgOptimizedImage`'s runtime image-sizing checks under jsdom, at the cost of not verifying template bindings themselves.
-
-## Configuration
-
-All runtime config lives in `src/environments/environment.ts`:
-
-- `firebaseConfig` — Firebase Web SDK config, used for `provideFirebaseApp` + Analytics.
-- `emailJSConfig` — `serviceID` / `templateID` / `publicKey` for `@emailjs/browser`, consumed by `SendEmailService` and used to deliver the contact form.
-
-There's a single environment file (no `environment.prod.ts`); the same public config is used for local dev and production builds.
-
-## Deployment
-
-Deploys to **Firebase Hosting** (`firebase.json` / `.firebaserc`, project `imalo-education`):
+To deploy (Firebase project `imalo-education`, set in `.firebaserc`):
 
 ```bash
 npm run build
 firebase deploy
 ```
 
-`firebase.json` serves `dist/imalo-education/browser`, rewrites everything except `/404` to `index.html`, and maps `errorPage` to `/404.html`. The `serve:ssr:*` script exists if you instead want to run the app as a Node/Express SSR server rather than the static prerendered output.
+---
+
+## 📝 License & Notes
+
+Built for Imalo; no license file. The photos, logo and texts belong to Imalo.
+
+- Translations are written directly in the templates rather than with `@angular/localize`. The current language comes from the URL through a small signal-based `LanguageService`.
