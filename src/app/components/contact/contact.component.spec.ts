@@ -49,6 +49,13 @@ describe('ContactComponent', () => {
     expect(component.contactForm.phone().valid()).toBe(true);
   });
 
+  it('does not accept a name or message of only spaces', () => {
+    component.model.set({ ...validForm, name: '   ', message: '   ' });
+
+    expect(component.contactForm.name().invalid()).toBe(true);
+    expect(component.contactForm.message().invalid()).toBe(true);
+  });
+
   it('rejects a malformed email address', () => {
     component.model.set({ ...validForm, email: 'not-an-email' });
     expect(component.contactForm.email().invalid()).toBe(true);
