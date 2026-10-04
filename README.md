@@ -18,7 +18,7 @@ This is the public website for Imalo, a German-language afterschool program in S
 ## Tech Stack
 
 - **Frontend:** Angular 22.2 (standalone components, signals, zoneless), TypeScript, per-component CSS, a vendored subset of Bootstrap's grid/utility CSS, Bootstrap Icons
-- **Backend:** N/A. Prerendering via `@angular/ssr`, with an Express server entry for running the SSR build
+- **Backend:** N/A. Build-time prerendering via `@angular/ssr` (`outputMode: "static"`), no server
 - **Database / Storage:** N/A. Gallery data is a static JSON file in `public/assets/`
 - **Tooling & Other:** Firebase JS SDK (Analytics), EmailJS, Vitest + jsdom, Prettier, Firebase Hosting
 
@@ -54,8 +54,7 @@ To change the gallery, edit `public/assets/galleryImages.json` (image path plus 
 npm install
 npm start          # dev server on http://localhost:4202
 npm test           # Vitest unit tests
-npm run build      # production build + prerender → dist/imalo-education
-npm run serve:ssr:Imalo_Education   # run the built SSR server
+npm run build      # prerendered static build → dist/imalo-education/browser
 ```
 
 `npm run build` also copies the prerendered `404/index.html` to `404.html`, which Firebase Hosting serves for unknown URLs.
