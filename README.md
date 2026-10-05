@@ -17,10 +17,10 @@ This is the public website for Imalo, a German-language afterschool program in S
 
 ## Tech Stack
 
-- **Frontend:** Angular 22.2 (standalone components, signals, zoneless), TypeScript, per-component CSS, a vendored subset of Bootstrap's grid/utility CSS, Bootstrap Icons
+- **Frontend:** Angular 22.2 (standalone components, signals, zoneless), TypeScript, per-component CSS, a vendored subset of Bootstrap's grid/utility CSS, a subset of the Bootstrap Icons font
 - **Backend:** N/A. Build-time prerendering via `@angular/ssr` (`outputMode: "static"`), no server
 - **Database / Storage:** N/A. Gallery data is a static JSON file in `public/assets/`
-- **Tooling & Other:** Firebase JS SDK (Analytics), EmailJS, Vitest + jsdom, Prettier, Firebase Hosting
+- **Tooling & Other:** Firebase JS SDK (Analytics), EmailJS, Vitest + jsdom, ESLint (angular-eslint), Prettier, Firebase Hosting
 
 ---
 
@@ -63,6 +63,8 @@ Or run the npm scripts yourself:
 npm install
 npm start          # dev server on http://localhost:4202
 npm test           # Vitest unit tests
+npm run lint       # ESLint
+npm run format     # Prettier, fixes formatting in place (format:check only reports)
 npm run build      # prerendered static build → dist/imalo-education/browser
 ```
 
